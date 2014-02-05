@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties>
+    <header>
+        <firm>
+            <pl>firma polska</pl>
+            <en>polish firm</en>
+        </firm>
+        <country>
+            <pl>Polska</pl>
+            <en>Poland</en>
+        </country>
+    </header>
+</properties>
