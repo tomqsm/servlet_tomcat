@@ -1,11 +1,17 @@
 <#ftl>
 <#assign firm = xml["properties/header/firm/${locale}"]>
 <#assign address = xml["properties/header/country/${locale}"]>
+<#assign title = xml["properties/head/title/${locale}"]>
 <!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Your Website</title>
+        <meta name="author" content="Tomasz Kusmierczyk">
+	<meta name="description" content="Programming services, web development.">
+
+	<meta name="viewport" content="width=device-width">
+	<title>${title}</title>
+        <script src="xml["properties/head/jquery"></script>
 </head>
 <body>
 	<header>

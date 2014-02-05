@@ -47,7 +47,16 @@
         <servlet-name>freemarker</servlet-name>
         <url-pattern>*.ftl</url-pattern>
     </servlet-mapping>
+<!--    <servlet>
+        <servlet-name>tiles</servlet-name>
+        <servlet-class>org.apache.tiles.web.startup.simple.SimpleTilesInitializerServlet</servlet-class>
 
+        <init-param>
+            <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+            <param-value>/WEB-INF/tiles.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>-->
     <!--
       Prevent the visiting of MVC Views from outside the servlet container.
       RequestDispatcher.forward/include should and will still work.

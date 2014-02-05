@@ -11,29 +11,22 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-/**
- * This class illustrate WebFilter annotation
- *
- * @author Shing Wai Chan
- * @author Daniel Guo
- *
- */
-@WebFilter(filterName = "filter2", urlPatterns = {"/"},
-        initParams = {
-            @WebInitParam(name = "mesg", value = "my filter")})
+@WebFilter(filterName = "filter2", urlPatterns = {"/"}, initParams = {@WebInitParam(name = "mesg", value = "my filter")})
 public class StaticFilter implements Filter {
 
-    private RequestDispatcher defaultRequestDispatcher;
+  private RequestDispatcher defaultRequestDispatcher;
 
-    public void init(FilterConfig filterConfig) throws ServletException {
-        defaultRequestDispatcher = filterConfig.getServletContext().getNamedDispatcher("LayoutServlet");
-    }
+  @Override
+  public void init(FilterConfig filterConfig) throws ServletException {
+    defaultRequestDispatcher = filterConfig.getServletContext().getNamedDispatcher("LayoutServlet");
+  }
 
-    public void doFilter(ServletRequest req, ServletResponse res,
-            FilterChain chain) throws IOException, ServletException {
-        defaultRequestDispatcher.forward(req, res);
-    }
+  @Override
+  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+      throws IOException, ServletException {
+    defaultRequestDispatcher.forward(req, res);
+  }
 
-    public void destroy() {
-    }
+  @Override
+  public void destroy() {}
 }

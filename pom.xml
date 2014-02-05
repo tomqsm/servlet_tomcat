@@ -12,6 +12,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <tiles.version>3.0.1</tiles.version>
     </properties>
 
     <dependencies>
@@ -27,6 +28,24 @@
             <version>2.4</version>
             <type>jar</type>
         </dependency>
+        <dependency>  
+            <groupId>org.slf4j</groupId>  
+            <artifactId>slf4j-log4j12</artifactId>  
+            <version>1.7.1</version>  
+        </dependency>
+        <!--TILES-->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-template</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+            
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-freemarker</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+            
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
