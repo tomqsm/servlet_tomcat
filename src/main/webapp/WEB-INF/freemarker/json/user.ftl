@@ -6,5 +6,6 @@
 "user": "tomasz",
 "locale":"${locale}",
 "timestamp": ${timestamp},
-"id": ${id}
+"id": ${id},
+"accept": ${accept}
 }

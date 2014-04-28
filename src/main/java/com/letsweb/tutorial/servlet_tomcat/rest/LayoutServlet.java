@@ -15,34 +15,40 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-@WebServlet(name = "LayoutServlet", urlPatterns = {"/user"}, initParams = {
-    @WebInitParam(name = "message", value = "layout servlet")})
+@WebServlet(name = "LayoutServlet", urlPatterns = {"/user"}, initParams = {@WebInitParam(name = "message", value = "layout servlet")})
 public class LayoutServlet extends HttpServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LayoutServlet.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LayoutServlet.class);
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
+      IOException {
+    NodeModel parsed = null;
+    try {
+      parsed =
+          NodeModel.parse(new File(req.getServletContext().getRealPath(
+              "WEB-INF/freemarker/header.xml")));
+    } catch (SAXException ex) {
+      LOG.error(ex.getMessage());
+    } catch (ParserConfigurationException ex) {
+      LOG.error(ex.getMessage());
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        NodeModel parsed = null;
-        try {
-            parsed = NodeModel.parse(new File(req.getServletContext().getRealPath(
-                    "WEB-INF/freemarker/header.xml")));
-        } catch (SAXException ex) {
-            LOG.error(ex.getMessage());
-        } catch (ParserConfigurationException ex) {
-            LOG.error(ex.getMessage());
-        }
-
-        req.setAttribute("xml", parsed);
-        req.setAttribute("locale", req.getLocale().getLanguage());
-        req.setAttribute("timestamp", System.currentTimeMillis());
-        req.setAttribute("id", req.getParameter("id"));
-        req.getRequestDispatcher("WEB-INF/freemarker/json/user.ftl").forward(req, resp);
+    final String acceptHeader = req.getHeader("Accept");
+    if (!acceptHeader.endsWith("application/json")) {
+      throw new LayoutException();
     }
+    req.setAttribute("xml", parsed);
+    req.setAttribute("locale", req.getLocale().getLanguage());
+    req.setAttribute("timestamp", System.currentTimeMillis());
+    req.setAttribute("id", req.getParameter("id"));
+    req.setAttribute("accept", acceptHeader);
+    resp.setHeader("Content-Type", "application/json");
+    req.getRequestDispatcher("WEB-INF/freemarker/json/user.ftl").forward(req, resp);
+  }
 
 }
