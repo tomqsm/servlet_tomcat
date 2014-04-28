@@ -4,13 +4,14 @@
 <#assign title = xml["properties/head/title/${locale}"]>
 <#assign jquery = xml["properties/head/jquery"]>
 <#assign jqueryUi = xml["properties/head/jqueryUi"]>
+<#assign cssMain = xml["properties/head/cssMain"]>
 <!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="author" content="Tomasz Kusmierczyk">
 	<meta name="description" content="Programming services, web development.">
-
+        <link rel="stylesheet" type="text/css" media="screen" href="/servlet_tomcat/${cssMain}" />
 	<meta name="viewport" content="width=device-width">
 	<title>${title}</title>
         <script src="${jquery}"></script>
@@ -18,12 +19,13 @@
         <script src="/servlet_tomcat/js/user.js"></script>
         <script>
             $(document).ready(function() {
-                $('#userSpan').demo();
+                var demo = $('#userSpan').demo();
             });
         </script>
 </head>
 <body>
 	<header>
+        <div id="userSpan"></div>
         <img src="/servlet_tomcat/images/animage.jpg">
             h4. Last check for ${firm} locale: ${locale}
             ${address}
@@ -35,7 +37,7 @@
 	</header>
 	
 	<section>
-	
+
 		<article>
 			<header>
 				<h2>Article title</h2>
@@ -61,7 +63,6 @@
 
 	<footer>
 		<p>Copyright 2009 Your name</p>
-                <span id="userSpan"></span>
 	</footer>
 
 </body>

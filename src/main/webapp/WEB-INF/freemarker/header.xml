@@ -3,6 +3,7 @@
     <head>
         <jquery>//code.jquery.com/jquery-1.10.2.js</jquery>
         <jqueryUi>//code.jquery.com/ui/1.10.3/jquery-ui.js</jqueryUi>
+        <cssMain>css/main.css</cssMain>
         <title>
             <pl>Letsweb - Strona główna.</pl>
             <en>Letsweb - Home</en>
