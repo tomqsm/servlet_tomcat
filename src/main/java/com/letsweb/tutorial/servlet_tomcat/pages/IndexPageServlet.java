@@ -1,6 +1,5 @@
-package com.letsweb.tutorial.servlet_tomcat.checks;
+package com.letsweb.tutorial.servlet_tomcat.pages;
 
-import com.letsweb.tutorial.servlet_tomcat.layout.*;
 import freemarker.ext.dom.NodeModel;
 import java.io.File;
 import java.io.IOException;
@@ -23,10 +22,10 @@ import org.xml.sax.SAXException;
  * @author Shing Wai Chan
  * @author Daniel Guo
  */
-@WebServlet(name = "ChecksServlet", urlPatterns = {"/checks"},
+@WebServlet(name = "IndexPageServlet", urlPatterns = {"/index"},
         initParams = {
             @WebInitParam(name = "message", value = "checks servlet")})
-public class ChecksServlet extends HttpServlet {
+public class IndexPageServlet extends HttpServlet {
 
     private String listenerMessage = null;
 
@@ -43,12 +42,12 @@ public class ChecksServlet extends HttpServlet {
         try {
             parsed = NodeModel.parse(new File(req.getServletContext().getRealPath("WEB-INF/freemarker/header.xml")));
         } catch (SAXException ex) {
-            Logger.getLogger(ChecksServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IndexPageServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ChecksServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IndexPageServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         req.setAttribute("xml", parsed);
-        req.getRequestDispatcher("WEB-INF/freemarker/header.ftl").forward(req, res);
+        req.getRequestDispatcher("WEB-INF/freemarker/index.ftl").forward(req, res);
     }
 }

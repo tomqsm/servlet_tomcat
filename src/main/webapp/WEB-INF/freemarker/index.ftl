@@ -2,6 +2,8 @@
 <#assign firm = xml["properties/header/firm/${locale}"]>
 <#assign address = xml["properties/header/country/${locale}"]>
 <#assign title = xml["properties/head/title/${locale}"]>
+<#assign jquery = xml["properties/head/jquery"]>
+<#assign jqueryUi = xml["properties/head/jqueryUi"]>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -11,7 +13,14 @@
 
 	<meta name="viewport" content="width=device-width">
 	<title>${title}</title>
-        <script src="xml["properties/head/jquery"></script>
+        <script src="${jquery}"></script>
+        <script src="${jqueryUi}"></script>
+        <script src="/servlet_tomcat/js/user.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#userSpan').demo();
+            });
+        </script>
 </head>
 <body>
 	<header>
@@ -52,6 +61,7 @@
 
 	<footer>
 		<p>Copyright 2009 Your name</p>
+                <span id="userSpan"></span>
 	</footer>
 
 </body>

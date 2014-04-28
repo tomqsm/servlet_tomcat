@@ -1,4 +1,4 @@
-package com.letsweb.tutorial.servlet_tomcat.layout;
+package com.letsweb.tutorial.servlet_tomcat;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -13,14 +13,14 @@ import javax.servlet.annotation.WebListener;
  *
  */
 @WebListener()
-public class LayoutContextListener implements ServletContextListener {
+public class ContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
-        String msg = "my listener";
-        context.setAttribute("listenerMessage", msg);
+        System.out.println("Context initialised. Servlet API " + context.getEffectiveMajorVersion());
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
+        System.out.println("Context destroyed.");
     }
 }

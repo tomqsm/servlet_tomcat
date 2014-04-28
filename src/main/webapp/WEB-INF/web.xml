@@ -5,7 +5,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <filter-mapping>
-        <filter-name>filter2</filter-name>
+        <filter-name>RootFilter</filter-name>
+        <url-pattern/>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>IndexPageFilter</filter-name>
         <url-pattern/>
     </filter-mapping>
     <servlet>
@@ -72,8 +76,13 @@
         </auth-constraint>
     </security-constraint>  
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
+    <error-page>
+        <exception-type>com.letsweb.tutorial.servlet_tomcat.layout.LayoutException</exception-type>
+        <location>/layout_exception.html</location>
+    </error-page>
+    <error-page>
+        <location>/general-error.html</location>
+    </error-page>
 </web-app>

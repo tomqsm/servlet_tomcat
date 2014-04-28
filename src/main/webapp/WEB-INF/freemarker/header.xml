@@ -2,6 +2,7 @@
 <properties>
     <head>
         <jquery>//code.jquery.com/jquery-1.10.2.js</jquery>
+        <jqueryUi>//code.jquery.com/ui/1.10.3/jquery-ui.js</jqueryUi>
         <title>
             <pl>Letsweb - Strona główna.</pl>
             <en>Letsweb - Home</en>
