@@ -3,6 +3,7 @@
     <head>
         <jquery>//code.jquery.com/jquery-1.10.2.js</jquery>
         <jqueryUi>//code.jquery.com/ui/1.10.3/jquery-ui.js</jqueryUi>
+        <underscore>js/lib/underscore-min.js</underscore>
         <cssMain>css/main.css</cssMain>
         <title>
             <pl>Letsweb - Strona główna.</pl>

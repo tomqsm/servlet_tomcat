@@ -16,9 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 @WebServlet(name = "LayoutServlet", urlPatterns = {"/user"}, initParams = {@WebInitParam(name = "message", value = "layout servlet")})
-public class LayoutServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
-  private static final Logger LOG = LoggerFactory.getLogger(LayoutServlet.class);
+  private static final Logger LOG = LoggerFactory.getLogger(UserServlet.class);
 
   @Override
   public void init(ServletConfig config) throws ServletException {
