@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<properties>
+    <title>
+        <pl>Letsweb - Strona główna.</pl>
+        <en>Home</en>
+    </title>
+    <firm>
+        <pl>firma polska</pl>
+        <en>polish firm</en>
+    </firm>
+    <country>
+        <pl>Polska</pl>
+        <en>Poland</en>
+    </country>
+    <identyfikator>
+        <pl>Identyfikator</pl>
+        <en>Username</en>
+    </identyfikator>
+    <haslo>
+        <pl>Hasło</pl>
+        <en>Password</en>
+    </haslo>
+    <wprowadz>
+        <pl>Proszę wprowadzić:</pl>
+        <en>Please enter:</en>
+    </wprowadz>
+    <zaloguj>
+        <pl>Zaloguj</pl>
+        <en>Login</en>
+    </zaloguj>
+    <zapamietaj>
+        <pl>Zapamiętaj</pl>
+        <en>Remember me</en>
+    </zapamietaj>
+</properties>

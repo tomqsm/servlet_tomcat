@@ -2,6 +2,7 @@ package com.letsweb.tutorial.servlet_tomcat.pages;
 
 import com.letsweb.tutorial.servlet_tomcat.pages.index.TemplateProvider;
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -16,30 +17,31 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shing Wai Chan
  * @author Daniel Guo
  */
-@WebServlet(name = "IndexPageServlet", urlPatterns = {"/index"},
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"},
         initParams = {
             @WebInitParam(name = "message", value = "checks servlet")})
-public class IndexPageServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     private String listenerMessage = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        
         listenerMessage = (String) config.getServletContext().getAttribute("listenerMessage");
+        super.init(config);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        System.out.println("serlet index page servlet");
-        req.getRequestDispatcher(getServletContext().getInitParameter("template")).forward(req, res);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("loginFailed"));
-        req.getRequestDispatcher(getServletContext().getInitParameter("template")).forward(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("WEB-INF/freemarker/login.ftl").forward(req, resp);
     }
     
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String referrer = req.getHeader("referer");
+        UUID uuid = UUID.randomUUID();
+        final Object username = req.getParameter("username");
+        final Object password = req.getParameter("password");
+        System.out.println("referrer: " + referrer + username + password);
+        req.getServletContext().getNamedDispatcher("IndexPageServlet").forward(req, resp);
+    }
 }

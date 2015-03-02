@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author toks
  */
-@WebFilter(filterName = "RootFilter", urlPatterns = {"/"}, initParams = {
+@WebFilter(filterName = "RootFilter", urlPatterns = {"/signin"}, initParams = {
     @WebInitParam(name = "mesg", value = "my filter")})
-public class RootFilter implements Filter {
+public class SigninFilter implements Filter {
 
     
 
@@ -32,10 +32,9 @@ public class RootFilter implements Filter {
         int counter = 1;
         if (req instanceof HttpServletRequest) {
             HttpServletRequest httpReq = (HttpServletRequest) req;
-            System.out.println("Filter 1 before: " + counter++ + httpReq.getRequestURI());
+            System.out.println("Filter 1: " + counter++ + httpReq.getRequestURI());
         }
         chain.doFilter(req, res);
-            System.out.println("Filter 1 after: ");
     }
 
     @Override
