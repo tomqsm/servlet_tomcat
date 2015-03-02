@@ -25,11 +25,7 @@
         </#list>
     </head>
     <body>
-        ${Request?size}
-        ${Request[".freemarker.Request"]?size}
-            <#list Request?keys as key>
-        ${key} </br>
-        </#list>
+        
 
 
 
