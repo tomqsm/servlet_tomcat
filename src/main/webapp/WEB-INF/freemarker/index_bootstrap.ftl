@@ -8,19 +8,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
-
         <title>${xml["//title/${locale}"]}</title>
-
-        <!-- Bootstrap core CSS -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <!-- Bootstrap core JavaScript
-               ================================================== -->
         <#assign scripts = scripts["properties/scripts"]> 
         <#list scripts as s>
         <#list s.* as sc>
@@ -41,8 +30,6 @@
                 context: '${context}'
             };
         </script>
-
-
     </head>
     <body>
         <div id="showSize"></div>
@@ -84,19 +71,18 @@
                                     <ul class="nav navbar-right navbar-nav">
                                         <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <form action="${context}/login" method="post" role="form">
-                                                    <div class="form-group">
-                                                        <label for="username">${xml["//identyfikator/${locale}"]}</label>
-                                                        <input type="email" class="form-control" id="username" name="username">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="password">${xml["//haslo/${locale}"]}</label>
-                                                        <input type="password" class="form-control" id="password" name="password">
-                                                    </div>
+                                                <form action="j_security_check" class="form-signin">
+                                                    <span class="form-signin-heading">${xml["//zaloguj/${locale}"]}</span>
+                                                    <label for="inputEmail" class="sr-only">${xml["//identyfikator/${locale}"]}</label>
+                                                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
+                                                    <label for="inputPassword" class="sr-only">Password</label>
+                                                    <input type="password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}">
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox"> ${xml["//zapamietaj/${locale}"]}</label>
+                                                        <label>
+                                                            <input type="checkbox" value="remember-me"> ${xml["//zapamietaj/${locale}"]}
+                                                        </label>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">${xml["//zaloguj/${locale}"]}</button>
+                                                    <button class="btn btn-lg btn-primary btn-block" type="submit">${xml["//zaloguj/${locale}"]}</button>
                                                 </form>
                                             </div>
                                         </li>
@@ -159,14 +145,10 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div><!-- /.carousel -->
-
-
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
-
             <div class="container marketing">
-
                 <!-- Three columns of text below the carousel -->
                 <div class="row">
                     <div class="col-lg-3">
@@ -196,9 +178,7 @@
                     </div>
                 </div><!-- /.row -->
 
-
                 <!-- START THE FEATURETTES -->
-
                 <hr class="featurette-divider">
 
                 <div class="row featurette">
