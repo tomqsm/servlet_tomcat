@@ -14,7 +14,8 @@
     <context-param>
         <description>This is a logical name for template.</description>
         <param-name>template</param-name>
-        <param-value>WEB-INF/freemarker/index_bootstrap.ftl</param-value>
+        <!--<param-value>WEB-INF/template.jsp</param-value>-->
+        <param-value>WEB-INF/freemarker/template.ftl</param-value>
     </context-param>
     
     <context-param>
@@ -36,6 +37,33 @@
     </context-param>
 
     <!-- f i l t e r s -->
+    <filter-mapping>
+        <filter-name>ApplicationScopeDataFilter</filter-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/en/*</url-pattern>
+        <url-pattern>/pl/*</url-pattern>
+        <url-pattern>/index</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/floor</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/</url-pattern>
+         <url-pattern>/en/*</url-pattern>
+        <url-pattern>/pl/*</url-pattern>
+        <url-pattern>/index</url-pattern>
+        <url-pattern>/floor</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>RootFilter</filter-name>
@@ -44,19 +72,7 @@
         <url-pattern>/login</url-pattern>
     </filter-mapping>
     
-    <filter-mapping>
-        <filter-name>LocaleFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/index</url-pattern>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>ApplicationScopeDataFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/index</url-pattern>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
+
 <!--    this filter should run after locale filter
     because you want locale overwriten by this in url-->
     <filter-mapping>
@@ -68,6 +84,7 @@
     <filter-mapping>
         <filter-name>IndexPageFilter</filter-name>
         <url-pattern>/</url-pattern>
+        <url-pattern>/index</url-pattern>
     </filter-mapping>
     
  <servlet>
@@ -170,7 +187,7 @@
         <auth-method>FORM</auth-method>
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
-            <form-error-page>/general-error.html</form-error-page>
+            <form-error-page>/login.jsp?result=failed</form-error-page>
         </form-login-config>
     </login-config>
     

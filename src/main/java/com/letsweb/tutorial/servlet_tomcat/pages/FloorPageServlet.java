@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shing Wai Chan
  * @author Daniel Guo
  */
-@WebServlet(name = "IndexPageServlet", urlPatterns = {"/index"},
+@WebServlet(name = "IndexPageServlet", urlPatterns = {"/floor"},
         initParams = {
             @WebInitParam(name = "message", value = "checks servlet")})
-public class IndexPageServlet extends HttpServlet {
+public class FloorPageServlet extends HttpServlet {
 
     private String listenerMessage = null;
 

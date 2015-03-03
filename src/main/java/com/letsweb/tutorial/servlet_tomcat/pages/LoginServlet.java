@@ -1,6 +1,5 @@
 package com.letsweb.tutorial.servlet_tomcat.pages;
 
-import com.letsweb.tutorial.servlet_tomcat.pages.index.TemplateProvider;
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.ServletConfig;
@@ -32,16 +31,20 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //prepares login page or redisplays it with login failed message
+        if (req.getParameter("result") != null) {
+            req.setAttribute("loginResult", req.getParameter("result"));
+        }
         req.getRequestDispatcher("WEB-INF/freemarker/login.ftl").forward(req, resp);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String referrer = req.getHeader("referer");
         UUID uuid = UUID.randomUUID();
         final Object username = req.getParameter("username");
         final Object password = req.getParameter("password");
-        System.out.println("referrer: " + referrer + username + password);
+        System.out.println("referrer: " + referrer + username + password + req.getParameter("result"));
         req.getServletContext().getNamedDispatcher("IndexPageServlet").forward(req, resp);
     }
 }

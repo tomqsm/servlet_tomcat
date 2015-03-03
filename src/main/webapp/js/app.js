@@ -5,12 +5,10 @@ var app = (function f($, doc, _) {
     $(doc).ready(function() {
 
         var w = $('#showSize').showSize();
-        w.contextTest();
         $('.form-signin input').click(function(event) {
             event.stopPropagation();
         });
 //        $('#maincontainer').login();
-
 
     });
     var pad = function pad(number, length) {

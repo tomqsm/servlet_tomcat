@@ -41,7 +41,9 @@ public class UrlFilter implements Filter {
             HttpServletRequest httpReq = (HttpServletRequest) req;
             final String servletPath = httpReq.getServletPath();
             final String lang = servletPath.substring(1, 3);
-            req.setAttribute("locale", lang);
+            String context = req.getServletContext().getContextPath();
+            req.setAttribute("context", context + lang);
+            
             System.out.println("Filter 3 before: request url: " + lang);
         }
         chain.doFilter(req, res);

@@ -44,7 +44,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">lukasfloor.com</a>
+                            <a class="navbar-brand" href="${response.encodeURL('${context}')}">lukasfloor.com</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Podłogi</a></li>
+                                        <li><a href="${response.encodeURL('en/floor')}">Podłogi</a></li>
                                         <li><a href="#">Schody</a></li>
                                         <li><a href="#">Cyklinowanie</a></li>
                                         <li class="divider"></li>
@@ -65,13 +65,20 @@
                                         <li><a href="#">Wylewki sampoziomujące</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="${response.encodeURL('pl')}">Polski</a></li>
+                                        <li><a href="${response.encodeURL('en')}">Angielski</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                             <div class="container">
                                 <div class="navbar-collapse">
                                     <ul class="nav navbar-right navbar-nav">
                                         <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <form action="j_security_check" class="form-signin">
+                                                <form action="j_security_check" method="post" class="form-signin">
                                                     <span class="form-signin-heading">${xml["//zaloguj/${locale}"]}</span>
                                                     <label for="inputEmail" class="sr-only">${xml["//identyfikator/${locale}"]}</label>
                                                     <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
