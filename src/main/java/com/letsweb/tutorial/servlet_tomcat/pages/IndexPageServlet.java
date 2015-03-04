@@ -1,5 +1,7 @@
 package com.letsweb.tutorial.servlet_tomcat.pages;
 
+import freemarker.ext.dom.NodeModel;
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,13 +22,10 @@ import javax.servlet.http.HttpServletResponse;
             @WebInitParam(name = "message", value = "checks servlet")})
 public class IndexPageServlet extends HttpServlet {
 
-    private String listenerMessage = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        
-        listenerMessage = (String) config.getServletContext().getAttribute("listenerMessage");
     }
 
     @Override

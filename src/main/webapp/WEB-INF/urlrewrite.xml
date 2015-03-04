@@ -10,39 +10,44 @@
 -->
 <urlrewrite>
         
-    <rule>
-        <note>
-            The rule means that requests to /test/status/ will be redirected to /rewrite-status
-            the url will be rewritten.
-        </note>
-        <from>/test/status/</from>
-        <to type="redirect">%{context-path}/rewrite-status</to>
+    <rule enabled="true" match-type="wildcard" >
+        <name>Index rule</name>
+        <note>Set locale 2.</note>
+        <from>/</from>
+        <to type="forward" qsappend="true">indexservlet</to>
+    </rule>
+    
+    <rule enabled="true" match-type="wildcard" >
+        <name>Index rule</name>
+        <note>Set locale 2.</note>
+        <from>/indexservlet/*</from>
+        <to type="forward" qsappend="true">indexservlet</to>
     </rule>
 
-
-    <outbound-rule enabled="true" match-type="regex" >
+<!--    <outbound-rule enabled="true" match-type="regex" >
         <name></name>
         <note></note>
         <condition name="parameter" operator="equal">www.example.com</condition>
-        <from>^.*/(en|pl)/.*$</from>
-        <to type="forward" last="true">%{context-path}/$1</to>
+        <from>^.*/(en|pl)/(.*)$</from>
+        <to type="forward" last="true">%{context-path}/$1/$2</to>
     </outbound-rule>
+    
+
     
     <rule enabled="true" match-type="regex" >
         <note>Set locale 2.</note>
-        <from>^.*/(en|pl)/.*$</from>
+        <from>^.*/(en|pl)/(.*)$</from>
         <set type="parameter" name="urlrewrite.path.lang">Set locale 2.</set>
-        <to type="redirect" last="true">%{context-path}/index?lang=$1</to>
-        <!--<to type="forward" last="true" qsappend="true">index?lang=$1&amp;ref=$2</to>-->
+        <to type="forward" last="true">%{context-path}/$2?lang=$1&amp;n=$2</to>
     </rule>
     
     <rule enabled="true" match-type="regex" >
         <note>Set locale 2.</note>
         <from>^.*/(en|pl)$</from>
         <set type="parameter" name="urlrewrite.path.lang">Set locale 2.</set>
-        <to type="redirect" last="true">%{context-path}/index?lang=$1</to>
-        <!--<to type="forward" last="true" qsappend="true">index?lang=$1&amp;ref=$2</to>-->
-    </rule>
+        <to type="forward" last="true">%{context-path}/index?lang=$1</to>
+        <to type="forward" last="true" qsappend="true">index?lang=$1&amp;ref=$2</to>
+    </rule>-->
 
     <!--
 

@@ -1,142 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
-    
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <context-param>
         <description>This parameter determines if template is read from file in each request.</description>
         <param-name>reloadTemplate</param-name>
         <param-value>true</param-value>
     </context-param>
-    
     <context-param>
         <description>This is a logical name for template.</description>
         <param-name>template</param-name>
         <!--<param-value>WEB-INF/template.jsp</param-value>-->
         <param-value>WEB-INF/freemarker/template.ftl</param-value>
     </context-param>
-    
     <context-param>
         <description>This is a logical name of xml data for css.</description>
         <param-name>csses</param-name>
         <param-value>WEB-INF/data/xml/css_bootstrap.xml</param-value>
     </context-param>
-
     <context-param>
         <description>This is a logical name of scripts.</description>
         <param-name>scripts</param-name>
         <param-value>WEB-INF/data/xml/scripts_bootstrap.xml</param-value>
     </context-param>
-    
     <context-param>
         <description>This is a logical name of scripts.</description>
         <param-name>supportedLocales</param-name>
         <param-value>pl,en</param-value>
     </context-param>
-
     <!-- f i l t e r s -->
-    <filter-mapping>
-        <filter-name>ApplicationScopeDataFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/en/*</url-pattern>
-        <url-pattern>/pl/*</url-pattern>
-        <url-pattern>/index</url-pattern>
-        <url-pattern>/login</url-pattern>
-        <url-pattern>/floor</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LocaleFilter</filter-name>
-        <url-pattern>/</url-pattern>
-         <url-pattern>/en/*</url-pattern>
-        <url-pattern>/pl/*</url-pattern>
-        <url-pattern>/index</url-pattern>
-        <url-pattern>/floor</url-pattern>
-    </filter-mapping>
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>DecoratorFilter</filter-name>
+        <filter-class>com.letsweb.tutorial.servlet_tomcat.filters.DecoratorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DecoratorFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-
-    <filter-mapping>
-        <filter-name>RootFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/index</url-pattern>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
-    
-
-<!--    this filter should run after locale filter
-    because you want locale overwriten by this in url-->
-    <filter-mapping>
-        <filter-name>UrlFilter</filter-name>
-        <url-pattern>/en/*</url-pattern>
-        <url-pattern>/pl/*</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>IndexPageFilter</filter-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/index</url-pattern>
-    </filter-mapping>
-    
- <servlet>
-  <servlet-name>freemarker</servlet-name>
-  <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
-    
-  <!-- FreemarkerServlet settings: -->
-  <init-param>
-    <param-name>TemplatePath</param-name>
-    <param-value>/</param-value>
-  </init-param>
-  <init-param>
-    <param-name>NoCache</param-name>
-    <param-value>true</param-value>
-  </init-param>
-  <init-param>
-    <param-name>ContentType</param-name>
-    <param-value>text/html; charset=UTF-8</param-value> <!-- Forces UTF-8 output encoding! -->
-  </init-param>
-    
-  <!-- FreeMarker settings: -->
-  <init-param>
-    <param-name>incompatible_improvements</param-name>
-    <param-value>2.3.21</param-value>
-  </init-param>
-  <init-param>
-    <param-name>template_exception_handler</param-name>
-    <!-- Some may prefer "html_debug" for development. -->
-    <!--<param-value>rethrow</param-value>-->
-    <param-value>html_debug</param-value>
-  </init-param>
-  <init-param>
-    <param-name>template_update_delay</param-name>
-    <param-value>0</param-value> <!-- 0 is for development only! Use higher value otherwise. -->
-  </init-param>
-  <init-param>
-    <param-name>default_encoding</param-name>
-    <param-value>UTF-8</param-value> <!-- The encoding of the template files. -->
-  </init-param>
-  <init-param>
-    <param-name>number_format</param-name>
-    <param-value>0.##########</param-value>
-  </init-param>
-
-  <load-on-startup>1</load-on-startup>
-</servlet>
+    <servlet>
+        <servlet-name>freemarker</servlet-name>
+        <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+        <!-- FreemarkerServlet settings: -->
+        <init-param>
+            <param-name>TemplatePath</param-name>
+            <param-value>/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>NoCache</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ContentType</param-name>
+            <param-value>text/html; charset=UTF-8</param-value>
+            <!-- Forces UTF-8 output encoding! -->
+        </init-param>
+        <!-- FreeMarker settings: -->
+        <init-param>
+            <param-name>incompatible_improvements</param-name>
+            <param-value>2.3.21</param-value>
+        </init-param>
+        <init-param>
+            <param-name>template_exception_handler</param-name>
+            <!-- Some may prefer "html_debug" for development. -->
+            <!--<param-value>rethrow</param-value>-->
+            <param-value>html_debug</param-value>
+        </init-param>
+        <init-param>
+            <param-name>template_update_delay</param-name>
+            <param-value>0</param-value>
+            <!-- 0 is for development only! Use higher value otherwise. -->
+        </init-param>
+        <init-param>
+            <param-name>default_encoding</param-name>
+            <param-value>UTF-8</param-value>
+            <!-- The encoding of the template files. -->
+        </init-param>
+        <init-param>
+            <param-name>number_format</param-name>
+            <param-value>0.##########</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexPageServlet</servlet-name>
+        <servlet-class>com.letsweb.tutorial.servlet_tomcat.pages.IndexPageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>freemarker</servlet-name>
         <url-pattern>*.ftl</url-pattern>
     </servlet-mapping>
-    
-<!--    <servlet>
+    <!--    <servlet>
         <servlet-name>tiles</servlet-name>
         <servlet-class>org.apache.tiles.web.startup.simple.SimpleTilesInitializerServlet</servlet-class>
 
@@ -146,7 +107,6 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>-->
-    
     <!--
       Prevent the visiting of MVC Views from outside the servlet container.
       RequestDispatcher.forward/include should and will still work.
@@ -161,7 +121,6 @@
             <!-- Nobody is allowed to visit these -->
         </auth-constraint>
     </security-constraint>
-    
     <security-constraint>
         <display-name>Restricted GET To Employees</display-name>
         <web-resource-collection>
@@ -175,14 +134,12 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
     <security-role>
         <role-name>manager</role-name>
     </security-role>
     <security-role>
         <role-name>Employee</role-name>
     </security-role>
-    
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -190,16 +147,18 @@
             <form-error-page>/login.jsp?result=failed</form-error-page>
         </form-login-config>
     </login-config>
-    
+    <servlet-mapping>
+        <servlet-name>IndexPageServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    
-    <error-page>
+    <!--    <error-page>
         <exception-type>com.letsweb.tutorial.servlet_tomcat.layout.LayoutException</exception-type>
         <location>/layout_exception.html</location>
     </error-page>
     <error-page>
         <location>/general-error.html</location>
-    </error-page>
+    </error-page>-->
 </web-app>
