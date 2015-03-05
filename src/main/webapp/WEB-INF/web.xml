@@ -9,17 +9,17 @@
         <description>This is a logical name for template.</description>
         <param-name>template</param-name>
         <!--<param-value>WEB-INF/template.jsp</param-value>-->
-        <param-value>WEB-INF/freemarker/template.ftl</param-value>
+        <param-value>/WEB-INF/freemarker/template.ftl</param-value>
     </context-param>
     <context-param>
         <description>This is a logical name of xml data for css.</description>
         <param-name>csses</param-name>
-        <param-value>WEB-INF/data/xml/css_bootstrap.xml</param-value>
+        <param-value>/WEB-INF/data/xml/css_bootstrap.xml</param-value>
     </context-param>
     <context-param>
         <description>This is a logical name of scripts.</description>
         <param-name>scripts</param-name>
-        <param-value>WEB-INF/data/xml/scripts_bootstrap.xml</param-value>
+        <param-value>/WEB-INF/data/xml/scripts_bootstrap.xml</param-value>
     </context-param>
     <context-param>
         <description>This is a logical name of scripts.</description>
@@ -28,20 +28,22 @@
     </context-param>
     <!-- f i l t e r s -->
     <filter>
+        <filter-name>TemplateLoaderFilter</filter-name>
+        <filter-class>com.letsweb.tutorial.servlet_tomcat.filters.TemplateLoaderFilter</filter-class>
+    </filter>
+    <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
     </filter>
-    <filter>
-        <filter-name>DecoratorFilter</filter-name>
-        <filter-class>com.letsweb.tutorial.servlet_tomcat.filters.DecoratorFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>DecoratorFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TemplateLoaderFilter</filter-name>
+        <servlet-name>freemarker</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -63,10 +65,10 @@
             <!-- Forces UTF-8 output encoding! -->
         </init-param>
         <!-- FreeMarker settings: -->
-        <init-param>
+        <!--        <init-param>
             <param-name>incompatible_improvements</param-name>
             <param-value>2.3.21</param-value>
-        </init-param>
+        </init-param>-->
         <init-param>
             <param-name>template_exception_handler</param-name>
             <!-- Some may prefer "html_debug" for development. -->
