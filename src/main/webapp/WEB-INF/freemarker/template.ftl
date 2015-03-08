@@ -44,21 +44,21 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="${response.encodeURL('${context}')}">lukasfloor.com</a>
+                            <a class="navbar-brand" href="${response.encodeURL('')}">lukasfloor.com</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#about">Cennik</a></li>
-                                <li><a href="#about">Firma</a></li>
-                                <li><a href="#about">Realizacje</a></li>
-                                <li><a href="#contact">Kontakt</a></li>
+                                <li><a href="cennik">${response.encodeURL('${xml["//cennik/${locale}"]}')}</a></li>
+                                <li><a href="firma">${response.encodeURL('${xml["//firma/${locale}"]}')}</a></li>
+                                <li><a href="realizacje">${response.encodeURL('${xml["//realizacje/${locale}"]}')}</a></li>
+                                <li><a href="contact">${response.encodeURL('${xml["//kontakt/${locale}"]}')}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="${response.encodeURL('en/floor')}">Podłogi</a></li>
-                                        <li><a href="#">Schody</a></li>
-                                        <li><a href="#">Cyklinowanie</a></li>
+                                        <li><a href="">Podłogi</a></li>
+                                        <li><a href="schody">Schody</a></li>
+                                        <li><a href="cyklinowanie">${xml["//cyklinowanie/${locale}"]}</a></li>
                                         <li class="divider"></li>
                                         <li class="dropdown-header">Usługi</li>
                                         <li><a href="#">Pomiar wilgotności powierzchni</a></li>
@@ -68,9 +68,10 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="${languageURLpl}">Polski</a></li>
-                                        <li><a href="${languageURLen}">Angielski</a></li>
+                                        <li><a href="${response.encodeURL('${context}')}">Polski</a></li>
+                                        <li><a href="${response.encodeURL('angielski')}">Angielski</a></li>
                                     </ul>
+
                                 </li>
                             </ul>
                             <div class="container">

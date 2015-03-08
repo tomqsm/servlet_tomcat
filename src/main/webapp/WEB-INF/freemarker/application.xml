@@ -36,4 +36,24 @@
         <pl>Logowanie się nie powiodło.</pl>
         <en>Login failed.</en>
     </niezalogowano>
+    <cyklinowanie>
+        <pl>Cyklinowanie</pl>
+        <en>Sanding</en>
+    </cyklinowanie>
+    <cennik>
+        <pl>Cyklinowanie</pl>
+        <en>Sanding</en>
+    </cennik>
+    <firma>
+        <pl>Firma</pl>
+        <en>Firm</en>
+    </firma>
+    <realizacje>
+        <pl>Realizacje</pl>
+        <en>Projects</en>
+    </realizacje>
+    <kontakt>
+        <pl>Kontakt</pl>
+        <en>Contact</en>
+    </kontakt>
 </properties>

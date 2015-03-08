@@ -1,7 +1,10 @@
 package com.letsweb.tutorial.servlet_tomcat.pages;
 
+import com.letsweb.tutorial.servlet_tomcat.UrlParser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +15,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toks
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/indexservlet"})
+@WebServlet(name = "IndexServlet", urlPatterns = {"/indexservlet", "/en/indexservlet"})
 public class IndexServlet extends HttpServlet {
+
+    private UrlParser parser = new UrlParser();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,33 +31,58 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        System.out.println("serlet index page servlet");
-        req.setAttribute("response", res); //for tuckey filter in ftl
-        String i18RootUrl = "";
-        final String requestURI = req.getRequestURI();
-        final StringBuffer requestURL = req.getRequestURL();
-        final StringBuffer requestURLWithQuery = req.getRequestURL().append('?').append(req.getQueryString());
-        final String contextPath = req.getContextPath();
-        final int indexOfContextPathInURL = requestURL.indexOf(contextPath);
-        final StringBuffer modifiedRequestURL = req.getRequestURL().append('?').append(req.getQueryString()).replace(0, indexOfContextPathInURL + contextPath.length(), "/en");
+        System.out.println("IndexServlet :)");
+        final int indexOfContextStart = req.getRequestURL().indexOf(req.getContextPath());
+        final int indexOfContextEnd = indexOfContextStart + req.getContextPath().length();
+        req.setAttribute("context", req.getContextPath());
+        req.setAttribute("fromServlet", req.getRequestURL().append(getQueryString(req)).replace(0, indexOfContextEnd, "").toString());
+        System.out.println("fromServlet: " + req.getRequestURI());
+        final String langUrl = parser.parseLanguageFromUrl(req.getContextPath(), req.getRequestURL().toString());
+        String i18nContext = req.getContextPath();
+        if (!langUrl.isEmpty()) {
+            req.setAttribute("locale", langUrl);
+//            req.setAttribute("tk", "true");
+        } else {
+            req.setAttribute("locale", "pl");
 
-        System.out.println("requestURI: " + requestURI);
-        System.out.println("requestURL: " + requestURL);
-        System.out.println("requestURLWithQuery: " + requestURLWithQuery);
-        System.out.println("indexOfContextPath: " + indexOfContextPathInURL);
-        System.out.println("modifiedRequestURL: " + modifiedRequestURL);
-        System.out.println("contextPath: " + contextPath);
-        final String languageURL = res.encodeURL(contextPath + modifiedRequestURL.toString());
-        req.setAttribute("languageURLen", languageURL);
-        req.setAttribute("languageURLpl", res.encodeURL(requestURLWithQuery.toString()));
-        
-
-        if (req.getParameter("lang") != null) {
-            req.setAttribute("locale", req.getParameter("lang"));
+            // remove
         }
-        req.getRequestDispatcher(getServletContext().getInitParameter("template")).forward(req, res);
+        req.setAttribute("response", res);
     }
 
+    public String getLanguageLink(HttpServletRequest req, String lang) {
+        String defaultLang = "pl";
+        if (lang.isEmpty() || lang.equals(defaultLang)) {
+            lang = "";
+        } else {
+            lang = "/" + lang;
+        }
+        String link = "";
+
+        final int indexOfContextStart = req.getRequestURL().indexOf(req.getContextPath());
+        final int indexOfContextEnd = indexOfContextStart + req.getContextPath().length();
+
+        final String currentPathFromDomain = req.getRequestURL().append(getQueryString(req)).replace(0, indexOfContextStart, "").toString(); // /servlet_tomcat/indexservlet?p=test
+        final String currentPathFromContext = req.getRequestURL().append(getQueryString(req)).replace(0, indexOfContextEnd, "").toString(); // /indexservlet?p=test
+        final StringBuffer currentPathToParams = req.getRequestURL(); // http://localhost:8084/servlet_tomcat/indexservlet
+        StringBuffer currentPath = req.getRequestURL().append(getQueryString(req)); // http://localhost:8084/servlet_tomcat/en/indexservlet?p=test
+        final String contextPath = req.getContextPath(); // /servlet_tomcat
+        final String currentPathI18ToServletPath = currentPath.replace(indexOfContextEnd, currentPath.length(), "/" + lang + "/").toString(); // http://localhost:8084/servlet_tomcat/en/
+        final StringBuffer currentPathI18FromContext = req.getRequestURL().append(getQueryString(req)).replace(0, indexOfContextEnd, "/en"); // /en/indexservlet?p=test
+        final String contextPathI18 = req.getContextPath(); // /servlet_tomcat/en
+        link = contextPathI18 + currentPathFromContext;
+        return link;
+    }
+
+    public String getQueryString(HttpServletRequest request) {
+        String queryString = request.getQueryString();
+        queryString = queryString == null ? "" : queryString;
+        StringBuilder queryStringBuilder = new StringBuilder(queryString);
+        if (queryStringBuilder.length() != 0) {
+            queryStringBuilder.insert(0, '?');
+        }
+        return queryStringBuilder.toString();
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -66,6 +96,7 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        request.getRequestDispatcher(getServletContext().getInitParameter("template")).forward(request, response);
     }
 
     /**
@@ -79,7 +110,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**

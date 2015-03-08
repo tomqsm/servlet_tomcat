@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shing Wai Chan
  * @author Daniel Guo
  */
-@WebServlet(name = "IndexPageServlet", urlPatterns = {"/floor"},
+@WebServlet(name = "FloorPageServlet", urlPatterns = {"/floor"},
         initParams = {
             @WebInitParam(name = "message", value = "checks servlet")})
 public class FloorPageServlet extends HttpServlet {
