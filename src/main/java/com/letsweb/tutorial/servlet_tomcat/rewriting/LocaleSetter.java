@@ -1,4 +1,4 @@
-package com.letsweb.tutorial.servlet_tomcat;
+package com.letsweb.tutorial.servlet_tomcat.rewriting;
 
 import java.util.HashSet;
 import java.util.Locale;

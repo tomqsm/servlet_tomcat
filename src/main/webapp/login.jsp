@@ -3,7 +3,9 @@
 <%
     if (request.getParameter("result") == null) {
         response.sendRedirect(request.getContextPath() + "/login");
-    } else {
+    } else if(request.getLocale().getLanguage().toString().equals("pl")){
+        response.sendRedirect(request.getContextPath() + "/logowanie/nieudane");
+    }else {
         response.sendRedirect(request.getContextPath() + "/login/result/" + request.getParameter("result"));
     }
 %>

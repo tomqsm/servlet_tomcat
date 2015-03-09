@@ -6,9 +6,16 @@
     <!--conditions run first-->
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
-        <name>loginFailureToCleanUrl</name>
+        <name>loginFailureToCleanUrlEnglish</name>
         <note></note>
         <from>^(.*)/result/failed$</from>
+        <set type="parameter" name="result">failed</set>
+        <to type="forward" last="true">$1</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>loginFailureToCleanUrlPolish</name>
+        <note></note>
+        <from>^(.*)/nieudane$</from>
         <set type="parameter" name="result">failed</set>
         <to type="forward" last="true">$1</to>
     </rule>
@@ -18,7 +25,7 @@
         <name>setSelectedLanguageFromBrowser</name>
         <condition type="method">GET</condition>
         <from>/</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.LocaleSetter" neweachtime="true"/>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LocaleSetter" neweachtime="true"/>
     </rule>
     <rule enabled="true" match-type="wildcard">
         <name>ifSelectedLanguageFromBrowserIsNotPolish_Redirect</name>

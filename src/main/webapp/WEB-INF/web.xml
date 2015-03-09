@@ -118,10 +118,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>IndexPageServlet</servlet-name>
-        <servlet-class>com.letsweb.tutorial.servlet_tomcat.pages.IndexPageServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>freemarker</servlet-name>
         <url-pattern>*.ftl</url-pattern>
@@ -176,10 +172,6 @@
             <form-error-page>/login.jsp?result=failed</form-error-page>
         </form-login-config>
     </login-config>
-    <servlet-mapping>
-        <servlet-name>IndexPageServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
