@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         if (req.getParameter("result") != null) {
             req.setAttribute("loginResult", req.getParameter("result"));
         }
-        req.getRequestDispatcher("WEB-INF/freemarker/login.ftl").forward(req, resp);
+        req.getRequestDispatcher("login.ftl").forward(req, resp);
     }
 
     @Override
@@ -45,6 +45,6 @@ public class LoginServlet extends HttpServlet {
         final Object username = req.getParameter("username");
         final Object password = req.getParameter("password");
         System.out.println("referrer: " + referrer + username + password + req.getParameter("result"));
-        req.getServletContext().getNamedDispatcher("IndexPageServlet").forward(req, resp);
+        req.getServletContext().getNamedDispatcher("IndexServlet").forward(req, resp);
     }
 }

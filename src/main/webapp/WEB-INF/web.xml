@@ -48,7 +48,7 @@
             <param-name>logLevel</param-name>
             <param-value>DEBUG</param-value>
         </init-param>
-         <!-- you can change status path so that it does not
+        <!-- you can change status path so that it does not
         conflict with your installed apps (note, defaults
         to /rewrite-status) note, must start with / -->
         <init-param>
@@ -80,7 +80,7 @@
         <!-- FreemarkerServlet settings: -->
         <init-param>
             <param-name>TemplatePath</param-name>
-            <param-value>/</param-value>
+            <param-value>/WEB-INF/freemarker/</param-value>
         </init-param>
         <init-param>
             <param-name>NoCache</param-name>

@@ -47,7 +47,6 @@ public class IndexServlet extends HttpServlet {
 
             // remove
         }
-        req.setAttribute("response", res);
     }
 
     public String getLanguageLink(HttpServletRequest req, String lang) {
@@ -96,7 +95,7 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher(getServletContext().getInitParameter("template")).forward(request, response);
+        request.getRequestDispatcher("template.ftl").forward(request, response);
     }
 
     @Override

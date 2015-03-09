@@ -58,6 +58,12 @@
         <to type="forward" last="true" qsappend="false">%{context-path}/en/indexservlet</to>
     </outbound-rule>
     
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>/links</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGet" />
+        <to type="forward">template.ftl</to>
+    </rule>
 
     
 </urlrewrite>
