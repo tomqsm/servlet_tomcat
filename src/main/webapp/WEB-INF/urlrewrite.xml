@@ -4,24 +4,25 @@
 <urlrewrite use-context="false">
     <!--NOTE-->
     <!--conditions run first-->
+    
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlEnglish</name>
         <note></note>
-        <from>^(.*)/result/failed$</from>
-        <set type="parameter" name="result">failed</set>
+        <from>^(.*)/failed$</from>
+        <set type="parameter" name="failed">true</set>
         <to type="forward" last="true">$1</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlPolish</name>
         <note></note>
         <from>^(.*)/nieudane$</from>
-        <set type="parameter" name="result">failed</set>
+        <set type="parameter" name="failed">true</set>
         <to type="forward" last="true">$1</to>
     </rule>
     
     <!--START LANGUAGE TO URL GROUP runs on / root call-->
-    <rule enabled="true" match-type="wildcard">
+<!--    <rule enabled="true" match-type="wildcard">
         <name>setSelectedLanguageFromBrowser</name>
         <condition type="method">GET</condition>
         <from>/</from>
@@ -40,7 +41,7 @@
         <condition type="attribute" name="selectedLanguage" operator="equal">/</condition>
         <from>/</from>
         <to type="forward" last="true">%{attribute:selectedLanguage}indexservlet</to>
-    </rule>
+    </rule>-->
     <!-- END LANGUAGE TO URL GROUP-->
 
     <rule enabled="true" match-type="regex">
@@ -60,8 +61,22 @@
     
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
+        <from>^/$|^/en/$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LandingController" method="doGet" />
+        <to type="forward" last="true">template.ftl</to>
+    </rule>
+    
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
         <from>/links</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGet" />
+        <to type="forward">template.ftl</to>
+    </rule>
+    
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>/podlogi|/floors|en/floors</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
         <to type="forward">template.ftl</to>
     </rule>
 

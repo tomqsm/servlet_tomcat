@@ -21,19 +21,11 @@ import javax.servlet.http.HttpServletResponse;
             @WebInitParam(name = "message", value = "checks servlet")})
 public class LoginServlet extends HttpServlet {
 
-    private String listenerMessage = null;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        listenerMessage = (String) config.getServletContext().getAttribute("listenerMessage");
-        super.init(config);
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //prepares login page or redisplays it with login failed message
-        if (req.getParameter("result") != null) {
-            req.setAttribute("loginResult", req.getParameter("result"));
+        if (req.getParameter("failed") != null) {
+            req.setAttribute("loginResult", req.getParameter("failed"));
         }
         req.getRequestDispatcher("login.ftl").forward(req, resp);
     }
@@ -44,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         UUID uuid = UUID.randomUUID();
         final Object username = req.getParameter("username");
         final Object password = req.getParameter("password");
-        System.out.println("referrer: " + referrer + username + password + req.getParameter("result"));
+        System.out.println("referrer: " + referrer + username + password + " failed: " + req.getParameter("failed"));
         req.getServletContext().getNamedDispatcher("IndexServlet").forward(req, resp);
     }
 }

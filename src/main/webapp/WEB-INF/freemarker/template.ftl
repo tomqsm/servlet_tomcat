@@ -1,6 +1,10 @@
 <#ftl>
+<#if locale??>
+<#else>
+<#assign locale="pl">
+</#if>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +60,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="">Podłogi</a></li>
+                                        <li><a href="${response.encodeURL('podlogi')}">Podłogi</a></li>
                                         <li><a href="schody">Schody</a></li>
                                         <li><a href="cyklinowanie">${xml["//cyklinowanie/${locale}"]}</a></li>
                                         <li class="divider"></li>
