@@ -10,37 +10,29 @@
 -->
 <urlrewrite use-context="false">
     
-<!--    <rule enabled="true" match-type="regex" >
-        <name>Index rule 3</name>
-        <note>Set locale 2.</note>
-        <from>/en/(.*)</from>
-        <to type="redirect" qsappend="true" last="true">%{context-path}/indexservlet?lang=en&amp;$1</to>
-    </rule>-->
-    <rule enabled="true" match-type="regex">
-        <name>Index rule 2</name>
-        <note>Set locale 2.</note>
-        <from>^.*/pl/(.*)$</from>
-        <to type="redirect" last="true">%{context-path}/$2</to>
-    </rule>
-    
     <rule enabled="true" match-type="wildcard">
-        <name>Index rule 2</name>
-        <note>Set locale 2.</note>
-        <condition type="parameter" name="message" operator="equal">alreadyThere</condition>
-        <from>/en/indexservlet</from>
-        <to type="redirect" qsappend="false" last="true">%{context-path}/indexservlet?test=true</to>
-    </rule>
-    
-    <rule enabled="true" match-type="wildcard">
-        <name>Index rule 1</name>
-        <note>Set locale 2.</note>
+        <name>selectedLanguageIsDefault</name>
+        <note>Runs method and sets atribute 'selectedLanguage'.</note>
+        <condition type="method">GET</condition>
         <from>/</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.LocaleSetter" />
+        <condition type="attribute" name="selectedLocale" operator="equal">/</condition>
         <to type="forward">indexservlet</to>
     </rule>
+    
+    <rule enabled="true" match-type="wildcard">
+        <name>selectedLanguageIsNotDefault</name>
+        <note>Runs method and sets atribute 'selectedLanguage'.</note>
+        <from>/</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.LocaleSetter" />
+        <condition type="attribute" name="selectedLocale" operator="notequal">/</condition>
+        <to type="temporary-redirect">%{context-path}%{attribute:selectedLanguage}indexservlet</to>
+    </rule>
+    
     <rule enabled="true" match-type="regex">
         <name>Index rule 1</name>
         <note>Set locale 2.</note>
-        <from>^(/angielski|/en/angielski)$</from>
+        <from>^(/angielski|/en/angielski)$</from>Wszystkiego dobrego w 
         <to type="forward">indexservlet?tk=true</to>
     </rule>
     
