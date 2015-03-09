@@ -5,11 +5,12 @@
     <!--NOTE-->
     <!--conditions run first-->
     <!--LOGIN-->
-    <rule enabled="false" match-type="wildcard">
-        <name>loginToCleanUrl</name>
+    <rule enabled="true" match-type="regex">
+        <name>loginFailureToCleanUrl</name>
         <note></note>
-        <from>%{context-path}/login/result/failed</from>
-        <to type="redirect" last="true">login?result=failed</to>
+        <from>^(.*)/result/failed$</from>
+        <set type="parameter" name="result">failed</set>
+        <to type="forward" last="true">$1</to>
     </rule>
     
     <!--START LANGUAGE TO URL GROUP runs on / root call-->

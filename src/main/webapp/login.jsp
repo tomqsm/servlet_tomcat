@@ -4,6 +4,6 @@
     if (request.getParameter("result") == null) {
         response.sendRedirect(request.getContextPath() + "/login");
     } else {
-        response.sendRedirect(request.getContextPath() + "/login?result=" + request.getParameter("result"));
+        response.sendRedirect(request.getContextPath() + "/login/result/" + request.getParameter("result"));
     }
 %>

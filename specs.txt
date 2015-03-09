@@ -1,0 +1,10 @@
+- Dostosuj url do preferencji językowej w przeglądarce.
+
+Po wysłaniu prośby o stronę, aplikacja wykrywa preferencję językową użytkownika ustawioną w przeglądarce.
+Jeśli jest inna niż polski, aplikacja przekierowuje żądanie na url 
+oraz dostosowuje wszystkie odnośniki na stronie do innej wersji językowej. Unikamy używania cookies.
+Na przykład: uzytkownika A znajduje się w Wielkiej Brytanii i używa komputera z przeglądarką,
+w której preferencja językowa jest ustawiona na język angielski. Wpisuje Twój adres url.
+Twoja aplikacja automatycznie przekiwrowuje żądanie, zmienia url i pozyskuje wersję angielską dla uzytkownika A.
+
+- Dostosuj język na żądanie uzytkownika.

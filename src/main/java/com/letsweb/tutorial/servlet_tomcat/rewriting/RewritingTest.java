@@ -13,7 +13,7 @@ public class RewritingTest extends RewriteRule{
 
     @Override
     public RewriteMatch matches(HttpServletRequest request, HttpServletResponse response) {
-        new RewriteMatch();
+        final RewriteMatch rewriteMatch = new RewriteMatch();
         return super.matches(request, response); //To change body of generated methods, choose Tools | Templates.
     }
     
