@@ -2,9 +2,6 @@ package com.letsweb.tutorial.servlet_tomcat.pages;
 
 import com.letsweb.tutorial.servlet_tomcat.UrlParser;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.regex.Pattern;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toks
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/indexservlet", "/en/indexservlet"})
+@WebServlet(name = "IndexServlet", urlPatterns = {"/index", "/en/index"})
 public class IndexServlet extends HttpServlet {
 
     private UrlParser parser = new UrlParser();

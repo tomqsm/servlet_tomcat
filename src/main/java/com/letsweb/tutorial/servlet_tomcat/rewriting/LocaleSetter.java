@@ -25,11 +25,10 @@ public class LocaleSetter {
         String browserLang = locale.getLanguage();
         String urlLang = null; // parse url for en / pl
         if (languages.contains(browserLang) && urlLang == null && !browserLang.equals(DEFAULT_LANGUAGE)) {
-            request.setAttribute("selectedLanguage", "/" + browserLang + "/");
+            request.setAttribute("browserLanguage", "/" + browserLang + "/");
         } else {
-            request.setAttribute("selectedLanguage", "/");
+            request.setAttribute("browserLanguage", "/");
         }
-        request.setAttribute("tk", true);
-        System.out.println("LocaleSetter OK: " + "Browser language: " + browserLang + ", set selectedLanguage: [" + request.getAttribute("selectedLanguage") + "]");
+        System.out.println("LocaleSetter OK: " + "Browser language: " + browserLang + ", set browserLanguage: [" + request.getAttribute("browserLanguage") + "]");
     }
 }

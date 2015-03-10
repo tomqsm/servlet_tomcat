@@ -2,15 +2,17 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-context="false">
-    <!--NOTE-->
+<!--NOTE-->
     <!--conditions run first-->
-    
+
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlEnglish</name>
         <note></note>
         <from>^(.*)/failed$</from>
         <set type="parameter" name="failed">true</set>
+        <set name="log.info">loginFailureToCleanUrlEnglish</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">$1</to>
     </rule>
     <rule enabled="true" match-type="regex">
@@ -18,30 +20,38 @@
         <note></note>
         <from>^(.*)/nieudane$</from>
         <set type="parameter" name="failed">true</set>
+        <set name="log.info">loginFailureToCleanUrlPolish</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">$1</to>
     </rule>
     
     <!--START LANGUAGE TO URL GROUP runs on / root call-->
-<!--    <rule enabled="true" match-type="wildcard">
-        <name>setSelectedLanguageFromBrowser</name>
+    <rule enabled="true" match-type="regex">
+        <name>setBrowserLanguage</name>
         <condition type="method">GET</condition>
-        <from>/</from>
+        <from>^/$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LocaleSetter" neweachtime="true"/>
+        <set name="log.info">setBrowserLanguage: %{attribute:browserLanguage}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
     </rule>
-    <rule enabled="true" match-type="wildcard">
-        <name>ifSelectedLanguageFromBrowserIsNotPolish_Redirect</name>
+    <rule enabled="true" match-type="regex">
+        <name>browserLanguageNotPL->Redirect</name>
         <condition type="method">GET</condition>
-        <condition type="attribute" name="selectedLanguage" operator="notequal">/</condition>
-        <from>/</from>
-        <to type="temporary-redirect" last="false">%{context-path}%{attribute:selectedLanguage}indexservlet</to>
+        <condition type="attribute" name="browserLanguage" operator="notequal">^/$</condition>
+        <set name="log.info">browserLanguageNotPL->Redirect: %{attribute:browserLanguage}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <from>^/$</from>
+        <to type="temporary-redirect" last="true">%{context-path}%{attribute:browserLanguage}/index</to>
     </rule>
-    <rule enabled="true" match-type="wildcard">
-        <name>ifSelectedLanguageFromBrowserIsPolish_Forward</name>
+    <rule enabled="true" match-type="regex">
+        <name>browserLanguagePL->Forward</name>
         <condition type="method">GET</condition>
-        <condition type="attribute" name="selectedLanguage" operator="equal">/</condition>
-        <from>/</from>
-        <to type="forward" last="true">%{attribute:selectedLanguage}indexservlet</to>
-    </rule>-->
+        <condition type="attribute" name="browserLanguage" operator="equal">^/$</condition>
+        <set name="log.info">browserLanguagePL->Forward: %{attribute:browserLanguage}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <from>^/$</from>
+        <to type="forward" last="true">%{attribute:browserLanguage}/index</to>
+    </rule>
     <!-- END LANGUAGE TO URL GROUP-->
 
     <rule enabled="true" match-type="regex">
