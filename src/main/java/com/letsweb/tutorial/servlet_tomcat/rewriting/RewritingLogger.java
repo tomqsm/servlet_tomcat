@@ -19,7 +19,6 @@ public class RewritingLogger {
 
     public void log(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("{}", request.getAttribute("log.info"));
-        logger.debug("{}", request);
         request.removeAttribute("log.info");
     }
 }

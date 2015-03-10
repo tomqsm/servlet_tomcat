@@ -75,7 +75,6 @@
                                         <li><a href="${response.encodeURL('${context}')}">Polski</a></li>
                                         <li><a href="${response.encodeURL('angielski')}">Angielski</a></li>
                                     </ul>
-
                                 </li>
                             </ul>
                             <div class="container">

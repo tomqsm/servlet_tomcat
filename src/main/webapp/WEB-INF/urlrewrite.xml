@@ -2,7 +2,7 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-context="false">
-<!--NOTE-->
+    <!--NOTE-->
     <!--conditions run first-->
 
     <!--LOGIN-->
@@ -61,12 +61,17 @@
         <to type="forward">indexservlet?tk=true</to>
     </rule>
     
-    <outbound-rule enabled="true" match-type="regex">
-        <name></name>
+    <outbound-rule enabled="true" match-type="wildcard">
+        <name>logOutboundRule</name>
+        <set name="log.info">test</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
+        <from>angielski</from>
+    </outbound-rule>
+    <outbound-rule enabled="true" match-type="wildcard">
+        <name>outboundRewriteForEN</name>
         <note></note>
-        <condition type="parameter" name="tk" operator="equal">true</condition>
-        <from>^angielski$</from>
-        <to type="forward" last="true" qsappend="false">%{context-path}/en/indexservlet</to>
+        <from>angielski</from>
+        <to>%{context-path}/en/indexservlet</to>
     </outbound-rule>
     
     <rule enabled="true" match-type="regex">
