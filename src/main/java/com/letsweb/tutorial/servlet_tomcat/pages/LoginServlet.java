@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shing Wai Chan
  * @author Daniel Guo
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login", "/logowanie"},
+@WebServlet(name = "LoginServlet", urlPatterns = {"/en/login", "/logowanie"},
         initParams = {
             @WebInitParam(name = "message", value = "checks servlet")})
 public class LoginServlet extends HttpServlet {
@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
         if (req.getParameter("failed") != null) {
             req.setAttribute("loginResult", req.getParameter("failed"));
         }
+        System.out.println("XXXXX");
         req.getRequestDispatcher("login.ftl").forward(req, resp);
     }
 

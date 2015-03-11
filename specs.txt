@@ -12,5 +12,4 @@ Twoja aplikacja automatycznie przekiwrowuje żądanie, zmienia url i pozyskuje w
 pathFrom    (referer)
 pathTo      (request url)
 
-if pathFrom.lang == pathTo.lang donothing
-else if pathFrom.lang != pathTo.lang pageLang = pathTo.lang
+Login will create a session. Failed login creates a session.

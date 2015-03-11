@@ -24,7 +24,7 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">$1</to>
     </rule>
-    
+     
     <!--START LANGUAGE TO URL GROUP runs on / root call-->
     <rule enabled="true" match-type="regex">
         <name>setBrowserLanguage</name>
@@ -53,13 +53,6 @@
         <to type="forward" last="true">%{attribute:browserLanguage}index</to>
     </rule>
     <!-- END LANGUAGE TO URL GROUP-->
-
-    <rule enabled="true" match-type="regex">
-        <name>Index rule 1</name>
-        <note>Set locale 2.</note>
-        <from>^(/angielski|/en/angielski)$</from>Wszystkiego dobrego w 
-        <to type="forward">indexservlet?tk=true</to>
-    </rule>
     
     <outbound-rule enabled="true" match-type="regex">
         <name>setLanguageFromRefererAndRequestPath</name>
@@ -68,12 +61,12 @@
         <set name="log.info">setLanguageFromRefererAndRequestPath</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <from>^en(.*)$|^de(.*)$</from>
-    </outbound-rule>
+    </outbound-rule> 
 
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForEN</name>
         <from>^en(.*)$</from>
-        <set name="log.info">outboundRewriteForEN: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
+        <set name="log.info">outboundRewriteForEN</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}/en${replace:$1:en/:}</to>
     </outbound-rule>
@@ -89,25 +82,10 @@
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForPL</name>
         <from>^pl(.*)$</from>
-        <set name="log.info">outboundRewriteForPL: %{request-uri} fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
+        <set name="log.info">outboundRewriteForPL</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}${replace:$1:en/:}</to>
     </outbound-rule>
-
-    
-    <rule enabled="true" match-type="regex">
-        <condition type="method">GET</condition>
-        <from>^/$|^/en/$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LandingController" method="doGet" />
-        <to type="forward" last="true">template.ftl</to>
-    </rule>
-    
-    <rule enabled="true" match-type="regex">
-        <condition type="method">GET</condition>
-        <from>/links</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGet" />
-        <to type="forward">template.ftl</to>
-    </rule>
     
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>

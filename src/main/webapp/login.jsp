@@ -6,6 +6,6 @@
     } else if(request.getLocale().getLanguage().toString().equals("pl")){
         response.sendRedirect(request.getContextPath() + "/logowanie/nieudane");
     }else {
-        response.sendRedirect(request.getContextPath() + "/login/failed");
+        response.sendRedirect(request.getContextPath() + "/en/login/failed");
     }
 %>
