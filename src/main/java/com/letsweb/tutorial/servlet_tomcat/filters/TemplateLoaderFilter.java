@@ -35,14 +35,12 @@ public class TemplateLoaderFilter implements Filter {
         if (debug) {
             log("DecoratorFilter:DoBeforeProcessing");
         }
-        HttpServletRequest request = (HttpServletRequest) req;
         System.out.println("DECOR before ok.");
         req.setAttribute("context", req.getServletContext().getContextPath());
         try {
             req.setAttribute("xml", NodeModel.parse(appStaticData));
             req.setAttribute("scripts", NodeModel.parse(scriptsFile));
             req.setAttribute("csses", NodeModel.parse(cssesFile));
-//            req.setAttribute("locale", req.getAttribute("locale") == null ? req.getLocale().getLanguage() : req.getAttribute("locale"));
             req.setAttribute("response", response);
         } catch (Exception ex) {
             throw new RuntimeException(ex);

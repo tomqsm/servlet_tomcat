@@ -38,16 +38,16 @@
         <name>browserLanguageNotPL->Redirect</name>
         <condition type="method">GET</condition>
         <condition type="attribute" name="browserLanguage" operator="notequal">^/$</condition>
-        <set name="log.info">browserLanguageNotPL->Redirect: %{attribute:browserLanguage}</set>
+        <set name="log.info">browserLanguageNotPL->Redirect: %{context-path}/%{attribute:browserLanguage}/index</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <from>^/$</from>
-        <to type="temporary-redirect" last="true">%{context-path}%{attribute:browserLanguage}/index</to>
+        <to type="temporary-redirect" last="true">%{context-path}/%{attribute:browserLanguage}/index</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>browserLanguagePL->Forward</name>
         <condition type="method">GET</condition>
         <condition type="attribute" name="browserLanguage" operator="equal">^/$</condition>
-        <set name="log.info">browserLanguagePL->Forward: %{attribute:browserLanguage}</set>
+        <set name="log.info">browserLanguagePL->Forward: %{attribute:browserLanguage}/index</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <from>^/$</from>
         <to type="forward" last="true">%{attribute:browserLanguage}/index</to>
@@ -61,19 +61,31 @@
         <to type="forward">indexservlet?tk=true</to>
     </rule>
     
-    <outbound-rule enabled="true" match-type="wildcard">
-        <name>logOutboundRule</name>
-        <set name="log.info">test</set>
+    <outbound-rule enabled="true" match-type="regex">
+        <name>setLanguageFromRefererAndRequestPath</name>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="setPathFromLang" />
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="setPathToLang" />
+        <set name="log.info">setLanguageFromRefererAndRequestPath</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="test" />
-        <from>angielski</from>
+        <from>^en(.*)$</from>
     </outbound-rule>
-    <outbound-rule enabled="true" match-type="wildcard">
+
+    <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForEN</name>
-        <note></note>
-        <from>angielski</from>
-        <to>%{context-path}/en/index</to>
+        <from>^en(.*)$</from>
+        <set name="log.info">outboundRewriteForEN: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
+        <to last="true">%{context-path}/en${replace:$1:en/:}</to>
     </outbound-rule>
+
+    <outbound-rule enabled="true" match-type="regex">
+        <name>outboundRewriteForEN</name>
+        <from>^pl(.*)$</from>
+        <set name="log.info">outboundRewriteForEN: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
+        <to last="true">%{context-path}${replace:$1:en/:}</to>
+    </outbound-rule>
+
     
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
