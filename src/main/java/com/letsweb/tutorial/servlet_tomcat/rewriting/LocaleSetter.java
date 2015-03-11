@@ -27,7 +27,7 @@ public class LocaleSetter {
         if (languages.contains(browserLang) && urlLang == null && !browserLang.equals(DEFAULT_LANGUAGE)) {
             request.setAttribute("browserLanguage", browserLang);
         } else {
-            request.setAttribute("browserLanguage", "");
+            request.setAttribute("browserLanguage", "/");
         }
         System.out.println("LocaleSetter OK: " + "Browser language: " + browserLang + ", set browserLanguage: [" + request.getAttribute("browserLanguage") + "]");
     }

@@ -41,7 +41,7 @@
         <set name="log.info">browserLanguageNotPL->Redirect: %{context-path}/%{attribute:browserLanguage}index</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <from>^/$</from>
-        <to type="temporary-redirect" last="true">%{context-path}/%{attribute:browserLanguage}index</to>
+        <to type="temporary-redirect" last="true">%{context-path}/%{attribute:browserLanguage}/index</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>browserLanguagePL->Forward</name>
@@ -78,13 +78,13 @@
         <to last="true">%{context-path}/en${replace:$1:en/:}</to>
     </outbound-rule>
     
-    <outbound-rule enabled="true" match-type="regex">
+<!--    <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForDE</name>
         <from>^de(.*)$</from>
         <set name="log.info">outboundRewriteForDE: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}/de${replace:$1:de/:}</to>
-    </outbound-rule>
+    </outbound-rule>-->
 
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForEN</name>

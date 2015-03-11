@@ -72,9 +72,11 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="${response.encodeURL('pl')}">Polski</a></li>
+<#if locale == "pl">
                                         <li><a href="${response.encodeURL('en${fromServlet}')}">Angielski</a></li>
-                                        <li><a href="${response.encodeURL('de${fromServlet}')}">Niemiecki</a></li>
+<#else>
+                                        <li><a href="${response.encodeURL('pl')}">Polski</a></li>
+</#if>
                                     </ul>
                                 </li>
                             </ul>
