@@ -55,16 +55,16 @@ public class IndexServletTest {
         String[] found = new String[1];
         String regex = "/(en|pl)/";
         String context = "/";
-        String url = "http://localhost:8084"+context+"/en/indexservlet";
+        String url = "http://localhost:8084"+context+"/indexservlet";
         final Pattern pattern = Pattern.compile(regex);
         final String[] split = pattern.split(url);
         System.out.println(split.length);
 //        assertThat(split).isSameAs(new String [] {"/en/"});
-        assertThat(split[0].endsWith(context)).isTrue();
+//        assertThat(split[0].endsWith(context)).isTrue();
         if (split[0].endsWith(context)) {
 //            final int index = url.indexOf(split[0]) + split[0].length() + 1;
             
-            System.out.println(url.substring(split[0].length()+1, split[0].length() + 3));
+            System.out.println(":"+url.substring(split[0].length()+1, split[0].length() + 3));
         }
 
         final Matcher matcher = pattern.matcher(url);

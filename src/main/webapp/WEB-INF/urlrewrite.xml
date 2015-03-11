@@ -65,13 +65,14 @@
         <name>logOutboundRule</name>
         <set name="log.info">test</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="test" />
         <from>angielski</from>
     </outbound-rule>
     <outbound-rule enabled="true" match-type="wildcard">
         <name>outboundRewriteForEN</name>
         <note></note>
         <from>angielski</from>
-        <to>%{context-path}/en/indexservlet</to>
+        <to>%{context-path}/en/index</to>
     </outbound-rule>
     
     <rule enabled="true" match-type="regex">
@@ -90,7 +91,7 @@
     
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
-        <from>/podlogi|/floors|en/floors</from>
+        <from>^/en/podlogi$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
         <to type="forward">template.ftl</to>
     </rule>

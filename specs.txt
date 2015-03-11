@@ -8,3 +8,9 @@ w której preferencja językowa jest ustawiona na język angielski. Wpisuje Twó
 Twoja aplikacja automatycznie przekiwrowuje żądanie, zmienia url i pozyskuje wersję angielską dla uzytkownika A.
 
 - Dostosuj język na żądanie uzytkownika.
+
+pathFrom    (referer)
+pathTo      (request url)
+
+if pathFrom.lang == pathTo.lang donothing
+else if pathFrom.lang != pathTo.lang pageLang = pathTo.lang
