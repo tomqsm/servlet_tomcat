@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LocaleSetter {
 
-    private static Set<String> languages = new HashSet<String>();
+    private static final Set<String> languages = new HashSet<>();
     private static final String DEFAULT_LANGUAGE = "pl";
 
     static {
@@ -29,6 +29,5 @@ public class LocaleSetter {
         } else {
             request.setAttribute("browserLanguage", "/");
         }
-        System.out.println("LocaleSetter OK: " + "Browser language: " + browserLang + ", set browserLanguage: [" + request.getAttribute("browserLanguage") + "]");
     }
 }

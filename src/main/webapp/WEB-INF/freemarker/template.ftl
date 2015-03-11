@@ -75,7 +75,7 @@
 <#if locale == "pl">
                                         <li><a href="${response.encodeURL('en${fromServlet}')}">Angielski</a></li>
 <#else>
-                                        <li><a href="${response.encodeURL('pl')}">Polski</a></li>
+                                        <li><a href="${response.encodeURL('pl${fromServlet}')}">Polski</a></li>
 </#if>
                                     </ul>
                                 </li>

@@ -1,3 +1,7 @@
+<#if locale??>
+<#else>
+<#assign locale="pl">
+</#if>
 <!DOCTYPE html>
 <html lang="en">
     <head>
