@@ -74,6 +74,7 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="${response.encodeURL('pl')}">Polski</a></li>
                                         <li><a href="${response.encodeURL('en${fromServlet}')}">Angielski</a></li>
+                                        <li><a href="${response.encodeURL('de${fromServlet}')}">Niemiecki</a></li>
                                     </ul>
                                 </li>
                             </ul>

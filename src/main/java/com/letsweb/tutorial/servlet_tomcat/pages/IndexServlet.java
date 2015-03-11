@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toks
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/index", "/en/index"})
+@WebServlet(name = "IndexServlet", urlPatterns = {"/index", "/en/index", "/de/index"}) 
 public class IndexServlet extends HttpServlet {
 
     private UrlParser parser = new UrlParser();
