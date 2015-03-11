@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "IndexServlet", urlPatterns = {"/index", "/en/index", "/de/index"})
 public class IndexServlet extends HttpServlet {
 
-    private UrlParser parser = new UrlParser();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,8 +28,7 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("IndexServlet :)");
         req.setAttribute("context", req.getContextPath());
-        req.setAttribute("servletPath", req.getRequestURI());
-        req.setAttribute("queryString", req.getQueryString());
+        req.setAttribute("request", req);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

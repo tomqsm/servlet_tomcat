@@ -3,12 +3,11 @@
 <#else>
 <#assign locale="pl">
 </#if>
-<#if queryString??>
+<#assign queryString=(request.queryString)!>
+<#if queryString != "">
 <#assign queryString="?"+queryString>
-<#else>
-<#assign queryString="">
 </#if>
-<#assign servletPathQueryString=(servletPath)?replace(context,"")+queryString>
+<#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
 <!DOCTYPE html>
 <html lang="${locale}">
     <head>
