@@ -16,6 +16,10 @@ public class LinksController extends HttpServlet {
 
     public void doGetPodlogi(HttpServletRequest req, HttpServletResponse res){
         System.out.println("doGetPodlogi " + req.getRequestURL().toString());
+        System.out.println("doGetPodlogi " + req.getRequestURI().toString());
+        req.setAttribute("servletPath", req.getRequestURI());
+        req.setAttribute("queryString", req.getQueryString());
+        
     }
 
     @Override

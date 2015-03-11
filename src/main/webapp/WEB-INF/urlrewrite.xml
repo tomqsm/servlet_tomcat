@@ -47,7 +47,7 @@
         <name>browserLanguagePL->Forward</name>
         <condition type="method">GET</condition>
         <condition type="attribute" name="browserLanguage" operator="equal">^/$</condition>
-        <set name="log.info">browserLanguagePL->Forward: %{attribute:browserLanguage}index</set>
+        <set name="log.info">browserLanguagePL->Forward: %{request-uri} %{attribute:browserLanguage}index</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <from>^/$</from>
         <to type="forward" last="true">%{attribute:browserLanguage}index</to>
@@ -87,9 +87,9 @@
     </outbound-rule>-->
 
     <outbound-rule enabled="true" match-type="regex">
-        <name>outboundRewriteForEN</name>
+        <name>outboundRewriteForPL</name>
         <from>^pl(.*)$</from>
-        <set name="log.info">outboundRewriteForEN: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
+        <set name="log.info">outboundRewriteForPL: %{request-uri} fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}${replace:$1:en/:}</to>
     </outbound-rule>
@@ -112,6 +112,12 @@
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
         <from>^/en/podlogi$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
+        <to type="forward">template.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^/podlogi$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
         <to type="forward">template.ftl</to>
     </rule>

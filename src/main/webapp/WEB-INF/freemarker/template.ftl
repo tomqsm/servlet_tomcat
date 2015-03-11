@@ -3,6 +3,12 @@
 <#else>
 <#assign locale="pl">
 </#if>
+<#if queryString??>
+<#assign queryString="?"+queryString>
+<#else>
+<#assign queryString="">
+</#if>
+<#assign servletPathQueryString=(servletPath)?replace(context,"")+queryString>
 <!DOCTYPE html>
 <html lang="${locale}">
     <head>
@@ -36,6 +42,7 @@
         </script>
     </head>
     <body>
+
         <div id="showSize"></div>
         <div class="navbar-wrapper">
             <div class="container">
@@ -73,9 +80,9 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
 <#if locale == "pl">
-                                        <li><a href="${response.encodeURL('en${fromServlet}')}">Angielski</a></li>
+                                        <li><a href="${response.encodeURL('en${servletPathQueryString}')}">Angielski</a></li>
 <#else>
-                                        <li><a href="${response.encodeURL('pl${fromServlet}')}">Polski</a></li>
+                                        <li><a href="${response.encodeURL('pl${servletPathQueryString}')}">Polski</a></li>
 </#if>
                                     </ul>
                                 </li>
