@@ -7,21 +7,26 @@
 
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
-        <name>loginFailureToCleanUrlEnglish</name>
+        <name>loginFailureToCleanUrlEN</name>
+        <note>When url based language choice is maintained, this rule 
+            allows to set preference to user language choice from dropdown
+        over user preferences from browser setting.</note>
+        <condition type="session-attribute" name="language" operator="equal">^en$</condition>
         <from>^(.*)/failed$</from>
         <set name="failed">true</set>
-        <set name="log.info">loginFailureToCleanUrlEnglish | Session: %{requested-session-id} | language: %{session-attribute:language}</set>
+        <set name="log.info">loginFailureToCleanUrlEN | Session: %{requested-session-id}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">/%{session-attribute:language}/login.ftl</to>
     </rule>
-<!--    <rule enabled="true" match-type="regex">
-        <name>loginFailureToCleanUrlPolish</name>
-        <from>^(.*)/nieudane$</from>
-        <set type="parameter" name="failed">true</set>
-        <set name="log.info">loginFailureToCleanUrlPolish | Session: %{requested-session-id} | language: %{session-attribute:language}</set>
+    <rule enabled="true" match-type="regex">
+        <name>loginFailureToCleanUrlPL</name>
+        <condition type="session-attribute" name="language" operator="equal">^pl$</condition>
+        <from>^(.*)/failed$</from>
+        <set name="failed">true</set>
+        <set name="log.info">loginFailureToCleanUrlPL | Session: %{requested-session-id}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">%{session-attribute:language}/$1</to>
-    </rule>-->
+        <to type="forward" last="true">/login.ftl</to>
+    </rule>
     <rule enabled="true" match-type="regex">
         <name>loginform</name>
         <condition type="method">POST</condition>
