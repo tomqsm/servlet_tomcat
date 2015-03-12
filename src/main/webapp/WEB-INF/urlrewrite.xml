@@ -8,21 +8,31 @@
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlEnglish</name>
-        <note></note>
         <from>^(.*)/failed$</from>
-        <set type="parameter" name="failed">true</set>
-        <set name="log.info">loginFailureToCleanUrlEnglish</set>
+        <set name="failed">true</set>
+        <set name="log.info">loginFailureToCleanUrlEnglish | Session: %{requested-session-id} | language: %{session-attribute:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">$1</to>
+        <to type="forward" last="true">/%{session-attribute:language}/login.ftl</to>
     </rule>
-    <rule enabled="true" match-type="regex">
+<!--    <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlPolish</name>
-        <note></note>
         <from>^(.*)/nieudane$</from>
         <set type="parameter" name="failed">true</set>
-        <set name="log.info">loginFailureToCleanUrlPolish</set>
+        <set name="log.info">loginFailureToCleanUrlPolish | Session: %{requested-session-id} | language: %{session-attribute:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">$1</to>
+        <to type="forward" last="true">%{session-attribute:language}/$1</to>
+    </rule>-->
+    <rule enabled="true" match-type="regex">
+        <name>loginform</name>
+        <condition type="method">POST</condition>
+        <from>^(.*)/loginform$</from>
+        <!--<set type="parameter" name="failed">true</set>-->
+        <set name="log.info">loginform | username: %{parameter:username} password: %{parameter:password}, language: %{parameter:language}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <set type="parameter" name="j_username">%{parameter:username}</set>
+        <set type="parameter" name="j_password">%{parameter:password}</set>
+        <set type="session" name="language">%{parameter:language}</set>
+        <to type="redirect" last="true" qsappend="true">j_security_check</to>
     </rule>
      
     <!--START LANGUAGE TO URL GROUP runs on / root call-->
@@ -38,7 +48,7 @@
         <name>browserLanguageNotPL->Redirect</name>
         <condition type="method">GET</condition>
         <condition type="attribute" name="browserLanguage" operator="notequal">^/$</condition>
-        <set name="log.info">browserLanguageNotPL->Redirect: %{context-path}/%{attribute:browserLanguage}index</set>
+        <set name="log.info">browserLanguageNotPL->Redirect: %{context-path}/%{attribute:browserLanguage}/index</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <from>^/$</from>
         <to type="temporary-redirect" last="true">%{context-path}/%{attribute:browserLanguage}/index</to>
@@ -71,7 +81,7 @@
         <to last="true">%{context-path}/en${replace:$1:en/:}</to>
     </outbound-rule>
     
-<!--    <outbound-rule enabled="true" match-type="regex">
+    <!--    <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForDE</name>
         <from>^de(.*)$</from>
         <set name="log.info">outboundRewriteForDE: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>

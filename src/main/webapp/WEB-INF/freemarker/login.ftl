@@ -66,7 +66,7 @@
     <body>
         <div class="container">
             <form action="j_security_check" method="post" class="form-signin">
-                <h2 class="form-signin-heading">${xml["//zaloguj/${locale}"]} <#if loginResult??> ${xml["//niezalogowano/${locale}"]}<#else></#if></h2>
+                <h2 class="form-signin-heading">${xml["//zaloguj/${locale}"]} <#if failed??> ${xml["//niezalogowano/${locale}"]}<#else></#if></h2>
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
                        <label for="inputPassword" class="sr-only">Password</label>

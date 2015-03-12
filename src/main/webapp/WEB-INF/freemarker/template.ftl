@@ -82,7 +82,7 @@
                                         <li><a href="${response.encodeURL('en${servletPathQueryString}')}">Angielski</a></li>
 <#else>
                                         <li><a href="${response.encodeURL('pl${servletPathQueryString}')}">Polski</a></li>
-</#if>
+                                        </#if>
                                     </ul>
                                 </li>
                             </ul>
@@ -91,17 +91,18 @@
                                     <ul class="nav navbar-right navbar-nav">
                                         <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <form action="j_security_check" method="post" class="form-signin">
+                                                <form action="loginform" method="post" class="form-signin">
                                                     <span class="form-signin-heading">${xml["//zaloguj/${locale}"]}</span>
                                                     <label for="inputEmail" class="sr-only">${xml["//identyfikator/${locale}"]}</label>
-                                                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
-                                                    <label for="inputPassword" class="sr-only">Password</label>
-                                                    <input type="password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}">
-                                                    <div class="checkbox">
+                                                    <input type="email" name="username" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
+                                                           <label for="inputPassword" class="sr-only">Password</label>
+                                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}">
+                                                           <div class="checkbox">
                                                         <label>
                                                             <input type="checkbox" value="remember-me"> ${xml["//zapamietaj/${locale}"]}
                                                         </label>
                                                     </div>
+                                                    <input type="hidden" name="language" value="${locale}">
                                                     <button class="btn btn-lg btn-primary btn-block" type="submit">${xml["//zaloguj/${locale}"]}</button>
                                                 </form>
                                             </div>
