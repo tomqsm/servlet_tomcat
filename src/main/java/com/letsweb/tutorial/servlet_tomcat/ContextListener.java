@@ -4,23 +4,22 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Web application lifecycle listener.
- *
- * @author Shing Wai Chan
- * @author Daniel Guo
- *
- */
 @WebListener()
 public class ContextListener implements ServletContextListener {
 
+    final Logger logger = LoggerFactory.getLogger(ContextListener.class);
+
+    @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
-        System.out.println("Context initialised. Servlet API " + context.getEffectiveMajorVersion());
+        logger.debug("Context initialised {}", context.getEffectiveMajorVersion());
     }
 
+    @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("Context destroyed.");
+        logger.debug("Context destroyed.");
     }
 }
