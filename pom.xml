@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.letsweb.tutorial</groupId>
-    <artifactId>servlet_tomcat</artifactId>
+    <artifactId>makumba-page</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>servlet_tomcat</name>
+    <name>makumba-page</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
