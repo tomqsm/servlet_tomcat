@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author toks
  */
-public class LocaleSetter {
+public class ClientLanguageSetter {
 
     private static final Set<String> languages = new HashSet<>();
     private static final String DEFAULT_LANGUAGE = "pl";
@@ -23,11 +23,16 @@ public class LocaleSetter {
     public void run(HttpServletRequest request, HttpServletResponse response) {
         final Locale locale = request.getLocale();
         String browserLang = locale.getLanguage();
-        String urlLang = null; // parse url for en / pl
-        if (languages.contains(browserLang) && urlLang == null && !browserLang.equals(DEFAULT_LANGUAGE)) {
+        if (languages.contains(browserLang) && !browserLang.equals(DEFAULT_LANGUAGE)) {
             request.setAttribute("browserLanguage", browserLang);
         } else {
             request.setAttribute("browserLanguage", "/");
         }
+    }
+    
+    public boolean isLanguageSupported(String lang){
+        boolean isSupported = false;
+        isSupported = languages.contains(lang);
+        return isSupported;
     }
 }

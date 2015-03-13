@@ -28,16 +28,31 @@ activate Container
 activate RequestResponse
 activate Tuckey
 Browser -> Container: get /
-Container -> RequestResponse: make
+Container -> RequestResponse: <<create>>
 Container -> Tuckey
-
-Tuckey --> RequestResponse: get language
-RequestResponse -> Tuckey: en
+Tuckey -> ClientLanguageSetter
+activate ClientLanguageSetter
+ClientLanguageSetter -> RequestResponse: get locale
+RequestResponse --> ClientLanguageSetter: locale
+ClientLanguageSetter --> ClientLanguageSetter: isLanguageSupported
+note right: [en,pl,de]
+alt isLanguageSupported==true
+ClientLanguageSetter --> RequestResponse: set language
+else [else]
+ClientLanguageSetter --> RequestResponse: set default language
+end
+deactivate ClientLanguageSetter
+Tuckey -> RequestResponse: getLanguage
+RequestResponse --> Tuckey: language
+alt language==defaultLanguage
+Tuckey ->] : forward /
+else [else]
+Tuckey -> Container: redirect /language/
+Container -> Browser: redirect /language/
+Browser -> Container: get /language/
+end
 deactivate RequestResponse
-Tuckey -> Container: redirect
 deactivate Tuckey
-Container -> Browser: redirect /en/
-Browser -> Container: get /en/
 
 deactivate Container
 

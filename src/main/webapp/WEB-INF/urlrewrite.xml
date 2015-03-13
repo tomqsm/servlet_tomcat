@@ -29,7 +29,6 @@
         <name>loginform</name>
         <condition type="method">POST</condition>
         <from>^(.*)/loginform$</from>
-        <!--<set type="parameter" name="failed">true</set>-->
         <set name="log.info">loginform | username: %{parameter:username} password: %{parameter:password}, language: %{parameter:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <set type="parameter" name="j_username">%{parameter:username}</set>
@@ -43,7 +42,7 @@
         <name>setBrowserLanguage</name>
         <condition type="method">GET</condition>
         <from>^/$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LocaleSetter" neweachtime="true"/>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.ClientLanguageSetter" neweachtime="true"/>
         <set name="log.info">setBrowserLanguage: %{attribute:browserLanguage}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
     </rule>
@@ -69,8 +68,8 @@
     
     <outbound-rule enabled="false" match-type="regex">
         <name>setLanguageFromRefererAndRequestPath</name>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="setPathFromLang" />
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.PageLanguageUrlResolver" method="setPathToLang" />
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathFromLang" />
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathToLang" />
         <set name="log.info">setLanguageFromRefererAndRequestPath</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <from>^en(.*)$|^de(.*)$</from>

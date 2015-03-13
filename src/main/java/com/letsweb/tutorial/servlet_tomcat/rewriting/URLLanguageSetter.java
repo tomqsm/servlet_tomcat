@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author toks
  */
-public class PageLanguageUrlResolver {
+public class URLLanguageSetter {
 
-    final Logger logger = LoggerFactory.getLogger(PageLanguageUrlResolver.class);
+    final Logger logger = LoggerFactory.getLogger(URLLanguageSetter.class);
 
     public void run(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("{}");
