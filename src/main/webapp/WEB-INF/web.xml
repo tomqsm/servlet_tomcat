@@ -23,8 +23,8 @@
     </context-param>
     <context-param>
         <description>This is a logical name of scripts.</description>
-        <param-name>supportedLocales</param-name>
-        <param-value>pl,en</param-value>
+        <param-name>supportedLanguages</param-name>
+        <param-value>pl,en,de</param-value>
     </context-param>
     <!-- f i l t e r s -->
     <filter>

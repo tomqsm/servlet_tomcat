@@ -82,7 +82,7 @@
         <to last="true">%{context-path}/en%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
     
-        <outbound-rule enabled="true" match-type="regex">
+    <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForDE</name>
         <from>^de(.*)$</from>
         <set name="log.info">outboundRewriteForDE: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>

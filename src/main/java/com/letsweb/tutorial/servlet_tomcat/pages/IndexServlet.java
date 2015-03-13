@@ -1,6 +1,5 @@
 package com.letsweb.tutorial.servlet_tomcat.pages;
 
-import com.letsweb.tutorial.servlet_tomcat.UrlParser;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
