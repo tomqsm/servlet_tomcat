@@ -65,31 +65,21 @@
     <!-- END LANGUAGE TO URL GROUP-->
     
     <outbound-rule enabled="true" match-type="regex">
-        <name>setLanguageFromRefererAndRequestPath</name>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathFromLang" />
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathToLang" />
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setServletPathWithoutLanguage" />
-        <set name="log.info">setLanguageFromRefererAndRequestPath</set>
+        <name>setServletPathWithoutLanguage</name>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter"/>
+        <set name="log.info">setServletPathWithoutLanguage</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <from>^(en|pl|de)(.*)$</from>
+        <from>^(pl|en|de)(.*)$</from>
     </outbound-rule> 
 
     <outbound-rule enabled="true" match-type="regex">
-        <name>outboundRewriteForEN</name>
-        <from>^en(.*)$</from>
+        <name>outboundRewriteForENorDE</name>
+        <from>^(en|de)(.*)$</from>
         <set name="log.info">outboundRewriteForEN</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <to last="true">%{context-path}/en%{attribute:servletPathWithoutLanguage}</to>
+        <to last="true">%{context-path}/$1%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
     
-    <outbound-rule enabled="true" match-type="regex">
-        <name>outboundRewriteForDE</name>
-        <from>^de(.*)$</from>
-        <set name="log.info">outboundRewriteForDE: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <to last="true">%{context-path}/de%{attribute:servletPathWithoutLanguage}</to>
-    </outbound-rule>
-
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForPL</name>
         <from>^pl(.*)$</from>
