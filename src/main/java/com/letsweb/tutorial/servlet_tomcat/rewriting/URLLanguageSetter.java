@@ -1,6 +1,5 @@
 package com.letsweb.tutorial.servlet_tomcat.rewriting;
 
-import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -30,8 +29,17 @@ public class URLLanguageSetter {
     public void setPathToLang(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("pathToLang", getPathToLang(request));
     }
-    public void setPathFromContext(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("pathFromContext", getPathFromContext(request));
+
+    public void setServletPathWithoutLanguage(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("servletPathWithoutLanguage", getServletPathWithoutLanguage(request));
+    }
+
+    public String rewritePathForLanguage(String lang, HttpServletRequest request) {
+        String rewritenPath = "";
+        String pathFrom = this.getPathFrom(request);
+        
+
+        return rewritenPath;
     }
 
     private String getPathFrom(HttpServletRequest request) {
@@ -47,7 +55,7 @@ public class URLLanguageSetter {
     }
 
     private String getPathFromLang(HttpServletRequest request) {
-        final String[] langs = new String[]{"en", "pl"};
+        final String[] langs = new String[]{"en", "pl", "de"};
         final String slash = "/";
         String pathLang = "";
         final String pathFrom = getPathFrom(request);
@@ -95,16 +103,18 @@ public class URLLanguageSetter {
         }
         return pathLang;
     }
-    private String getPathFromContext(HttpServletRequest request) {
-        final int indexOfContextStart = request.getRequestURL().indexOf(request.getContextPath());
-        final int indexOfContextEnd = indexOfContextStart + request.getContextPath().length();
-        final String pathFromContext = request.getRequestURL().append(getQueryString(request)).replace(0, indexOfContextEnd, "").toString();
-        final String[] langs = new String[]{"en", "pl"};
+
+    private String getServletPathWithoutLanguage(HttpServletRequest request) {
+        final HttpServletRequest originalRequest = (HttpServletRequest)(request.getAttribute("request"));
+        assert originalRequest != null : "assertion: please set original request";
+        final String contextPath = originalRequest.getContextPath();
+        final StringBuffer requestURL = originalRequest.getRequestURL();
+        final int indexOfContextStart = requestURL.indexOf(contextPath);
+        final int indexOfContextEnd = indexOfContextStart + contextPath.length();
+        String pathFromContext = requestURL.append(getQueryString(originalRequest)).replace(0, indexOfContextEnd, "").toString();
+        final String[] langs = new String[]{"en", "pl", "de"}; //TODO get these from some init params
         final String slash = "/";
-        String pathLang = pathFromContext;
-        final String pathTo = getPathTo(request);
-        final String context = request.getContextPath();
-        if (context.length() == 1) {
+        if (contextPath.length() == 1) {
             for (int i = 0; i < langs.length; i++) {
                 String lang = langs[i];
                 langs[i] = lang + slash;
@@ -116,12 +126,13 @@ public class URLLanguageSetter {
             }
         }
         for (String lang : langs) {
-            if (pathTo.contains(lang)) {
-                pathLang = lang.replaceAll(slash, "");
+            if (pathFromContext.contains(lang)) {
+                pathFromContext = pathFromContext.replaceAll(lang, "");
             }
         }
-        return pathLang;
+        return pathFromContext.startsWith(slash) ? pathFromContext : slash+pathFromContext;
     }
+
     private String getQueryString(HttpServletRequest request) {
         String queryString = request.getQueryString();
         queryString = queryString == null ? "" : queryString;

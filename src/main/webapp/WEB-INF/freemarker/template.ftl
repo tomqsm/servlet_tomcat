@@ -78,11 +78,9 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-<#if locale == "pl">
                                         <li><a href="${response.encodeURL('en${servletPathQueryString}')}">Angielski</a></li>
-<#else>
                                         <li><a href="${response.encodeURL('pl${servletPathQueryString}')}">Polski</a></li>
-                                        </#if>
+                                        <li><a href="${response.encodeURL('de${servletPathQueryString}')}">Niemiecki</a></li>
                                     </ul>
                                 </li>
                             </ul>

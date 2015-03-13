@@ -27,21 +27,26 @@ User -[#gray]> Browser: www.page.com
 activate Container
 activate RequestResponse
 activate Tuckey
-Browser -> Container: get /
+Browser -> Container: get /language/
 Container -> RequestResponse: <<create>>
 Container -> Tuckey
-Tuckey -> ClientLanguageSetter
-activate ClientLanguageSetter
-ClientLanguageSetter -> RequestResponse: get locale
-RequestResponse --> ClientLanguageSetter: locale
-ClientLanguageSetter --> ClientLanguageSetter: isLanguageSupported
+Tuckey -> URLLanguageSetter
+activate URLLanguageSetter
+URLLanguageSetter -> RequestResponse: path-to:getRequestURL()
+RequestResponse --> URLLanguageSetter: path-to
+URLLanguageSetter -> RequestResponse: path-from:getHeader("referer")
+RequestResponse --> URLLanguageSetter: path-from
+URLLanguageSetter --> URLLanguageSetter: parse path-to
+URLLanguageSetter --> RequestResponse: set path-from language
+URLLanguageSetter --> URLLanguageSetter: parse path-from
+URLLanguageSetter --> RequestResponse: set path-to language
 note right: [en,pl,de]
 alt isLanguageSupported==true
-ClientLanguageSetter --> RequestResponse: set language
+URLLanguageSetter --> RequestResponse: set language
 else [else]
-ClientLanguageSetter --> RequestResponse: set default language
+URLLanguageSetter --> RequestResponse: set default language
 end
-deactivate ClientLanguageSetter
+deactivate URLLanguageSetter
 Tuckey -> RequestResponse: getLanguage
 RequestResponse --> Tuckey: language
 alt language==defaultLanguage
@@ -49,7 +54,7 @@ Tuckey ->] : forward /
 else [else]
 Tuckey -> Container: redirect /language/
 Container -> Browser: redirect /language/
-Browser -> Container: get /language/
+Browser -> Container: get /language/language/
 end
 deactivate RequestResponse
 deactivate Tuckey

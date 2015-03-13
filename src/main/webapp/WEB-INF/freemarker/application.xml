@@ -3,57 +3,71 @@
     <title>
         <pl>Letsweb - Strona główna.</pl>
         <en>Home</en>
+        <de>Hause</de>
     </title>
     <firm>
         <pl>firma polska</pl>
         <en>polish firm</en>
+        <de>polish firm</de>
     </firm>
     <country>
         <pl>Polska</pl>
         <en>Poland</en>
+        <de>Poland</de>
     </country>
     <identyfikator>
         <pl>Identyfikator</pl>
         <en>Username</en>
+        <de>Username</de>
     </identyfikator>
     <haslo>
         <pl>Hasło</pl>
         <en>Password</en>
+        <de>Password</de>
     </haslo>
     <wprowadz>
         <pl>Proszę wprowadzić:</pl>
         <en>Please enter:</en>
+        <de>Please enter:</de>
     </wprowadz>
     <zaloguj>
         <pl>Zaloguj</pl>
         <en>Login</en>
+        <de>Login</de>
     </zaloguj>
     <zapamietaj>
         <pl>Zapamiętaj</pl>
         <en>Remember me</en>
+        <de>Remember me</de>
     </zapamietaj>
     <niezalogowano>
         <pl>Logowanie się nie powiodło.</pl>
         <en>Login failed.</en>
+        <de>Login failed.</de>
     </niezalogowano>
     <cyklinowanie>
         <pl>Cyklinowanie</pl>
         <en>Sanding</en>
+        <de>Sanding</de>
     </cyklinowanie>
     <cennik>
         <pl>Cennik</pl>
         <en>Prices</en>
+        <de>Prices-de</de>
     </cennik>
     <firma>
         <pl>Firma</pl>
         <en>Firm</en>
+        <de>Firm-de</de>
     </firma>
     <realizacje>
         <pl>Realizacje</pl>
         <en>Projects</en>
+        <de>Projects-de</de>
     </realizacje>
     <kontakt>
         <pl>Kontakt</pl>
         <en>Contact</en>
+        <de>Contact-de</de>
     </kontakt>
 </properties>

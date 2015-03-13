@@ -2,8 +2,6 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-context="false">
-    <!--NOTE-->
-    <!--conditions run first-->
 
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
@@ -66,13 +64,14 @@
     </rule>
     <!-- END LANGUAGE TO URL GROUP-->
     
-    <outbound-rule enabled="false" match-type="regex">
+    <outbound-rule enabled="true" match-type="regex">
         <name>setLanguageFromRefererAndRequestPath</name>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathFromLang" />
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setPathToLang" />
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter" method="setServletPathWithoutLanguage" />
         <set name="log.info">setLanguageFromRefererAndRequestPath</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <from>^en(.*)$|^de(.*)$</from>
+        <from>^(en|pl|de)(.*)$</from>
     </outbound-rule> 
 
     <outbound-rule enabled="true" match-type="regex">
@@ -80,23 +79,23 @@
         <from>^en(.*)$</from>
         <set name="log.info">outboundRewriteForEN</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <to last="true">%{context-path}/en${replace:$1:en/:}</to>
+        <to last="true">%{context-path}/en%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
     
-    <!--    <outbound-rule enabled="true" match-type="regex">
+        <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForDE</name>
         <from>^de(.*)$</from>
         <set name="log.info">outboundRewriteForDE: fromServlet: %{attribute:fromServlet}, pathFromLang: %{attribute:pathFromLang}, pathToLang: %{attribute:pathToLang}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <to last="true">%{context-path}/de${replace:$1:de/:}</to>
-    </outbound-rule>-->
+        <to last="true">%{context-path}/de%{attribute:servletPathWithoutLanguage}</to>
+    </outbound-rule>
 
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForPL</name>
         <from>^pl(.*)$</from>
         <set name="log.info">outboundRewriteForPL</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <to last="true">%{context-path}${replace:$1:en/:}</to>
+        <to last="true">%{context-path}%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
     
     <rule enabled="true" match-type="regex">
