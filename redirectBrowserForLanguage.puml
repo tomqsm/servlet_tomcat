@@ -1,0 +1,47 @@
+@startuml
+'autonumber
+title Client Language Preference Setting
+hide footbox
+skinparam backgroundColor gray
+
+skinparam sequence {
+	ArrowColor black
+	ActorBorderColor gray
+	LifeLineBorderColor gray
+	LifeLineBackgroundColor gray
+	
+	ParticipantBorderColor gray
+	ParticipantBackgroundColor white
+	ParticipantFontName Monospaced
+	ParticipantFontSize 10
+	ParticipantFontColor black
+	
+	ActorBackgroundColor white
+	ActorFontColor black
+	ActorFontSize 10
+	ActorFontName Monospaced
+}
+actor User
+
+User -[#gray]> Browser: www.page.com
+activate Container
+activate RequestResponse
+activate Tuckey
+Browser -> Container: get /
+Container -> RequestResponse: make
+Container -> Tuckey
+
+Tuckey --> RequestResponse: get language
+RequestResponse -> Tuckey: en
+deactivate RequestResponse
+Tuckey -> Container: redirect
+deactivate Tuckey
+Container -> Browser: redirect /en/
+Browser -> Container: get /en/
+
+deactivate Container
+
+legend right
+  Redirect browser for language version.
+endlegend
+@enduml

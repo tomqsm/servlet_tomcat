@@ -12,4 +12,7 @@ Twoja aplikacja automatycznie przekiwrowuje żądanie, zmienia url i pozyskuje w
 pathFrom    (referer)
 pathTo      (request url)
 
-Login will create a session. Failed login creates a session.
+Login will create a session. Failed login creates a session too.
+Consider invalidating session upon failed login.
+
+

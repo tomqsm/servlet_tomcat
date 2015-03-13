@@ -152,6 +152,7 @@
         <web-resource-collection>
             <web-resource-name>Restricted Access - Get Only</web-resource-name>
             <url-pattern>/restricted/*</url-pattern>
+            <url-pattern>/en/restricted/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Employee</role-name>
