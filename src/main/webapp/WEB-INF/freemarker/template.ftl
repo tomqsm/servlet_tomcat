@@ -59,16 +59,16 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">Home</a></li>
-                                <li><a href="cennik">${response.encodeURL('${xml["//cennik/${locale}"]}')}</a></li>
-                                <li><a href="firma">${response.encodeURL('${xml["//firma/${locale}"]}')}</a></li>
-                                <li><a href="realizacje">${response.encodeURL('${xml["//realizacje/${locale}"]}')}</a></li>
-                                <li><a href="contact">${response.encodeURL('${xml["//kontakt/${locale}"]}')}</a></li>
+                                <li><a href="${response.encodeURL('${xml["//cennik/${locale}"]?lower_case}')}">${xml["//cennik/${locale}"]}</a></li>
+                                <li><a href="${response.encodeURL('${xml["//firma/${locale}"]?lower_case}')}">${xml["//firma/${locale}"]}</a></li>
+                                <li><a href="${response.encodeURL('${xml["//realizacje/${locale}"]?lower_case}')}">${xml["//realizacje/${locale}"]}</a></li>
+                                <li><a href="${response.encodeURL('${xml["//kontakt/${locale}"]?lower_case}')}">${xml["//kontakt/${locale}"]}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="${response.encodeURL('podlogi')}">Podłogi</a></li>
                                         <li><a href="schody">Schody</a></li>
-                                        <li><a href="cyklinowanie">${xml["//cyklinowanie/${locale}"]}</a></li>
+                                        <li><a href="${response.encodeURL('${xml["//cyklinowanie/${locale}"]?lower_case}')}">${xml["//cyklinowanie/${locale}"]}</a></li>
                                         <li class="divider"></li>
                                         <li class="dropdown-header">Usługi</li>
                                         <li><a href="#">Pomiar wilgotności powierzchni</a></li>
