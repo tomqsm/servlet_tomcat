@@ -24,6 +24,11 @@ public class URLLanguageSetter {
         }
     }
 
+    /**
+     * This method is automatically called by means if urlrewrite.xml run tag.
+     * @param request
+     * @param response
+     */
     public void run(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("servletPathWithoutLanguage", getServletPathWithoutLanguage(request));
     }

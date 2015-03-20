@@ -32,6 +32,12 @@ public class ClientLanguageSetter {
         }
     }
 
+    /**
+     * This method is automatically called by means if urlrewrite.xml run tag.
+     *
+     * @param request
+     * @param response
+     */
     public void run(HttpServletRequest request, HttpServletResponse response) {
         final Locale locale = request.getLocale();
         String browserLang = locale.getLanguage();

@@ -11,12 +11,22 @@ import org.slf4j.LoggerFactory;
  */
 public class RewritingLogger {
 
-    final Logger logger = LoggerFactory.getLogger(RewritingLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(RewritingLogger.class);
 
+    /**
+     * This method is automatically called by means if urlrewrite.xml run tag.
+     * @param request
+     * @param response 
+     */
     public void run(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("{}");
     }
 
+    /**
+     * Input to this method is provided via urlrewrite.xml setting.
+     * @param request
+     * @param response
+     */
     public void log(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("{}", request.getAttribute("log.info"));
         request.removeAttribute("log.info");

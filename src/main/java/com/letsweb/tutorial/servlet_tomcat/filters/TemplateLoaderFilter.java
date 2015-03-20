@@ -12,7 +12,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.ParserConfigurationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -20,27 +23,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TemplateLoaderFilter implements Filter {
 
-    private static final boolean debug = false;
+    private static final Logger logger = LoggerFactory.getLogger(TemplateLoaderFilter.class);
 
     private FilterConfig filterConfig;
     private File appStaticData;
     private File scriptsFile;
     private File cssesFile;
+    private NodeModel cssesParsed;
+    private NodeModel scriptsParsed;
+    private NodeModel appStaticDataParsed;
 
     public TemplateLoaderFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest req, ServletResponse response)
             throws IOException, ServletException {
-        if (debug) {
-            log("DecoratorFilter:DoBeforeProcessing");
-        }
+        logger.debug("TemplateLoaderFilter:DoBeforeProcessing");
         System.out.println("DECOR before ok.");
         req.setAttribute("context", req.getServletContext().getContextPath());
         try {
-            req.setAttribute("xml", NodeModel.parse(appStaticData));
-            req.setAttribute("scripts", NodeModel.parse(scriptsFile));
-            req.setAttribute("csses", NodeModel.parse(cssesFile));
+            req.setAttribute("xml", appStaticDataParsed);
+            req.setAttribute("scripts", scriptsParsed);
+            req.setAttribute("csses", cssesParsed);
             req.setAttribute("response", response);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -49,9 +53,7 @@ public class TemplateLoaderFilter implements Filter {
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-        if (debug) {
-            log("DecoratorFilter:DoAfterProcessing");
-        }
+        logger.debug("TemplateLoaderFilter:DoAfterProcessing");
     }
 
     /**
@@ -66,13 +68,8 @@ public class TemplateLoaderFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-
-        if (debug) {
-            log("DecoratorFilter:doFilter()");
-        }
-
+        logger.debug("TemplateLoaderFilter:doFilter()");
         doBeforeProcessing(request, response);
-
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
@@ -101,6 +98,7 @@ public class TemplateLoaderFilter implements Filter {
 
     /**
      * Return the filter configuration object for this filter.
+     * @return 
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -116,37 +114,38 @@ public class TemplateLoaderFilter implements Filter {
     }
 
     /**
-     * Destroy method for this filter
-     */
-    public void destroy() {
-    }
-
-    /**
      * Init method for this filter
+     * @param filterConfig
      */
+    @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
-        if (filterConfig != null) {
-            if (debug) {
-                log("DecoratorFilter:Initializing filter");
-            }
+        logger.debug("TemplateLoaderFilter:Initializing filter");
+        try {
+            initialiseFreemarker();
+        } catch (SAXException | IOException | ParserConfigurationException ex) {
+            logger.error("{}", getStackTrace(ex));
         }
-        initialiseFreemarker();
     }
-    private void initialiseFreemarker() {
+
+    private void initialiseFreemarker() throws SAXException, IOException, ParserConfigurationException {
         appStaticData = new File(filterConfig.getServletContext().getRealPath("/WEB-INF/freemarker/application.xml"));
         scriptsFile = new File(filterConfig.getServletContext().getRealPath(filterConfig.getServletContext().getInitParameter("scripts")));
         cssesFile = new File(filterConfig.getServletContext().getRealPath(filterConfig.getServletContext().getInitParameter("csses")));
+        cssesParsed = cssesParsed == null ? cssesParsed = NodeModel.parse(cssesFile) : cssesParsed;
+        scriptsParsed = scriptsParsed == null ? NodeModel.parse(scriptsFile) : scriptsParsed;
+        appStaticDataParsed = appStaticDataParsed == null ? NodeModel.parse(appStaticData) : appStaticDataParsed;
     }
+
     /**
      * Return a String representation of this object.
      */
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("DecoratorFilter()");
+            return ("TemplateLoaderFilter()");
         }
-        StringBuffer sb = new StringBuffer("DecoratorFilter(");
+        StringBuffer sb = new StringBuffer("TemplateLoaderFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
@@ -169,7 +168,7 @@ public class TemplateLoaderFilter implements Filter {
                 pw.close();
                 ps.close();
                 response.getOutputStream().close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
             }
         } else {
             try {
@@ -177,7 +176,7 @@ public class TemplateLoaderFilter implements Filter {
                 t.printStackTrace(ps);
                 ps.close();
                 response.getOutputStream().close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
             }
         }
     }
@@ -198,6 +197,10 @@ public class TemplateLoaderFilter implements Filter {
 
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
+    }
+
+    @Override
+    public void destroy() {
     }
 
 }
