@@ -39,7 +39,7 @@ public class TemplateLoaderFilter implements Filter {
     private void doBeforeProcessing(ServletRequest req, ServletResponse response)
             throws IOException, ServletException {
         logger.debug("TemplateLoaderFilter:DoBeforeProcessing");
-        System.out.println("DECOR before ok.");
+//        System.out.println("DECOR before ok.");
         req.setAttribute("context", req.getServletContext().getContextPath());
         try {
             req.setAttribute("xml", appStaticDataParsed);

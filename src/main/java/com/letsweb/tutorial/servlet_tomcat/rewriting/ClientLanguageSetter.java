@@ -20,8 +20,12 @@ public class ClientLanguageSetter {
     private static final String DEFAULT_LANGUAGE = "pl";
     private static final String SUPPORTED_LANGUAGES = "supportedLanguages";
     private String supportedLanguagesString = null;
-    final Logger logger = LoggerFactory.getLogger(ClientLanguageSetter.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientLanguageSetter.class);
 
+    /**
+     * This method is authomatically called when urlrewite.xml uses this class.
+     * @param servletConfig 
+     */
     public void init(ServletConfig servletConfig) {
         final boolean needsInitialising = supportedLanguagesString == null;
         if (needsInitialising) {
@@ -40,15 +44,17 @@ public class ClientLanguageSetter {
      */
     public void run(HttpServletRequest request, HttpServletResponse response) {
         final Locale locale = request.getLocale();
+        final String attributeName = "browserLanguage";
         String browserLang = locale.getLanguage();
         if (languages.contains(browserLang) && !browserLang.equals(DEFAULT_LANGUAGE)) {
-            request.setAttribute("browserLanguage", browserLang);
+            request.setAttribute(attributeName, browserLang);
+            logger.debug("Set attribute: {}:{} default language is {}", attributeName, browserLang, DEFAULT_LANGUAGE);
         } else {
-            request.setAttribute("browserLanguage", "/");
+            request.setAttribute(attributeName, "/");
         }
     }
 
-    public boolean isLanguageSupported(String lang) {
+    private boolean isLanguageSupported(String lang) {
         boolean isSupported = false;
         isSupported = languages.contains(lang);
         return isSupported;

@@ -1,4 +1,4 @@
-package com.letsweb.tutorial.servlet_tomcat.pages;
+package com.letsweb.tutorial.servlet_tomcat.rewriting;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
