@@ -21,9 +21,9 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <#assign scripts = scripts["properties/scripts"]> 
         <#list scripts as s>
-        <#list s.* as sc>
+                <#list s.* as sc>
         <script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
-        </#list>
+                </#list>
         </#list>
         <!-- Custom styles for this template -->
         <link href="${context}/css/carousel.css" rel="stylesheet"/>
@@ -41,7 +41,6 @@
         </script>
     </head>
     <body>
-
         <div id="showSize"></div>
         <div class="navbar-wrapper">
             <div class="container">

@@ -26,7 +26,7 @@ public class TemplateLoaderFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(TemplateLoaderFilter.class);
 
     private FilterConfig filterConfig;
-    private File appStaticData;
+    private File appStaticDataFile;
     private File scriptsFile;
     private File cssesFile;
     private NodeModel cssesParsed;
@@ -39,7 +39,6 @@ public class TemplateLoaderFilter implements Filter {
     private void doBeforeProcessing(ServletRequest req, ServletResponse response)
             throws IOException, ServletException {
         logger.debug("TemplateLoaderFilter:DoBeforeProcessing");
-//        System.out.println("DECOR before ok.");
         req.setAttribute("context", req.getServletContext().getContextPath());
         try {
             req.setAttribute("xml", appStaticDataParsed);
@@ -129,12 +128,12 @@ public class TemplateLoaderFilter implements Filter {
     }
 
     private void initialiseFreemarker() throws SAXException, IOException, ParserConfigurationException {
-        appStaticData = new File(filterConfig.getServletContext().getRealPath("/WEB-INF/freemarker/application.xml"));
+        appStaticDataFile = new File(filterConfig.getServletContext().getRealPath("/WEB-INF/freemarker/application.xml"));
         scriptsFile = new File(filterConfig.getServletContext().getRealPath(filterConfig.getServletContext().getInitParameter("scripts")));
         cssesFile = new File(filterConfig.getServletContext().getRealPath(filterConfig.getServletContext().getInitParameter("csses")));
         cssesParsed = cssesParsed == null ? cssesParsed = NodeModel.parse(cssesFile) : cssesParsed;
         scriptsParsed = scriptsParsed == null ? NodeModel.parse(scriptsFile) : scriptsParsed;
-        appStaticDataParsed = appStaticDataParsed == null ? NodeModel.parse(appStaticData) : appStaticDataParsed;
+        appStaticDataParsed = appStaticDataParsed == null ? NodeModel.parse(appStaticDataFile) : appStaticDataParsed;
     }
 
     /**

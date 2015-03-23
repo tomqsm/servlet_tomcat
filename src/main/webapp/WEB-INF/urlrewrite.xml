@@ -35,7 +35,7 @@
         <to type="redirect" last="true" qsappend="true">j_security_check</to>
     </rule>
      
-    <!--START LANGUAGE TO URL GROUP runs on / root call-->
+    <!--START RESOLVING BROWSER LANGUAGE TO URL runs on / root call-->
     <rule enabled="true" match-type="regex">
         <name>setBrowserLanguage</name>
         <condition type="method">GET</condition>
@@ -62,12 +62,13 @@
         <from>^/$</from>
         <to type="forward" last="true">%{attribute:browserLanguage}index</to>
     </rule>
-    <!-- END LANGUAGE TO URL GROUP-->
+    <!-- END RESOLVING BROWSER LANGUAGE TO URL-->
     
+    <!--USER SELECTION LANGUAGE TO URL - REWRITE-->
     <outbound-rule enabled="true" match-type="regex">
-        <name>setServletPathWithoutLanguage</name>
+        <name>setServletPathWithQueryStringWithoutLanguage</name>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter"/>
-        <set name="log.info">setServletPathWithoutLanguage</set>
+        <set name="log.info">setServletPathWithQueryStringWithoutLanguage</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <from>^(pl|en|de)(.*)$</from>
     </outbound-rule> 
@@ -75,11 +76,11 @@
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForENorDE</name>
         <from>^(en|de)(.*)$</from>
-        <set name="log.info">outboundRewriteForEN</set>
+        <set name="log.info">outboundRewriteForENorDE</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}/$1%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
-    
+
     <outbound-rule enabled="true" match-type="regex">
         <name>outboundRewriteForPL</name>
         <from>^pl(.*)$</from>
@@ -87,6 +88,7 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
         <to last="true">%{context-path}%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
+    <!-- END USER SELECTION LANGUAGE TO URL - REWRITE-->
     
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>

@@ -30,10 +30,10 @@ public class URLLanguageSetter {
      * @param response
      */
     public void run(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("servletPathWithoutLanguage", getServletPathWithoutLanguage(request));
+        request.setAttribute("servletPathWithoutLanguage", getServletPathWithQueryStringWithoutLanguage(request));
     }
 
-    private String getServletPathWithoutLanguage(HttpServletRequest request) {
+    private String getServletPathWithQueryStringWithoutLanguage(HttpServletRequest request) {
         final HttpServletRequest originalRequest = (HttpServletRequest) (request.getAttribute("request"));
         assert originalRequest != null : "assertion: please set original request";
         final String contextPath = originalRequest.getContextPath();
