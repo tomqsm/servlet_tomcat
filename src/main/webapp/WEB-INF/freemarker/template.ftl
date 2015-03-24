@@ -233,6 +233,7 @@
             </footer>
 
         </div><!-- /.container -->
-        <div id="loadJsonOnClick">loadJsonOnClick tutaj</div>
+        <div id="loadJsonOnClick">test loading json tutaj</div>
+        <div id="loadJsonOnClick7secDelay">test loading json with timeout tutaj</div>
     </body>
 </html>

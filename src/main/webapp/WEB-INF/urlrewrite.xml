@@ -124,6 +124,13 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.UserJsonController"/>
         <to type="forward">/user.ftljson</to>
     </rule>
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^(/json/user/delayed/)(\d)/sec$</from>
+        <set name="delay">$2</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.UserJsonController" method="getDelayedJson"/>
+        <to type="forward">/user.ftljson</to>
+    </rule>
 
     
 </urlrewrite>

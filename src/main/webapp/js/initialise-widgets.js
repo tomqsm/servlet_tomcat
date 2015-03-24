@@ -12,6 +12,11 @@ var app = (function f($, doc, _) {
                         thisEl.text(data.date);
                     }}
         );
+        var l = $('#loadJsonOnClick7secDelay').loadJsonOnClick(
+                {url: "json/user/delayed/5/sec", callback: function(thisEl,data) {
+                        thisEl.text(data.date);
+                    }}
+        );
 
     }
 })($, document, _);

@@ -47,7 +47,7 @@
         <init-param>
             <description>DEBUG</description>
             <param-name>logLevel</param-name>
-            <param-value>DEBUG</param-value>
+            <param-value>INFO</param-value>
         </init-param>
         <!-- you can change status path so that it does not
         conflict with your installed apps (note, defaults
@@ -76,6 +76,7 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <servlet>
+        <description>Html templating.</description>
         <servlet-name>freemarker</servlet-name>
         <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
         <!-- FreemarkerServlet settings: -->
@@ -105,7 +106,7 @@
         </init-param>
         <init-param>
             <param-name>template_update_delay</param-name>
-            <param-value>3600</param-value>
+            <param-value>0</param-value>
             <!-- 0 is for development only! Use higher value otherwise. -->
         </init-param>
         <init-param>
@@ -124,6 +125,7 @@
         <url-pattern>*.ftl</url-pattern>
     </servlet-mapping>
     <servlet>
+        <description>Json templating.</description>
         <servlet-name>freemarkerForJson</servlet-name>
         <servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
         <!-- FreemarkerServlet settings: -->
