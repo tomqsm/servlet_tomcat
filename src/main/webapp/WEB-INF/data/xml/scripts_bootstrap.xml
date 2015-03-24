@@ -6,6 +6,7 @@
         <script name="jquery-ui" with="">//code.jquery.com/ui/1.10.3/jquery-ui.js</script>
         <script name="underscore-min" with="context">/js/lib/underscore-min.js</script>
         <script name="widgets" with="context">/js/widgets.js</script>
+        <script name="initialise-widgets" with="context">/js/initialise-widgets.js</script>
         <script name="app" with="context">/js/app.js</script>
         <script name="bootstrap-min" with="">//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js</script>
         <script name="docs-min" with="context">/js/lib/docs.min.js</script>
