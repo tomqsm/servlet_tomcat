@@ -14,12 +14,12 @@
     <context-param>
         <description>This is a logical name of xml data for css.</description>
         <param-name>csses</param-name>
-        <param-value>/WEB-INF/data/xml/css_bootstrap.xml</param-value>
+        <param-value>/WEB-INF/data/xml/css.xml</param-value>
     </context-param>
     <context-param>
         <description>This is a logical name of scripts.</description>
         <param-name>scripts</param-name>
-        <param-value>/WEB-INF/data/xml/scripts_bootstrap.xml</param-value>
+        <param-value>/WEB-INF/data/xml/js-scripts.xml</param-value>
     </context-param>
     <context-param>
         <description>This is a logical name of scripts.</description>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <properties>
     <csses>
-        <css name="main-css" with="context" media="screen">/css/main.css</css>
+        <!--<css name="main-css" with="context" media="screen">/css/main.css</css>-->
         <css name="bootstrap_css" with="" media="screen">//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css</css>
         <css name="bootstrap-theme-css" with="" media="screen">//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css</css>
     </csses>
