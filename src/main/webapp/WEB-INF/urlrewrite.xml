@@ -16,10 +16,18 @@
     </rule>
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlPL</name>
-        <condition type="session-attribute" name="language" operator="equal">^pl$</condition>
+        <!--<condition type="session-attribute" name="language" operator="equal">^pl$</condition>-->
         <from>^(.*)/failed$</from>
         <set name="failed">true</set>
         <set name="log.info">loginFailureToCleanUrlPL | Session: %{requested-session-id}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <to type="forward" last="true">/login.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>showLogin</name>
+        <!--<condition type="session-attribute" name="language" operator="equal">^pl$</condition>-->
+        <from>^(.*)/login$</from>
+        <set name="log.info">showLogin | Session: %{requested-session-id} | lang: %{session-attribute:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">/login.ftl</to>
     </rule>
@@ -29,10 +37,12 @@
         <from>^(.*)/loginform$</from>
         <set name="log.info">loginform | username: %{parameter:username} password: %{parameter:password}, language: %{parameter:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <set type="parameter" name="j_username">%{parameter:username}</set>
-        <set type="parameter" name="j_password">%{parameter:password}</set>
+        <set type="request" name="j_username">%{parameter:username}</set>
+        <set type="request" name="j_password">%{parameter:password}</set>
+<!--        <set type="parameter" name="j_username">%{parameter:username}</set>
+        <set type="parameter" name="j_password">%{parameter:password}</set>-->
         <set type="session" name="language">%{parameter:language}</set>
-        <to type="redirect" last="true" qsappend="true">j_security_check</to>
+        <to type="forward" last="true" qsappend="true">${context-path}/j_security_check</to>
     </rule>
      
     <!--START RESOLVING BROWSER LANGUAGE TO URL runs on / root call-->
@@ -101,6 +111,12 @@
         <from>^/podlogi$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
         <to type="forward">template.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^/restricted/index$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
+        <to type="forward">/index</to>
     </rule>
 
     

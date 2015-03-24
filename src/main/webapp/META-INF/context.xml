@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/makumba"/>
+<Context antiJARLocking="true" path="/makumba">
+    <Realm className="org.apache.catalina.realm.JAASRealm" 
+         appName="makumba"
+         userClassNames="com.tomasz.design.framuga.jaas.UserPrincipal"
+         roleClassNames="com.tomasz.design.framuga.jaas.RolePrincipal" />
+</Context>

@@ -28,7 +28,12 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        logger.debug("started");
+        System.out.println("IndexServlet :)");
+        if(req.getAttribute("restricted") == null){
+            
+        } else {
+            System.out.println("XXX EXTRICTED");
+        }
         req.setAttribute("context", req.getContextPath());
         req.setAttribute("request", req);
     }

@@ -65,12 +65,12 @@
     </head>
     <body>
         <div class="container">
-            <form action="loginform" method="post" class="form-signin">
+            <form action="j_security_check" method="post" class="form-signin">
                 <h2 class="form-signin-heading">${xml["//zaloguj/${locale}"]} <#if failed??> ${xml["//niezalogowano/${locale}"]}<#else></#if></h2>
                 <label for="inputEmail" class="sr-only">${xml["//identyfikator/${locale}"]}</label>
-                <input type="email" name="username" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
+                <input type="email" name="j_username" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus>
                        <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}">
+                <input type="password" name="j_password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}">
                        <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> ${xml["//zapamietaj/${locale}"]}
