@@ -118,6 +118,12 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
         <to type="forward">/index</to>
     </rule>
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^/json/user$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.UserJsonController"/>
+        <to type="forward">/user.ftljson</to>
+    </rule>
 
     
 </urlrewrite>

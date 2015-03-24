@@ -4,8 +4,11 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LandingController {
+    private static final Logger logger = LoggerFactory.getLogger(LandingController.class);
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         System.out.println(req.getParameter("Servlet via urlrewirting GET"));

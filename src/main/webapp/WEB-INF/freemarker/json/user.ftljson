@@ -1,0 +1,6 @@
+<#ftl><#assign locale="pl"><#setting locale=locale>
+{
+"user": "tomasz",
+"date": "${date?datetime}",
+"decimal-localised": "${1.2}"
+}

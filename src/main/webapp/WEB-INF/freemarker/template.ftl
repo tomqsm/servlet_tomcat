@@ -3,6 +3,7 @@
 <#else>
 <#assign locale="pl">
 </#if>
+<#setting locale=locale>
 <#assign queryString=(request.queryString)!>
 <#if queryString != "">
 <#assign queryString="?"+queryString>
@@ -19,6 +20,11 @@
         <link rel="icon" href="../../favicon.ico">
         <title>${xml["//title/${locale}"]}</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <script>
+            var appInit = {
+                context: '${context}'
+            };
+        </script>
         <#assign scripts = scripts["properties/scripts"]> 
         <#list scripts as s>
                 <#list s.* as sc>
@@ -34,11 +40,6 @@
                 margin: auto;
             }
         </style>
-        <script>
-            var appInit = {
-                context: '${context}'
-            };
-        </script>
     </head>
     <body>
         <div id="showSize"></div>
@@ -232,5 +233,6 @@
             </footer>
 
         </div><!-- /.container -->
+        <div id="loadJsonOnClick">loadJsonOnClick tutaj</div>
     </body>
 </html>

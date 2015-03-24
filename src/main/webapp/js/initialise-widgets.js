@@ -5,7 +5,13 @@ var app = (function f($, doc, _) {
     $(doc).ready(function() {
         initialiseWidges();
     });
-    function initialiseWidges(){
+    function initialiseWidges() {
         var w = $('#showSize').showSize();
+        var l = $('#loadJsonOnClick').loadJsonOnClick(
+                {url: "json/user", callback: function(thisEl,data) {
+                        thisEl.text(data.date);
+                    }}
+        );
+
     }
 })($, document, _);

@@ -70,24 +70,71 @@
             this._destroy();
         }
     });
-    $.widget('qs.login', {
+    $.widget("qs.loadJsonOnClick", {
         options: {
-            context: appInit.context
+            callback: $.noop,
+            template: $.noop,
+            app_context: appInit['context'],
+            url: 'ajax',
+            data: '',
+            ajaxloader: $('<img/>', {id: "ajaxloader", src: appInit['context'] + '/images/ajaxloader.gif', style: "visibility:hidden"})
         },
         _create: function() {
-            console.log('trying to load');
-            this.element.load(appInit.context + "/login.html", function() {
-                alert("Load was performed.");
-            });
+            _.templateSettings = {
+                interpolate: /\<\@\=(.+?)\@\>/gim,
+                evaluate: /\<\@([\s\S]+?)\@\>/gim,
+                escape: /\<\@\-(.+?)\@\>/gim
+            };
+            this.element.bind('click', $.proxy(function() {
+                this.get();
+            }, this));
+            this.element.bind('mouseenter', $.proxy(function() {
+                this.element.css('cursor', 'pointer');
+            }, this));
         },
         _setOption: function(key, value) {
             this.options[key] = value;
             this._update();
         },
         _update: function() {
+            this.options.el = this.element;
         },
-        destroy: function() {
-            this.element.remove();
+        get: function() {
+            console.log('trying to load');
+            this.element.prepend(this.options.ajaxloader);
+            $('#fail-cause').remove(); // removes fail info
+            this.options.ajaxloader.css('visibility', 'visible');
+            var jqxhr = $.ajax({
+                url: this.options['app_context'] + '/' + this.options.url,
+                type: 'GET',
+                timeout: 4000
+            }).then(
+                    $.proxy(function(data) {
+                        this._setOption('data', data);
+                        var funct = this.options['callback'];
+                        if (funct instanceof Function) {
+                            this.element.css('cursor', 'default');
+                            this.element.unbind();
+                            funct(this.element, data);
+                            this.options.ajaxloader.remove();
+                        }
+                    }, this),
+                    $.proxy(function(data) {
+                        var cause = data.statusText + " ",
+                        causeSpan = $('<div/>', {id: "fail-cause", class:"alert alert-warning", text:"Sorry, " + cause + "please try again later."});
+                        causeSpan.append('<a href="#" class="close" data-dismiss="alert">&times;</a>');
+                        this.element.after(causeSpan);
+                    }, this),
+                    $.proxy(function() {
+                        this.options.ajaxloader.css('visibility', 'hidden');
+                    }), this);
+            jqxhr.always($.proxy(function() {
+                this.options.ajaxloader.remove();
+            }, this));
+        },
+        _destroy: function() {
+            this.element.unbind();
+            this.element.remove(this.options.ajaxloader);
             this._destroy();
         }
     });
