@@ -1,13 +1,8 @@
-<#ftl>
-<#if locale??>
-<#else>
-<#assign locale="pl">
-</#if>
+<#ftl><#if locale??><#else>
+<#assign locale="pl"></#if>
 <#setting locale=locale>
 <#assign queryString=(request.queryString)!>
-<#if queryString != "">
-<#assign queryString="?"+queryString>
-</#if>
+<#if queryString != ""><#assign queryString="?"+queryString></#if>
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
 <!DOCTYPE html>
 <html lang="${locale}">
@@ -234,6 +229,6 @@
 
         </div><!-- /.container -->
         <div id="loadJsonOnClick">test loading json tutaj</div>
-        <div id="loadJsonOnClick7secDelay">test loading json with timeout tutaj</div>
+        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj</div>
     </body>
 </html>

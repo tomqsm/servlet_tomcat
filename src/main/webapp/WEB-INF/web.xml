@@ -166,7 +166,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>freemarkerForJson</servlet-name>
-        <url-pattern>*.ftljson</url-pattern>
+        <url-pattern>*.json</url-pattern>
     </servlet-mapping>
     <!--    <servlet>
         <servlet-name>tiles</servlet-name>
