@@ -2,26 +2,38 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-context="false">
-
-    <!--LOGIN-->
     <rule enabled="true" match-type="regex">
-        <name>loginFailureToCleanUrlEN</name>
-        <note>When url based language choice is maintained, this rule allows to set preference to user language choice from dropdown over user preferences from browser setting.</note>
-        <condition type="session-attribute" name="language" operator="equal">^en$</condition>
-        <from>^(.*)/failed$</from>
-        <set name="failed">true</set>
-        <set name="log.info">loginFailureToCleanUrlEN | Session: %{requested-session-id}</set>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">/%{session-attribute:language}/login.ftl</to>
+        <name>Root-Index</name>
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/index$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
+        <to type="forward" last="true">template.ftl</to>
     </rule>
+        <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/podlogi$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
+        <to type="forward">template.ftl</to>
+    </rule>
+    <!--LOGIN-->
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlPL</name>
         <!--<condition type="session-attribute" name="language" operator="equal">^pl$</condition>-->
-        <from>^(.*)/failed$</from>
+        <from>^(.*)/login-failed$</from>
         <set name="failed">true</set>
         <set name="log.info">loginFailureToCleanUrlPL | Session: %{requested-session-id}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">/login.ftl</to>
+        <to type="forward" last="true">login.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>showLogin</name>
+        <condition type="header" name="referer" operator="equal">^$</condition>
+        <set type="session" name="language">de</set>
+        <set name="message">No way to establish language, resource accessed without referrer header.</set>
+        <from>^(.*)/login$</from>
+        <set name="log.info">showLogin | Session: %{requested-session-id} | lang: %{session-attribute:language}</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <to type="forward" last="true">/warning.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>showLogin</name>
@@ -29,9 +41,9 @@
         <from>^(.*)/login$</from>
         <set name="log.info">showLogin | Session: %{requested-session-id} | lang: %{session-attribute:language}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
-        <to type="forward" last="true">/login.ftl</to>
+        <to type="forward" last="true">login.ftl</to>
     </rule>
-    <rule enabled="true" match-type="regex">
+    <rule enabled="false" match-type="regex">
         <name>loginform</name>
         <condition type="method">POST</condition>
         <from>^(.*)/loginform$</from>
@@ -39,7 +51,7 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <set type="request" name="j_username">%{parameter:username}</set>
         <set type="request" name="j_password">%{parameter:password}</set>
-<!--        <set type="parameter" name="j_username">%{parameter:username}</set>
+        <!--        <set type="parameter" name="j_username">%{parameter:username}</set>
         <set type="parameter" name="j_password">%{parameter:password}</set>-->
         <set type="session" name="language">%{parameter:language}</set>
         <to type="forward" last="true" qsappend="true">${context-path}/j_security_check</to>
@@ -73,14 +85,14 @@
         <to type="forward" last="true">%{attribute:browserLanguage}index</to>
     </rule>
     <!-- END RESOLVING BROWSER LANGUAGE TO URL-->
-    
+
     <!--USER SELECTION LANGUAGE TO URL - REWRITE-->
     <outbound-rule enabled="true" match-type="regex">
         <name>setServletPathWithQueryStringWithoutLanguage</name>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.URLLanguageSetter"/>
         <set name="log.info">setServletPathWithQueryStringWithoutLanguage</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log" />
-        <from>^(pl|en|de)(.*)$</from>
+        <from>^(pl|en|de)(.*)$</from> 
     </outbound-rule> 
 
     <outbound-rule enabled="true" match-type="regex">
@@ -100,36 +112,33 @@
     </outbound-rule>
     <!-- END USER SELECTION LANGUAGE TO URL - REWRITE-->
     
-    <rule enabled="true" match-type="regex">
+
+    <rule enabled="false" match-type="regex">
         <condition type="method">GET</condition>
-        <from>^/en/podlogi$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
-        <to type="forward">template.ftl</to>
-    </rule>
-    <rule enabled="true" match-type="regex">
-        <condition type="method">GET</condition>
-        <from>^/podlogi$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
-        <to type="forward">template.ftl</to>
-    </rule>
-    <rule enabled="true" match-type="regex">
-        <condition type="method">GET</condition>
-        <from>^/restricted/index$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.pages.LinksController" method="doGetPodlogi" />
+        <from>^(.*)/restricted(.*)$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward">/index</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
         <from>^/json/user$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.UserJsonController"/>
-        <to type="forward">/user.ftljson</to>
+        <to type="forward">/user.json</to>
     </rule>
     <rule enabled="true" match-type="regex">
+        <name>getDelayedJson</name>
         <condition type="method">GET</condition>
         <from>^(/json/user/delayed/)(\d)/sec$</from>
         <set name="delay">$2</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.UserJsonController" method="getDelayedJson"/>
-        <to type="forward">/user.ftljson</to>
+        <to type="forward">/user.json</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>logout</name>
+        <condition type="method">GET</condition>
+        <from>^(.*)/logout(.*)$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
+        <to type="redirect">%{context-path}$2</to>
     </rule>
 
     

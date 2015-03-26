@@ -1,9 +1,11 @@
-<#ftl><#if locale??><#else>
-<#assign locale="pl"></#if>
+<#ftl>
+<#if locale??><#else><#assign locale="pl"></#if>
 <#setting locale=locale>
 <#assign queryString=(request.queryString)!>
 <#if queryString != ""><#assign queryString="?"+queryString></#if>
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
+<#assign principalName=(request.userPrincipal.name)!"undefined">
+<#if principalName=="undefined"><#assign isLoggedIn="false"><#else><#assign isLoggedIn="true"></#if>
 <!DOCTYPE html>
 <html lang="${locale}">
     <head>
@@ -24,7 +26,7 @@
         <#list scripts as s>
                 <#list s.* as sc>
         <script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
-                </#list>
+        </#list>
         </#list>
         <!-- Custom styles for this template -->
         <link href="${context}/css/carousel.css" rel="stylesheet"/>
@@ -84,12 +86,14 @@
                                     <ul class="nav navbar-right navbar-nav">
                                         <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <a href="${response.encodeURL('restricted/index')}">Restricted</a>
+                                                <a href="${response.encodeURL('restricted')}">Restricted</a>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                            <a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">Logout</a>
+
                         </div>
                     </div>
                 </nav>
@@ -229,6 +233,6 @@
 
         </div><!-- /.container -->
         <div id="loadJsonOnClick">test loading json tutaj</div>
-        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj</div>
+        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj ${principalName} is logged in: ${isLoggedIn}</div>
     </body>
 </html>

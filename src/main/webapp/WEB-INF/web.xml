@@ -47,7 +47,7 @@
         <init-param>
             <description>DEBUG</description>
             <param-name>logLevel</param-name>
-            <param-value>INFO</param-value>
+            <param-value>DEBUG</param-value>
         </init-param>
         <!-- you can change status path so that it does not
         conflict with your installed apps (note, defaults
@@ -199,6 +199,7 @@
             <web-resource-name>Restricted Access - Get Only</web-resource-name>
             <url-pattern>/restricted/*</url-pattern>
             <url-pattern>/en/restricted/*</url-pattern>
+            <url-pattern>/de/restricted/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>

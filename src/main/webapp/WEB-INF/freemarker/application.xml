@@ -33,22 +33,22 @@
     <zaloguj>
         <pl>Zaloguj</pl>
         <en>Login</en>
-        <de>Login</de>
+        <de>Login-de</de>
     </zaloguj>
     <zapamietaj>
         <pl>Zapamiętaj</pl>
         <en>Remember me</en>
-        <de>Remember me</de>
+        <de>Remember me-de</de>
     </zapamietaj>
     <niezalogowano>
         <pl>Logowanie się nie powiodło.</pl>
         <en>Login failed.</en>
-        <de>Login failed.</de>
+        <de>Login failed - de.</de>
     </niezalogowano>
     <cyklinowanie>
         <pl>Cyklinowanie</pl>
         <en>Sanding</en>
-        <de>Sanding</de>
+        <de>Sanding - de</de>
     </cyklinowanie>
     <cennik>
         <pl>Cennik</pl>

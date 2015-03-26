@@ -30,10 +30,13 @@ public class URLLanguageSetter {
      * @param response
      */
     public void run(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("servletPathWithoutLanguage", getServletPathWithQueryStringWithoutLanguage(request));
+        final LanguageAndPath languageAndPath = getServletPathWithQueryStringWithoutLanguage(request);
+        request.setAttribute("servletPathWithoutLanguage", languageAndPath.path);
+        request.setAttribute("servletUrlLanguage", languageAndPath.language);
     }
 
-    private String getServletPathWithQueryStringWithoutLanguage(HttpServletRequest request) {
+    private LanguageAndPath getServletPathWithQueryStringWithoutLanguage(HttpServletRequest request) {
+        LanguageAndPath languageAndPath = new LanguageAndPath();
         final HttpServletRequest originalRequest = (HttpServletRequest) (request.getAttribute("request"));
         assert originalRequest != null : "assertion: please set original request";
         final String contextPath = originalRequest.getContextPath();
@@ -56,10 +59,12 @@ public class URLLanguageSetter {
         }
         for (String lang : langs) {
             if (pathFromContext.contains(lang)) {
+                languageAndPath.language = lang;
                 pathFromContext = pathFromContext.replaceAll(lang, "");
             }
         }
-        return pathFromContext.startsWith(slash) ? pathFromContext : slash + pathFromContext;
+        languageAndPath.path = pathFromContext.startsWith(slash) ? pathFromContext : slash + pathFromContext;
+        return languageAndPath;
     }
 
     private String getQueryString(HttpServletRequest request) {
@@ -70,5 +75,8 @@ public class URLLanguageSetter {
             queryStringBuilder.insert(0, '?');
         }
         return queryStringBuilder.toString();
+    }
+    class LanguageAndPath{
+        String language, path;
     }
 }
