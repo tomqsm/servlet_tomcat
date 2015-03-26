@@ -59,7 +59,7 @@
                                 <li><a href="cennik">${response.encodeURL('${xml["//cennik/${locale}"]}')}</a></li>
                                 <li><a href="firma">${response.encodeURL('${xml["//firma/${locale}"]}')}</a></li>
                                 <li><a href="realizacje">${response.encodeURL('${xml["//realizacje/${locale}"]}')}</a></li>
-                                <li><a href="contact">${response.encodeURL('${xml["//kontakt/${locale}"]}')}</a></li>
+                                <li><a href="kontakt">${response.encodeURL('${xml["//kontakt/${locale}"]}')}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
@@ -84,15 +84,20 @@
                             <div class="container">
                                 <div class="navbar-collapse">
                                     <ul class="nav navbar-right navbar-nav">
-                                        <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
+                                        <li class="dropdown"> 
+                                            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-log-in"></span> 
+                                                    <#if isLoggedIn?boolean>${xml["//wyloguj/${locale}"]}<#else>${xml["//zaloguj/${locale}"]}</#if>
+                                                <strong class="caret"></strong>
+                                            </a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">Restricted</a>
+                                                    <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${locale}"]}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml["//zaloguj/${locale}"]}</a></#if>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
+                            
                             </div>
-                            <a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">Logout</a>
 
                         </div>
                     </div>

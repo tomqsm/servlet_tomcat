@@ -35,6 +35,11 @@
         <en>Login</en>
         <de>Login-de</de>
     </zaloguj>
+    <wyloguj>
+        <pl>Wyloguj</pl>
+        <en>Logout</en>
+        <de>Logout-de</de>
+    </wyloguj>
     <zapamietaj>
         <pl>Zapamiętaj</pl>
         <en>Remember me</en>

@@ -17,7 +17,7 @@ public class LinksController {
     }
     
     public void doGetPodlogi(HttpServletRequest req, HttpServletResponse res) {
-        logger.debug("podłogi");
+        logger.debug("Started.");
         req.setAttribute("request", req);
     }
     
