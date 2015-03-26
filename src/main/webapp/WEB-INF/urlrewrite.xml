@@ -9,11 +9,17 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">template.ftl</to>
     </rule>
-        <rule enabled="true" match-type="regex">
+    <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>
         <from>^(/en|/de)?/podlogi$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward">template.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/restricted/(index|podlogi)$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
+        <to type="forward">/template.ftl</to>
     </rule>
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">

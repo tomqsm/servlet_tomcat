@@ -86,7 +86,7 @@
                                     <ul class="nav navbar-right navbar-nav">
                                         <li class="dropdown"> <a class="dropdown-toggle" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> ${xml["//zaloguj/${locale}"]}<strong class="caret"></strong></a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                <a href="${response.encodeURL('restricted')}">Restricted</a>
+                                                <a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">Restricted</a>
                                             </div>
                                         </li>
                                     </ul>
