@@ -64,6 +64,7 @@ public class TemplateLoaderFilter implements Filter {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -144,7 +145,7 @@ public class TemplateLoaderFilter implements Filter {
         if (filterConfig == null) {
             return ("TemplateLoaderFilter()");
         }
-        StringBuffer sb = new StringBuffer("TemplateLoaderFilter(");
+        StringBuilder sb = new StringBuilder("TemplateLoaderFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

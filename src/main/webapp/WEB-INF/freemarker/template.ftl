@@ -6,6 +6,21 @@
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
 <#assign principalName=(request.userPrincipal.name)!"undefined">
 <#if principalName=="undefined"><#assign isLoggedIn="false"><#else><#assign isLoggedIn="true"></#if>
+<#macro greet>
+  <font size="+2">Hello Joe! ${locale}</font>
+</#macro>
+<#macro pageTitle title>
+  ${title}
+</#macro>
+<#macro list title items>
+  <p>${title?cap_first}:
+  <ul>
+    <#list items as x>
+      <li>${x?cap_first}
+    </#list>
+  </ul>
+</#macro>
+
 <!DOCTYPE html>
 <html lang="${locale}">
     <head>
@@ -15,7 +30,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
-        <title>${xml["//title/${locale}"]}</title>
+        <title><@pageTitle xml["//title/${locale}"]/></title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script>
             var appInit = {
@@ -91,7 +106,7 @@
                                                 <strong class="caret"></strong>
                                             </a>
                                             <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                                    <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${locale}"]}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml["//zaloguj/${locale}"]}</a></#if>
+                                                    <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${locale}"]} ${principalName}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml["//zaloguj/${locale}"]}</a></#if>
                                             </div>
                                         </li>
                                     </ul>
@@ -236,6 +251,8 @@
 
         </div><!-- /.container -->
         <div id="loadJsonOnClick">test loading json tutaj</div>
-        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj ${principalName} is logged in: ${isLoggedIn}</div>
+        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj
+<@greet/>
+<@list items=["mouse", "elephant", "python"] title="Animals"/>
     </body>
 </html>

@@ -2,25 +2,26 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-context="false">
+    
     <rule enabled="true" match-type="regex">
         <name>Root-Index</name>
+        <note>Limits url on index.</note>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/index$</from>
+        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|podlogi)$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
-        <to type="forward" last="true">template.ftl</to>
+        <!--<to type="forward" last="true">template.ftl</to>-->
+        <to type="forward" last="true">home.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
-        <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(cennik|firma|realizacje|kontakt|podlogi)$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
-        <to type="forward">template.ftl</to>
-    </rule>
-    <rule enabled="true" match-type="regex">
+        <name>FirstLevelRoute</name>
+        <note>Controlls </note>
         <condition type="method">GET</condition>
         <from>^(/en|/de)?/restricted/(index|cennik|podlogi|kontakt)$</from>
+        <set type="cookie" name="tkcookie">value:sd:3600</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
-        <to type="forward">/template.ftl</to>
+        <to type="forward" last="true">$1/template.ftl</to>
     </rule>
+    
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
         <name>loginFailureToCleanUrlPL</name>

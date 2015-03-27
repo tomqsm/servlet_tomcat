@@ -168,6 +168,14 @@
         <servlet-name>freemarkerForJson</servlet-name>
         <url-pattern>*.json</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <url-pattern>*.tiles</url-pattern>
+    </servlet-mapping>
     <!--    <servlet>
         <servlet-name>tiles</servlet-name>
         <servlet-class>org.apache.tiles.web.startup.simple.SimpleTilesInitializerServlet</servlet-class>
