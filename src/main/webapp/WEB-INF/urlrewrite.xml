@@ -10,7 +10,7 @@
         <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|podlogi)$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <!--<to type="forward" last="true">template.ftl</to>-->
-        <to type="forward" last="true">home.ftl</to>
+        <to type="forward" last="true">$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>FirstLevelRoute</name>
@@ -19,7 +19,7 @@
         <from>^(/en|/de)?/restricted/(index|cennik|podlogi|kontakt)$</from>
         <set type="cookie" name="tkcookie">value:sd:3600</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
-        <to type="forward" last="true">$1/home.ftl</to>
+        <to type="forward" last="true">$1/$2.ftl</to>
     </rule>
     
     <!--LOGIN-->
