@@ -1,13 +1,11 @@
-<#macro layout title>
-<#if locale??><#else><#assign locale="pl"></#if>
-<#setting locale=locale>
+<#macro layout lang title>
 <#assign queryString=(request.queryString)!>
 <#if queryString != ""><#assign queryString="?"+queryString></#if>
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
 <#assign principalName=(request.userPrincipal.name)!"undefined">
 <#if principalName=="undefined"><#assign isLoggedIn="false"><#else><#assign isLoggedIn="true"></#if>
 <!DOCTYPE html>
-  <html lang="${locale}">
+<html lang="${lang}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,11 +37,11 @@
         </style>
     </head>
     <body>
-        <#include "html/diagnostics.html"/>
-        <#--<#include "html/navbar.html"/>-->
+        <#include "html/navbar.html"/>
         <div id="maincontainer"><!-- maincontainer start -->
             <#include "html/carousel.html"/>
             <#include "html/columns.html"/>
+            <#nested/><!-- default body from page view -->
             <footer>
                 <p class="pull-right"><a href="#">Na początek strony</a></p>
                 <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
@@ -51,6 +49,8 @@
         </div><!-- maincontainer end -->
         <div id="loadJsonOnClick">test loading json tutaj</div>
         <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj</div>
+        <#--<#include "html/diagnostics.html"/>-->
+        <#include "html/diagnostics.html"/>
     </body>
-  </html>
+</html>
 </#macro>

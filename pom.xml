@@ -32,25 +32,6 @@
             <artifactId>slf4j-log4j12</artifactId>  
             <version>1.7.1</version>  
         </dependency>
-        <!--TILES-->
-        <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-template</artifactId>
-            <version>3.0.3</version>
-        </dependency>
-            
-        <dependency>
-            <groupId>org.apache.tiles</groupId>
-            <artifactId>tiles-freemarker</artifactId>
-            <version>3.0.3</version>
-        </dependency>
-            
-        <!--        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>-->
         <!--jstl cannot be provided, there is problem when it is-->
         <dependency>
             <groupId>jstl</groupId>

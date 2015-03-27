@@ -19,7 +19,7 @@
         <from>^(/en|/de)?/restricted/(index|cennik|podlogi|kontakt)$</from>
         <set type="cookie" name="tkcookie">value:sd:3600</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
-        <to type="forward" last="true">$1/template.ftl</to>
+        <to type="forward" last="true">$1/home.ftl</to>
     </rule>
     
     <!--LOGIN-->

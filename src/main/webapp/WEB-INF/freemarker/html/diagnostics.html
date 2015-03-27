@@ -1,12 +1,16 @@
 <!-- diagnostics  -->
 <div class="container diagnostics">
+    <hr class="featurette-divider">
     <div class="row">
-        <div class="col-md-7">
-            <h2>Diagnostics<span class="text-muted">Technical:</span></h2>
-            <p><span id="showSize"></span>Technical information status.</p>
-        </div>
-        <div class="col-md-5">
-            <p>test</p>
+        <h3>Diagnostics:</h3>
+        <div class="col-md-12">
+            <p>Properties:</p>
+            <ul>
+                <#list diagnostics_cookies![{"name":"none", "value":"none"}] as cookie>
+                <li>Cookie: name: ${cookie.name} -- value: ${cookie.value}</li>
+                </#list>
+                <li>Language: ${lang}</li>
+            </ul>
         </div>
     </div>
     <hr class="featurette-divider">
