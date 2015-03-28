@@ -50,7 +50,7 @@
                                         <strong class="caret"></strong>
                                     </a>
                                     <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                        <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${lang}"]} ${principalName}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml['//zaloguj/${lang}']}</a></#if>
+                                        <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml['//wyloguj/${lang}']} ${principalName}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml['//zaloguj/${lang}']}</a></#if>
                                     </div>
                                 </li>
                             </ul>
