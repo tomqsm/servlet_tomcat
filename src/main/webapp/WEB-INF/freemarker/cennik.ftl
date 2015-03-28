@@ -1,8 +1,10 @@
 <#import "layout_1.ftl" as default>
 <#assign title>Strona główna.</#assign>
 <#assign lang="pl"> 
+<#assign navbar_highlight=xml['//cennik/${lang}']> 
 
-<@default.layout lang title>
+
+<@default.layout lang title navbar_highlight>
 
 <!-- Main component for a primary marketing message or call to action -->
 <div class="jumbotron">

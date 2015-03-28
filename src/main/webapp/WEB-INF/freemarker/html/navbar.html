@@ -14,8 +14,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="${response.encodeURL('index')}">${xml['//index/${lang}']}</a></li>
-                        <li><a href="${response.encodeURL('cennik')}">${xml['//cennik/${lang}']}</a></li>
+                        <li class="<#if xml['//index/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('index')}">${xml['//index/${lang}']}</a></li>
+                        <li class="<#if xml['//cennik/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('cennik')}">${xml['//cennik/${lang}']}</a></li>
                         <li><a href="${response.encodeURL('firma')}">${xml['//firma/${lang}']}</a></li>
                         <li><a href="${response.encodeURL('realizacje')}">${xml['//realizacje/${lang}']}</a></li>
                         <li><a href="${response.encodeURL('kontakt')}">${xml['//kontakt/${lang}']}</a></li>

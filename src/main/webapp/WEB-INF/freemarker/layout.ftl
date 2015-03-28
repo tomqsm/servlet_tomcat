@@ -1,4 +1,4 @@
-<#macro layout lang title>
+<#macro layout lang title navbar_highlight>
 <#assign queryString=(request.queryString)!>
 <#if queryString != ""><#assign queryString="?"+queryString></#if>
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
