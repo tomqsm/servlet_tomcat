@@ -10,15 +10,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${response.encodeURL('')}">lukasfloor.com</a>
+                    <a class="navbar-brand" href="${response.encodeURL('index')}">lukasfloor.com</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="cennik">${response.encodeURL('${xml["//cennik/${lang}"]}')}</a></li>
-                        <li><a href="firma">${response.encodeURL('${xml["//firma/${lang}"]}')}</a></li>
-                        <li><a href="realizacje">${response.encodeURL('${xml["//realizacje/${lang}"]}')}</a></li>
-                        <li><a href="kontakt">${response.encodeURL('${xml["//kontakt/${lang}"]}')}</a></li>
+                        <li class="active"><a href="index">${response.encodeURL('${xml["//index/${lang}"]}')}</a></li>
+                        <li><a href="${response.encodeURL('cennik')}">${response.encodeURL('${xml["//cennik/${lang}"]}')}</a></li>
+                        <li><a href="${response.encodeURL('firma')}">${response.encodeURL('${xml["//firma/${lang}"]}')}</a></li>
+                        <li><a href="${response.encodeURL('realizacje')}">${response.encodeURL('${xml["//realizacje/${lang}"]}')}</a></li>
+                        <li><a href="${response.encodeURL('kontakt')}">${response.encodeURL('${xml["//kontakt/${lang}"]}')}</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">

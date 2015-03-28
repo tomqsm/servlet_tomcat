@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="${xml["//author/${lang}"]}">
+<link rel="icon" href="../../favicon.ico">
+<title>${title}</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script>
+    var appInit = {
+        context: '${context}'
+    };
+</script>
+        <#assign scripts = scripts["properties/scripts"]> 
+        <#list scripts as s>
+                <#list s.* as sc>
+<script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
+</#list>
+</#list>

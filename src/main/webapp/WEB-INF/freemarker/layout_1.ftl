@@ -12,8 +12,6 @@
     <body>
         <#include "html/navbar.html"/>
         <div id="maincontainer"><!-- maincontainer start -->
-            <#include "html/carousel.html"/>
-            <#include "html/columns.html"/>
             <#nested/><!-- default body from page view -->
             <footer>
                 <p class="pull-right"><a href="#">Na początek strony</a></p>

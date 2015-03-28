@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <properties>
+    <author>
+        <pl>Tomasz Kuśmierczyk</pl>
+        <en>Tomasz Kuśmierczyk</en>
+        <de>Tomasz Kuśmierczyk</de>
+    </author>
+    <description>
+        <pl>Parkieciarstwo, cyklinowanie.</pl>
+        <en>Wooden floors, sanding.</en>
+        <de>Holzboden, schleifen.</de>
+    </description>
     <title>
         <pl>Letsweb - Strona główna.</pl>
         <en>Home</en>
@@ -55,6 +65,11 @@
         <en>Sanding</en>
         <de>Sanding - de</de>
     </cyklinowanie>
+    <index>
+        <pl>Strona główna</pl>
+        <en>Home</en>
+        <de>Home-de</de>
+    </index>
     <cennik>
         <pl>Cennik</pl>
         <en>Prices</en>
