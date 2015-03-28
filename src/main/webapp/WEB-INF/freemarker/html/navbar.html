@@ -23,8 +23,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="${response.encodeURL('podlogi')}">Podłogi</a></li>
-                                <li><a href="schody">Schody</a></li>
-                                <li><a href="cyklinowanie">${xml["//cyklinowanie/${lang}"]}</a></li>
+                                <li><a href="${response.encodeURL('schody')}">Schody</a></li>
+                                <li><a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Usługi</li>
                                 <li><a href="#">Pomiar wilgotności powierzchni</a></li>
@@ -32,11 +32,11 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Język <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${xml['//jezyk/${lang}']}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${response.encodeURL('en${servletPathQueryString}')}">Angielski</a></li>
-                                <li><a href="${response.encodeURL('pl${servletPathQueryString}')}">Polski</a></li>
-                                <li><a href="${response.encodeURL('de${servletPathQueryString}')}">Niemiecki</a></li>
+                                <#if lang!="pl"><li><a href="${response.encodeURL('pl${servletPathQueryString}')}">${xml['//jezyk_polski/${lang}']}</a></li></#if>
+                                <#if lang!="en"><li><a href="${response.encodeURL('en${servletPathQueryString}')}">${xml['//jezyk_angielski/${lang}']}</a></li></#if>
+                                <#if lang!="de"><li><a href="${response.encodeURL('de${servletPathQueryString}')}">${xml['//jezyk_niemiecki/${lang}']}</a></li></#if>
                             </ul>
                         </li>
                     </ul>

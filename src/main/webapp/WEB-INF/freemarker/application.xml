@@ -90,4 +90,24 @@
         <en>Contact</en>
         <de>Contact-de</de>
     </kontakt>
+    <jezyk>
+        <pl>Język</pl>
+        <en>Language</en>
+        <de>Sprache</de>
+    </jezyk>
+    <jezyk_polski>
+        <pl>Polski</pl>
+        <en>Polish</en>
+        <de>Polnisch</de>
+    </jezyk_polski>
+    <jezyk_angielski>
+        <pl>Angielski</pl>
+        <en>English</en>
+        <de>Englisch</de>
+    </jezyk_angielski>
+    <jezyk_niemiecki>
+        <pl>Niemiecki</pl>
+        <en>German</en>
+        <de>Deutch</de>
+    </jezyk_niemiecki>
 </properties>
