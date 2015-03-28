@@ -14,11 +14,11 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index">${response.encodeURL('${xml["//index/${lang}"]}')}</a></li>
-                        <li><a href="${response.encodeURL('cennik')}">${response.encodeURL('${xml["//cennik/${lang}"]}')}</a></li>
-                        <li><a href="${response.encodeURL('firma')}">${response.encodeURL('${xml["//firma/${lang}"]}')}</a></li>
-                        <li><a href="${response.encodeURL('realizacje')}">${response.encodeURL('${xml["//realizacje/${lang}"]}')}</a></li>
-                        <li><a href="${response.encodeURL('kontakt')}">${response.encodeURL('${xml["//kontakt/${lang}"]}')}</a></li>
+                        <li class="active"><a href="${response.encodeURL('index')}">${xml['//index/${lang}']}</a></li>
+                        <li><a href="${response.encodeURL('cennik')}">${xml['//cennik/${lang}']}</a></li>
+                        <li><a href="${response.encodeURL('firma')}">${xml['//firma/${lang}']}</a></li>
+                        <li><a href="${response.encodeURL('realizacje')}">${xml['//realizacje/${lang}']}</a></li>
+                        <li><a href="${response.encodeURL('kontakt')}">${xml['//kontakt/${lang}']}</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -46,11 +46,11 @@
                                 <li class="dropdown"> 
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                                         <span class="glyphicon glyphicon-log-in"></span>
-                                            <#if isLoggedIn?boolean>${xml["//wyloguj/${lang}"]}<#else>${xml["//zaloguj/${lang}"]}</#if>
+                                            <#if isLoggedIn?boolean>${xml['//wyloguj/${lang}']}<#else>${xml['//zaloguj/${lang}']}</#if>
                                         <strong class="caret"></strong>
                                     </a>
                                     <div class="dropdown-menu" style="padding:10px; min-width:240px;">
-                                        <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${lang}"]} ${principalName}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml["//zaloguj/${lang}"]}</a></#if>
+                                        <#if isLoggedIn?boolean><a href="${response.encodeURL('logout${(servletPathWithoutLanguage)!""}')}">${xml["//wyloguj/${lang}"]} ${principalName}</a><#else><a href="${response.encodeURL('restricted${(servletPathWithoutLanguage)!""}')}">${xml['//zaloguj/${lang}']}</a></#if>
                                     </div>
                                 </li>
                             </ul>

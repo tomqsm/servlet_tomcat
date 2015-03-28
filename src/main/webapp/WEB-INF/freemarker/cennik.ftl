@@ -3,6 +3,7 @@
 <#assign lang="pl"> 
 
 <@default.layout lang title>
+
 <!-- Main component for a primary marketing message or call to action -->
 <div class="jumbotron">
     <h1>Navbar example</h1>
