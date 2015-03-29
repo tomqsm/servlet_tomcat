@@ -1,4 +1,4 @@
-<#import "layout.ftl" as default>
+<#import "../layout.ftl" as default>
 <#assign title>Diagnostics</#assign>
 
 <@default.layout title>

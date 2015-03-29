@@ -232,11 +232,11 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    <!--    <error-page>
+    <error-page>
         <exception-type>com.letsweb.tutorial.servlet_tomcat.layout.LayoutException</exception-type>
         <location>/layout_exception.html</location>
     </error-page>
     <error-page>
         <location>/general-error.html</location>
-    </error-page>-->
+    </error-page>
 </web-app>
