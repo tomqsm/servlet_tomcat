@@ -12,18 +12,10 @@
     <body>
         <#include "html/navbar.html"/>
         <div id="maincontainer"><!-- maincontainer start -->
-            <#include "html/carousel.html"/>
-            <#include "html/columns.html"/>
             <#nested/><!-- default body from page view -->
-            <footer>
-                <p class="pull-right"><a href="#">Na początek strony</a></p>
-                <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-            </footer>
         </div><!-- maincontainer end -->
-        <div id="loadJsonOnClick">test loading json tutaj</div>
-        <div id="loadJsonOnClickNSecDelay">test loading json with timeout tutaj</div>
+        <#include "html/footer.html"/>
         <#--<#include "html/diagnostics.html"/>-->
-        <#include "html/diagnostics.html"/>
     </body>
 </html>
 </#macro>

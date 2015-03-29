@@ -13,7 +13,6 @@
                 console.log("enetered");
             });
             this.element.text('height: ' + this.options.viewportHeight + ' width: ' + this.options.viewportWidth);
-            this.element.prependTo('body');
         },
         _setOption: function(key, value) {
             this.options[key] = value;

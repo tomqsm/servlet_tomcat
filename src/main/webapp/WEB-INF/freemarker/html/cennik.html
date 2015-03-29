@@ -1,7 +1,21 @@
-<div class="" style="">
-    <h1>Makumba</h1>
+<div class="container" style="">
+    <h1>${xml['//cennik/${lang}']}</h1>
+    <#if lang=="en">
     <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
     <p>
         <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
     </p>
+    </#if>
+    <#if lang=="pl">
+    <p>Oto przykład szybkiego ćwiczenia ilustrującego domyślny navbar.</p>
+    <p>
+        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Zobacz dokumentację &raquo;</a>
+    </p>
+    </#if>
+    <#if lang=="de">
+    <p>Das ist bla bla bla.</p>
+    <p>
+        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Sehen dokumentation &raquo;</a>
+    </p>
+    </#if>
 </div>

@@ -1,9 +1,14 @@
 <#import "../../layout.ftl" as default>
-<#assign title>Main page.</#assign>
-<#assign lang="en">
+<#assign title>Strona główna.</#assign>
+<#assign lang="en"> 
 <#assign navbar_highlight=xml['//index/${lang}']> 
 
 <@default.layout lang title navbar_highlight>
-  <div><h1>Hello Dude</h1></div>
+<#include "../../html/carousel.html"/>
+<#include "../../html/columns.html"/>
+<div class="container">
+    <h1>cześć pajacu</h1>
+</div>
+  <#include "static/artykul1.html"/>
 </@default.layout>
 
