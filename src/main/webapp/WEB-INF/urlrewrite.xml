@@ -34,10 +34,9 @@
     <rule enabled="true" match-type="regex">
         <name>showLogin</name>
         <condition type="header" name="referer" operator="equal">^$</condition>
-        <set type="session" name="language">de</set>
         <set name="message">No way to establish language, resource accessed without referrer header.</set>
         <from>^(.*)/login$</from>
-        <set name="log.info">showLogin | Session: %{requested-session-id} | lang: %{session-attribute:language}</set>
+        <set name="log.info">showLogin | Session: %{requested-session-id}</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">/warning.ftl</to>
     </rule>
@@ -124,6 +123,15 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <to type="redirect">%{context-path}</to>
     </rule>
+    <!-- E R R O R S -->
+    <rule enabled="true" match-type="regex">
+        <name>error</name>
+        <condition type="method">GET</condition>
+        <from>^/error$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
+        <to type="redirect">%{context-path}</to>
+    </rule>
+    
     <!-- J S O N -->
     <rule enabled="true" match-type="regex">
         <condition type="method">GET</condition>

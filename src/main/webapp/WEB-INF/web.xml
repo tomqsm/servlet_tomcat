@@ -236,7 +236,28 @@
         <exception-type>com.letsweb.tutorial.servlet_tomcat.layout.LayoutException</exception-type>
         <location>/layout_exception.html</location>
     </error-page>
-    <error-page>
-        <location>/general-error.html</location>
-    </error-page>
+   
+    <!-- ===========================================================
+            Error Handler
+            This forwards all errors to error.jsp
+            Note that error.jsp MUST NOT throw an error itself,
+            or it causes a second call and is hard to debug.
+            Comment this section out when testing changes to
+            your error page.
+        ============================================================ -->
+        <error-page>
+            <error-code>401</error-code><location>/error.jsp</location>
+        </error-page>
+        <error-page>
+            <error-code>403</error-code><location>/error.jsp</location>
+        </error-page>
+        <error-page>
+            <error-code>404</error-code><location>/error.jsp</location>
+        </error-page>
+        <error-page>
+            <error-code>500</error-code><location>/error.jsp</location>
+        </error-page>
+        <error-page>
+            <error-code>503</error-code><location>/error.jsp</location>
+        </error-page>
 </web-app>

@@ -7,4 +7,3 @@
   <div><h1>cześć pajacu</h1></div>
   <#include "static/artykul1.html"/>
 </@default.layout>
-
