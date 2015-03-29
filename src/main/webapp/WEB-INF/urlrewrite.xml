@@ -119,9 +119,10 @@
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
-        <from>^(.*)/logout(.*)$</from>
+        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|podlogi|kontakt)?$</from>
+        <!--<from>^(.*)/logout/restricted/(index|cennik|firma|realizacje|kontakt|podlogi)?$</from>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
-        <to type="redirect">%{context-path}</to>
+        <to type="redirect">%{context-path}$1/$2</to>
     </rule>
     <!-- E R R O R S -->
     <rule enabled="true" match-type="regex">

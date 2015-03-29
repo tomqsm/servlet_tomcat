@@ -11,7 +11,7 @@
         <#include "html/head.html"/>
     </head>
     <body>
-        <@jestesZalogowany.info lang principalName/>
+        <div class="container"><@jestesZalogowany.info lang principalName/></div>
         <#include "html/navbar.html"/>
         <div id="maincontainer"><!-- maincontainer start -->
             <#nested/><!-- default body from page view -->
