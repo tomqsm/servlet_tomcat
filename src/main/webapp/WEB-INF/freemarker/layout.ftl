@@ -1,4 +1,5 @@
 <#macro layout lang title navbar_highlight>
+<#import "jestesZalogowanyMacro.ftl" as jestesZalogowany>
 <#assign queryString=(request.queryString)!>
 <#if queryString != ""><#assign queryString="?"+queryString></#if>
 <#assign servletPathQueryString=(request.requestURI)?replace(context,"")+queryString>
@@ -10,6 +11,7 @@
         <#include "html/head.html"/>
     </head>
     <body>
+        <@jestesZalogowany.info lang principalName/>
         <#include "html/navbar.html"/>
         <div id="maincontainer"><!-- maincontainer start -->
             <#nested/><!-- default body from page view -->

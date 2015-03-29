@@ -110,4 +110,14 @@
         <en>German</en>
         <de>Deutch</de>
     </jezyk_niemiecki>
+    <jestes_zalogowany_info>
+        <pl>Jesteś zalogowany ${principalName}</pl>
+        <en>You are logged-in</en>
+        <de>Du bist logged-in</de>
+    </jestes_zalogowany_info>
+    <napoczatekstrony>
+        <pl>Na początek strony</pl>
+        <en>Top</en>
+        <de>Top</de>
+    </napoczatekstrony>
 </properties>

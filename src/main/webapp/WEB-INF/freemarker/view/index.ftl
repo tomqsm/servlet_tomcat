@@ -7,7 +7,7 @@
 <#include "../html/carousel.html"/>
 <#include "../html/columns.html"/>
 <div class="container">
-    <h1>cześć pajacu</h1>
+    <h1>Jakaś zawartość tutaj.</h1>
 </div>
   <#include "static/artykul1.html"/>
 </@default.layout>
