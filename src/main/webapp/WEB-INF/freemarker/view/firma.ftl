@@ -1,5 +1,5 @@
 <#import "../layout.ftl" as default>
-<#assign title>Strona główna.</#assign>
+<#assign title>Firma</#assign>
 <#assign lang="pl"> 
 <#assign navbar_highlight=xml['//firma/${lang}']> 
 
