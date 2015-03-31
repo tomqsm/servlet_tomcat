@@ -8,7 +8,7 @@
         <note>Limits url on index.</note>
         <condition type="method">GET</condition>
         <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|cyklinowanie|lakierowanie)$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootColtroller"/>
         <to type="forward" last="true">view/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
