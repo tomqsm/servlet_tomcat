@@ -7,9 +7,17 @@
         <name>Root-Index</name>
         <note>Limits url on index.</note>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|cyklinowanie|lakierowanie)$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootColtroller"/>
+        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt)$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/$2.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>Oferta-Index</name>
+        <note>Limits url on index.</note>
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/(lakierowanie|cyklinowanie|podlogi|szpachlowanie)$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
+        <to type="forward" last="true">view/oferta/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>FirstLevelRoute</name>

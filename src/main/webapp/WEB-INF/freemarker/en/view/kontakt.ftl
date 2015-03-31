@@ -6,8 +6,5 @@
 
 <@default.layout lang title navbar_highlight>
 <#include "../../html/kontakt.html"/>
-<div class="container">
-    <p>Contact details stuff ...</p>
-</div>
 </@default.layout>
 

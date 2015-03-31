@@ -1,0 +1,42 @@
+<div class="container" style="">
+    <h1>${xml['//podlogi/${lang}']}</h1>
+    <article class="${xml['//cyklinowanie/${lang}']}">
+        <h2>${xml['//cyklinowanie/${lang}']}</h2>
+        <#if lang=="en">
+        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        </#if>
+    <#if lang=="pl">
+        <p>Oto przykład szybkiego ćwiczenia ilustrującego domyślny navbar.</p>
+        </#if>
+    <#if lang=="de">
+        <p>Das ist bla bla bla.</p>
+        </#if>
+        <a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a>
+    </article>
+    <article class="${xml['//szpachlowanie/${lang}']}">
+        <h2>${xml['//szpachlowanie/${lang}']}</h2>
+        <#if lang=="en">
+        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+        </#if>
+    <#if lang=="pl">
+        <p>Szpachlowanie ubytków.</p>
+        </#if>
+    <#if lang=="de">
+        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+        </#if>
+        <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+    </article>
+    <article class="${xml['//lakierowanie/${lang}']}">
+        <h2>${xml['//lakierowanie/${lang}']}</h2>
+        <#if lang=="en">
+        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+        </#if>
+    <#if lang=="pl">
+        <p>Lakierowanie parkietu.</p>
+        </#if>
+    <#if lang=="de">
+        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+        </#if>
+        <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+    </article>
+</div>

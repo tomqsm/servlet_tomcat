@@ -65,6 +65,11 @@
         <en>Sanding</en>
         <de>Sanding - de</de>
     </cyklinowanie>
+    <szpachlowanie>
+        <pl>Szpachlowanie</pl>
+        <en>Filling-in</en>
+        <de>Sanding - de</de>
+    </szpachlowanie>
     <lakierowanie>
         <pl>Lakierowanie</pl>
         <en>Lacquering</en>
@@ -100,6 +105,31 @@
         <en>Floors</en>
         <de>Floors-de</de>
     </podlogi>
+    <schody>
+        <pl>Schody</pl>
+        <en>Stairs</en>
+        <de>Stairs+de</de>
+    </schody>
+    <stolarka>
+        <pl>Stolarka</pl>
+        <en>Carpentry</en>
+        <de>Carpentry-de</de>
+    </stolarka>
+    <balustrady>
+        <pl>Balustrady</pl>
+        <en>Handrails</en>
+        <de>Handrails-de</de>
+    </balustrady>
+    <drzwi>
+        <pl>Drzwi</pl>
+        <en>Door</en>
+        <de>Door-de</de>
+    </drzwi>
+    <werandy>
+        <pl>Werandy</pl>
+        <en>Verandah</en>
+        <de>Verandah-de</de>
+    </werandy>
     <oferta>
         <pl>Oferta</pl>
         <en>Offer</en>
@@ -135,4 +165,9 @@
         <en>Top</en>
         <de>Top</de>
     </napoczatekstrony>
+    <wbudowie_przepraszamy>
+        <pl>W trakcie uzupełniania, przepraszamy.</pl>
+        <en>Under development, sorry for inconvenience.</en>
+        <de>Under development, sorry for inconvenience. - de</de>
+    </wbudowie_przepraszamy>
 </properties>
