@@ -65,6 +65,11 @@
         <en>Sanding</en>
         <de>Sanding - de</de>
     </cyklinowanie>
+    <lakierowanie>
+        <pl>Lakierowanie</pl>
+        <en>Lacquering</en>
+        <de>Lacquering-de</de>
+    </lakierowanie>
     <index>
         <pl>Strona główna</pl>
         <en>Home</en>
@@ -90,6 +95,16 @@
         <en>Contact</en>
         <de>Contact-de</de>
     </kontakt>
+    <podlogi>
+        <pl>Podłogi</pl>
+        <en>Floors</en>
+        <de>Floors-de</de>
+    </podlogi>
+    <oferta>
+        <pl>Oferta</pl>
+        <en>Offer</en>
+        <de>Offer-de</de>
+    </oferta>
     <jezyk>
         <pl>Język</pl>
         <en>Language</en>

@@ -7,7 +7,7 @@
         <name>Root-Index</name>
         <note>Limits url on index.</note>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|podlogi)$</from>
+        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt|cyklinowanie|lakierowanie)$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/$2.ftl</to>
     </rule>
@@ -15,7 +15,7 @@
         <name>FirstLevelRoute</name>
         <note>Controlls </note>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/restricted/(index|cennik|podlogi|kontakt)((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <from>^(/en|/de)?/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
         <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward" last="true">$1/view/$2.ftl</to>
@@ -119,8 +119,8 @@
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|podlogi|kontakt)?$</from>
-        <!--<from>^(.*)/logout/restricted/(index|cennik|firma|realizacje|kontakt|podlogi)?$</from>-->
+        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>
+        <!--<from>^(.*)/logout/restricted/(index|cennik|firma|realizacje|kontakt|cyklinowanie)?$</from>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <to type="redirect">%{context-path}$1/$2</to>
     </rule>

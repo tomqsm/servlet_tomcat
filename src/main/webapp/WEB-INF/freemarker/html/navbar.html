@@ -1,6 +1,6 @@
 <!-- navigation bar starts -->
 <div class="navbar-wrapper" <#if xml['//index/${lang}']==navbar_highlight><#else>style="position: relative;"</#if>>
-    <div class="container">
+     <div class="container">
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -19,10 +19,12 @@
                         <li class="<#if xml['//firma/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('firma')}">${xml['//firma/${lang}']}</a></li>
                         <li class="<#if xml['//realizacje/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('realizacje')}">${xml['//realizacje/${lang}']}</a></li>
                         <li class="<#if xml['//kontakt/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('kontakt')}">${xml['//kontakt/${lang}']}</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oferta <span class="caret"></span></a>
+                        <li class="dropdown <#if xml['//cyklinowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${xml['//oferta/${lang}']}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${response.encodeURL('podlogi')}">Podłogi</a></li>
+                                <li class="dropdown-header">${xml['//podlogi/${lang}']}</li>
+                                <li class="<#if xml['//cyklinowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a></li>
+                                <li class="<#if xml['//lakierowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a></li>
                                 <li><a href="${response.encodeURL('schody')}">Schody</a></li>
                                 <li><a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a></li>
                                 <li class="divider"></li>
