@@ -64,6 +64,7 @@
         </style>
     </head>
     <body>
+        <div id="results">sth</div>
         <div class="container">
             <form action="${response.encodeURL('j_security_check')}" method="post" class="form-signin">
                 <h2 class="form-signin-heading">${xml["//zaloguj/${locale}"]} <#if failed??> ${xml["//niezalogowano/${locale}"]}<#else></#if></h2>

@@ -1,3 +1,15 @@
 <div class="container" style="">
     <h1>${xml['//realizacje/${lang}']}</h1>
+    <#if lang=="en">
+    <p>Information about previous projects.</p>
+    <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+    </#if>
+    <#if lang=="pl">
+    <p>Informacje na temat wykonanych prac.</p>
+    <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+    </#if>
+    <#if lang=="de">
+    <p>Das ist bla bla bla.</p>
+    <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+    </#if>
 </div>

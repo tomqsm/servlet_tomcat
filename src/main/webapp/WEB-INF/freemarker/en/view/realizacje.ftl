@@ -6,8 +6,5 @@
 <@default.layout lang title navbar_highlight>
 <@jestesw.breadcrumbs ["index","firma"] lang/>
 <#include "../../html/realizacje.html"/>
-<div class="container">
-    <p>Informations about job done ...</p>
-</div>
 </@default.layout>
 

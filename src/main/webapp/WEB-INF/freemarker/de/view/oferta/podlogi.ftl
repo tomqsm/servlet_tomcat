@@ -1,6 +1,6 @@
 <#import "../../../layout.ftl" as default>
 <#import "../../../jesteswMacro.ftl" as jestesw>
-<#assign lang="en"> 
+<#assign lang="de"> 
 <#assign navbar_highlight=xml['//oferta/${lang}']> 
 
 <@default.layout lang xml['//podlogi/${lang}'] navbar_highlight>
