@@ -127,6 +127,7 @@
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
+        <!--add a condition that principal is not empty ?-->
         <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>
         <!--<from>^(.*)/logout/restricted/(index|cennik|firma|realizacje|kontakt|cyklinowanie)?$</from>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>

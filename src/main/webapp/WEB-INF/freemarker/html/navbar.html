@@ -3,6 +3,7 @@
      <div class="container">
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
+                <img class="img-responsive" src="${context}/images/logo.png" alt="schody" style="float: left; width: 60px; height: 60px;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -14,8 +15,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="<#if xml['//index/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//index/${lang}']!=navbar_highlight>${response.encodeURL('index')}<#else>#</#if>">${xml['//index/${lang}']}</a></li>
-                        <li class="<#if xml['//cennik/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//cennik/${lang}']!=navbar_highlight>${response.encodeURL('cennik')}<#else>#</#if>">${xml['//cennik/${lang}']}</a></li>
+                        <li class="<#if xml['/properties/index/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//index/${lang}']!=navbar_highlight>${response.encodeURL(xml['//index/${lang}/@url'])}<#else>#</#if>">${xml['//index/${lang}']}</a></li>
+                        <li class="<#if xml['//cennik/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//cennik/${lang}']!=navbar_highlight>${response.encodeURL(xml['//cennik/${lang}/@url'])}<#else>#</#if>">${xml['//cennik/${lang}']}</a></li>
                         <li class="<#if xml['//firma/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('firma')}">${xml['//firma/${lang}']}</a></li>
                         <li class="<#if xml['//realizacje/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('realizacje')}">${xml['//realizacje/${lang}']}</a></li>
                         <li class="<#if xml['//kontakt/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('kontakt')}">${xml['//kontakt/${lang}']}</a></li>

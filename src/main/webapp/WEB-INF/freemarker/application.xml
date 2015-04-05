@@ -61,34 +61,34 @@
         <de>Login failed - de.</de>
     </niezalogowano>
     <cyklinowanie>
-        <pl>Cyklinowanie</pl>
-        <en>Sanding</en>
-        <de>Sanding - de</de>
+        <pl url="cyklinowanie">Cyklinowanie</pl>
+        <en url="cyklinowanie">Sanding</en>
+        <de url="cyklinowanie">Sanding - de</de>
     </cyklinowanie>
     <szpachlowanie>
-        <pl>Szpachlowanie</pl>
-        <en>Filling-in</en>
-        <de>Sanding - de</de>
+        <pl url="szpachlowanie">Szpachlowanie</pl>
+        <en url="szpachlowanie">Filling-in</en>
+        <de url="szpachlowanie">Sanding - de</de>
     </szpachlowanie>
     <lakierowanie>
-        <pl>Lakierowanie</pl>
-        <en>Lacquering</en>
-        <de>Lacquering-de</de>
+        <pl url="lakierowanie">Lakierowanie</pl>
+        <en url="lakierowanie">Lacquering</en>
+        <de url="lakierowanie">Lacquering-de</de>
     </lakierowanie>
     <index>
-        <pl>Strona główna</pl>
-        <en>Home</en>
-        <de>Home-de</de>
+        <pl url="index">Strona główna</pl>
+        <en url="index">Home</en>
+        <de url="index">Home-de</de>
     </index>
     <cennik>
-        <pl>Cennik</pl>
-        <en>Prices</en>
-        <de>Prices-de</de>
+        <pl url="cennik">Cennik</pl>
+        <en url="cennik">Prices</en>
+        <de url="cennik">Prices-de</de>
     </cennik>
     <firma>
-        <pl>Firma</pl>
-        <en>Firm</en>
-        <de>Firm-de</de>
+        <pl url="firma">Firma</pl>
+        <en url="firma">Firm</en>
+        <de url="firma">Firm-de</de>
     </firma>
     <realizacje>
         <pl>Realizacje</pl>
@@ -101,9 +101,9 @@
         <de>Contact-de</de>
     </kontakt>
     <podlogi>
-        <pl>Podłogi</pl>
-        <en>Floors</en>
-        <de>Floors-de</de>
+        <pl url="podlogi">Oferta-Podłogi</pl>
+        <en url="podlogi">Floors</en>
+        <de url="podlogi">Floors-de</de>
     </podlogi>
     <schody>
         <pl>Schody</pl>
@@ -131,15 +131,20 @@
         <de>Verandah-de</de>
     </werandy>
     <oferta>
-        <pl>Oferta</pl>
-        <en>Offer</en>
-        <de>Offer-de</de>
+        <pl url="#">Oferta</pl>
+        <en url="#">Offer</en>
+        <de url="#">Offer-de</de>
     </oferta>
     <jezyk>
         <pl>Język</pl>
         <en>Language</en>
         <de>Sprache</de>
     </jezyk>
+    <jestesw>
+        <pl>Jesteś w:</pl>
+        <en>Your location:</en>
+        <de>Your location-de:</de>
+    </jestesw>
     <jezyk_polski>
         <pl>Polski</pl>
         <en>Polish</en>
