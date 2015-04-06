@@ -1,42 +1,86 @@
 <div class="container" style="">
-    <h1>${xml['//podlogi/${lang}']}</h1>
+    <h1 class="">${xml['//podlogi/${lang}']}</h1>
     <article class="${xml['//cyklinowanie/${lang}']}">
-        <h2>${xml['//cyklinowanie/${lang}']}</h2>
+        <div class="row featurette">
         <#if lang=="en">
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//cyklinowanie/${lang}']} - <span class="text-muted">The floor looks like a new one.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            </#if>
     <#if lang=="pl">
-        <p>Oto przykład szybkiego ćwiczenia ilustrującego domyślny navbar.</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//cyklinowanie/${lang}']} - <span class="text-muted">Nowoczesny bezpyłowy sprzęt.</span></h2>
+                <p class="lead">Już od 12 złotych za metr kwadratowy używając nowoczesnej maszynerii firmy Legler zapewnimy doskonałą jakość szlifu oraz równość powierzchni.</p>
+                <a href="${response.encodeURL('cyklinowanie')}">Więcej o cyklinowaniu...</a>
+            </div>
+            </#if>
     <#if lang=="de">
-        <p>Das ist bla bla bla.</p>
-        </#if>
-        <a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//cyklinowanie/${lang}']} - <span class="text-muted">It'll blow your mind.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            </#if>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto/lava" alt="Generic placeholder image">
+            </div>
+        </div>
     </article>
+    <hr class="featurette-divider">
     <article class="${xml['//szpachlowanie/${lang}']}">
-        <h2>${xml['//szpachlowanie/${lang}']}</h2>
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto/sky" alt="Generic placeholder image">
+            </div>
         <#if lang=="en">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//szpachlowanie/${lang}']}<span class="text-muted">See for yourself.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            </#if>
     <#if lang=="pl">
-        <p>Szpachlowanie ubytków.</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//szpachlowanie/${lang}']} <span class="text-muted">Niweluje ubytki i rozstępy.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <a href="${response.encodeURL('szpachlowanie')}">${xml['//szpachlowanie/${lang}']}</a>
+            </div>
+            </#if>
     <#if lang=="de">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
-        <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            </#if>
+        </div>
     </article>
+    <hr class="featurette-divider">
     <article class="${xml['//lakierowanie/${lang}']}">
-        <h2>${xml['//lakierowanie/${lang}']}</h2>
+        <div class="row featurette">
         <#if lang=="en">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//lakierowanie/${lang}']} <span class="text-muted">Checkmate.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+            </div>
+            </#if>
     <#if lang=="pl">
-        <p>Lakierowanie parkietu.</p>
-        </#if>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//lakierowanie/${lang}']} <span class="text-muted">Checkmate.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+            </div>
+            </#if>
     <#if lang=="de">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
-        <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">${xml['//lakierowanie/${lang}']} <span class="text-muted">Checkmate.</span></h2>
+                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                <a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a>
+            </div>
+            </#if>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto/vine" alt="Generic placeholder image">
+            </div>
+        </div>
     </article>
+    <hr class="featurette-divider">
 </div>

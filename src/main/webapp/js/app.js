@@ -4,10 +4,7 @@ var app = (function f($, doc, _) {
     });
     $(document).ready(function() {
 
-        $('a.back').click(function(event) {
-            event.preventDefault();
-            history.back(1);
-        });
-        
+       
+
     });
 })($, document, _);
