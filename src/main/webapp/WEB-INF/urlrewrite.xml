@@ -56,7 +56,7 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <to type="forward" last="true">login.ftl</to>
     </rule>
-    <rule enabled="false" match-type="regex">
+    <!--    <rule enabled="false" match-type="regex">
         <name>loginform</name>
         <condition type="method">POST</condition>
         <from>^(.*)/loginform$</from>
@@ -64,11 +64,11 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <set type="request" name="j_username">%{parameter:username}</set>
         <set type="request" name="j_password">%{parameter:password}</set>
-        <!--        <set type="parameter" name="j_username">%{parameter:username}</set>
-        <set type="parameter" name="j_password">%{parameter:password}</set>-->
+                <set type="parameter" name="j_username">%{parameter:username}</set>
+        <set type="parameter" name="j_password">%{parameter:password}</set>
         <set type="session" name="language">%{parameter:language}</set>
-        <to type="forward" last="true" qsappend="true">${context-path}/j_security_check</to>
-    </rule>
+        <to type="forward" last="true" qsappend="true">%{context-path}/j_security_check</to>
+    </rule>-->
      
     <!--START RESOLVING BROWSER LANGUAGE TO URL runs on / root call-->
     <rule enabled="true" match-type="regex">
@@ -124,6 +124,15 @@
         <to last="true">%{context-path}%{attribute:servletPathWithoutLanguage}</to>
     </outbound-rule>
     <!-- END USER SELECTION LANGUAGE TO URL - REWRITE-->
+    <rule>
+        <condition type="scheme" operator="equal">^https$</condition>
+        <set name="log.info">XXX1</set>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
+        <!--<from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>-->
+        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>
+        <to type="redirect" last="true">http://localhost:8084%{context-path}$1/$2</to>
+    </rule>
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
