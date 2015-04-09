@@ -6,3 +6,10 @@
 .redBorder {
     border:1px solid red;
 }
+#navbar > ul > li.active > a{
+    height: 60px;
+    background-color: #5a5a5a;
+}
+.btn-group-vertical>.btn-group:after, after, .clearfix:after, .container-fluid:after, .container:after, .dl-horizontal dd:after, .form-horizontal .form-group:after, .modal-footer:after, .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
+   clear: none; 
+}
