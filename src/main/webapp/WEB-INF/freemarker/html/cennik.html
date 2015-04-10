@@ -1,12 +1,16 @@
 <div class="container" style="">
-    <h1>${xml['//cennik/${lang}']}</h1>
-    <#if lang=="en">
-    <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-    </#if>
+    <div class="col-lg-12"><h1>${xml['//cennik/${lang}']}</h1></div>
+    <div class="col-lg-12">
+        <article class="cennik_class">
+       <#if lang=="en">
+            <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+            </#if>
     <#if lang=="pl">
-    <p>Oto przykład szybkiego ćwiczenia ilustrującego domyślny navbar.</p>
-    </#if>
+            <p>Oto przykład szybkiego ćwiczenia ilustrującego domyślny navbar.</p>
+            </#if>
     <#if lang=="de">
-    <p>Das ist bla bla bla.</p>
-    </#if>
+            <p>Das ist bla bla bla.</p>
+            </#if>
+        </article>
+    </div>
 </div>

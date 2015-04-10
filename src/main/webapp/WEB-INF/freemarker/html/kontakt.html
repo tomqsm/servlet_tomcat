@@ -1,14 +1,29 @@
 <div class="container" style="">
-    <article class="${xml['//kontakt/${lang}']}">
-        <h1>${xml['//kontakt/${lang}']}</h1>
+    <div class="col-lg-12"><h1>${xml['//kontakt/${lang}']}</h1></div>
+    <div class="col-lg-6">
+        <article class="kontakt_class">
         <#if lang=="en">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
+            <p>Thank you for an insterest in my offer.</p>
+            <div id="kontakt_form"><textarea rows="4" cols="50" autofocus="true" placeholder="Please atach your contact details to receive reply."></textarea>
+            </div>
+            </#if>
     <#if lang=="pl">
-        <p>Dane kontaktowe.</p>
-        </#if>
+            <p>Dziękuję za zainteresowanie moją ofertą.</p>
+            <div id="kontakt_form">
+                <textarea rows="4" cols="50" autofocus placeholder="Proszę dołączyć swój kontakt by uzyskać odpowiedź."></textarea>
+            </div>
+            </#if>
     <#if lang=="de">
-        <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
-        </#if>
-    </article>
+            <p>Thank you for an insterest in my offer.</p>
+            <div id="kontakt_form"><textarea rows="4" cols="50" autofocus="true" placeholder="Please atach your contact details to receive reply."></textarea>
+            </div>
+            </#if>
+            <a class="btn btn-default" href="#" role="button">Wyślij &raquo;</a>
+            <p>${xml['//wbudowie_przepraszamy/${lang}']}</p>
+        </article>    
+    </div>
+    <div class="col-lg-6">
+        <div>Adres:</div>
+    </div>
+        
 </div>
