@@ -3,11 +3,13 @@
     <div class="col-lg-6">
         <article class="kontakt_class">
         <#if lang=="en">
+            <h2>Contact form</h2>
             <p>Thank you for an insterest in my offer.</p>
             <div id="kontakt_form"><textarea rows="4" cols="50" autofocus="true" placeholder="Please atach your contact details to receive reply."></textarea>
             </div>
             </#if>
     <#if lang=="pl">
+            <h2>Formularz kontaktowy</h2>
             <p>Dziękuję za zainteresowanie moją ofertą.</p>
             <div id="kontakt_form">
                 <textarea rows="4" cols="50" autofocus placeholder="Proszę dołączyć swój kontakt by uzyskać odpowiedź."></textarea>
@@ -23,7 +25,38 @@
         </article>    
     </div>
     <div class="col-lg-6">
-        <div>Adres:</div>
+<#if lang=="pl">
+        <div>
+            <h2>Adres pocztowy</h2>
+            <p>ul. Macierzanki 19</p>
+            <p>43-340 Kozy</p>
+            <p>Bielsko-Biała</p>
+        </div>
+        <div>
+            <h2>Adres Email</h2>
+            <p>kliknij tutaj</p>
+        </div>
+        <div>
+            <h2>Telefon</h2>
+            <p>887 330 406</p>
+        </div>
+        </#if>
+<#if lang=="en">
+        <div>
+            <h2>Postal Address</h2>
+            <p>ul. Macierzanki 19</p>
+            <p>43-340 Kozy</p>
+            <p>Bielsko-Biała</p>
+        </div>
+        <div>
+            <h2>Email Address</h2>
+            <p>Click here to reveal.</p>
+        </div>
+        <div>
+            <h2>Telephone</h2>
+            <p>0048 887 330 406</p>
+        </div>
+        </#if>
     </div>
         
 </div>
