@@ -33,18 +33,18 @@ public class ContextListener implements ServletContextListener {
 
     private void initialiseDataBase(ServletContextEvent sce) {
         final ServletContext context = sce.getServletContext();
-        final String sqlFilePath = context.getInitParameter("sqlFilePath");
+        final String createSqlFilePath = context.getInitParameter("createSqlFilePath");
+        final String loadSqlFilePath = context.getInitParameter("loadSqlFilePath");
         final String dbConnectionUrl = context.getInitParameter("dbConnectionUrl");
         final String dbUsername = context.getInitParameter("dbUsername");
         final String dbPassword = context.getInitParameter("dbPassword");
         final DataSourceable dataSourceable = new DataSourceProviderH2(dbConnectionUrl, dbUsername, dbPassword);
-        final SqlFileLineReader fileLineReader = new SqlFileLineReader(context.getRealPath(sqlFilePath));
-        final int[] createLines = new int[]{2, 6};
-        final int[] insertLines = new int[]{3, 4, 5, 7};
-        final ReadSqlResult loadCreateLinesResult = readSql(fileLineReader, createLines);
-        final ReadSqlResult loadInsertLinesResult = readSql(fileLineReader, insertLines);
+        final SqlFileLineReader createReader = new SqlFileLineReader(context.getRealPath(createSqlFilePath));
+        final SqlFileLineReader loadReader = new SqlFileLineReader(context.getRealPath(loadSqlFilePath));
+        final ReadSqlResult readCreateSql = readSql(createReader);
+        final ReadSqlResult readLoadSql = readSql(loadReader);
         final SqlExecutor sqlExecutor = new SqlExecutor(dataSourceable.getDataSource());
-        if (loadCreateLinesResult.read && loadInsertLinesResult.read && runSql(sqlExecutor, loadCreateLinesResult.sqlLines, SqlPurpose.CREATE) && runSql(sqlExecutor, loadInsertLinesResult.sqlLines,SqlPurpose.LOAD)) {
+        if (readCreateSql.read && readLoadSql.read && runSql(sqlExecutor, readCreateSql.sqlLines, SqlPurpose.CREATE) && runSql(sqlExecutor, readLoadSql.sqlLines, SqlPurpose.LOAD)) {
             logger.info("Created and loaded database: {}", dbConnectionUrl);
         }
     }
@@ -54,6 +54,18 @@ public class ContextListener implements ServletContextListener {
         result.read = true;
         try {
             result.sqlLines = sqlFileLineReader.readLines(lineNumbers);
+        } catch (IOException ex) {
+            logger.error("Error accessing database init files: {}", ex.getMessage());
+            result.read = false;
+        }
+        return result;
+    }
+
+    private ReadSqlResult readSql(SqlFileLineReader sqlFileLineReader) {
+        final ReadSqlResult result = new ReadSqlResult();
+        result.read = true;
+        try {
+            result.sqlLines = sqlFileLineReader.readAllLines();
         } catch (IOException ex) {
             logger.error("Error accessing database init files: {}", ex.getMessage());
             result.read = false;
