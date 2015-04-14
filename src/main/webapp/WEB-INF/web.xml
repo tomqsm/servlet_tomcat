@@ -26,6 +26,27 @@
         <param-name>supportedLanguages</param-name>
         <param-value>pl,en,de</param-value>
     </context-param>
+    <context-param>
+        <description>This is a logical name of scripts.</description>
+        <param-name>dbConnectionUrl</param-name>
+        <!--<param-value>jdbc:h2:../test;INIT=CREATE SCHEMA IF NOT EXISTS makumba\;SET SCHEMA makumba\;RUNSCRIPT FROM '~/tables.sql';AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;USER=sa;PASSWORD=sa</param-value>-->
+        <param-value>jdbc:h2:${db.directory}/test;INIT=CREATE SCHEMA IF NOT EXISTS ${dbSchema}\;SET SCHEMA ${dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${dbServerPort};USER=${dbUsername};PASSWORD=${dbPassword}</param-value>
+    </context-param>
+    <context-param>
+        <description>This is a logical name of scripts.</description>
+        <param-name>dbUsername</param-name>
+        <param-value>${dbUsername}</param-value>
+    </context-param>
+    <context-param>
+        <description>This is a logical name of scripts.</description>
+        <param-name>dbPassword</param-name>
+        <param-value>${dbPassword}</param-value>
+    </context-param>
+    <context-param>
+        <description>This is a logical name of scripts.</description>
+        <param-name>sqlFilePath</param-name>
+        <param-value>${dbSqlFilePath}</param-value>
+    </context-param>
     <!-- f i l t e r s -->
     <filter>
         <filter-name>TemplateLoaderFilter</filter-name>
@@ -47,7 +68,7 @@
         <init-param>
             <description>Logging level: debug, info</description>
             <param-name>logLevel</param-name>
-            <param-value>info</param-value>
+            <param-value>${tuckeyLogLevel}</param-value>
         </init-param>
         <!-- you can change status path so that it does not
         conflict with your installed apps (note, defaults
@@ -168,24 +189,6 @@
         <servlet-name>freemarkerForJson</servlet-name>
         <url-pattern>*.json</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>Tiles Dispatch Servlet</servlet-name>
-        <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Tiles Dispatch Servlet</servlet-name>
-        <url-pattern>*.tiles</url-pattern>
-    </servlet-mapping>
-    <!--    <servlet>
-        <servlet-name>tiles</servlet-name>
-        <servlet-class>org.apache.tiles.web.startup.simple.SimpleTilesInitializerServlet</servlet-class>
-
-        <init-param>
-            <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
-            <param-value>/WEB-INF/tiles.xml</param-value>
-        </init-param>
-        <load-on-startup>2</load-on-startup>
-    </servlet>-->
     <!--
       Prevent the visiting of MVC Views from outside the servlet container.
       RequestDispatcher.forward/include should and will still work.
@@ -238,7 +241,6 @@
         <exception-type>com.letsweb.tutorial.servlet_tomcat.layout.LayoutException</exception-type>
         <location>/layout_exception.html</location>
     </error-page>
-   
     <!-- ===========================================================
             Error Handler
             This forwards all errors to error.jsp
@@ -247,22 +249,28 @@
             Comment this section out when testing changes to
             your error page.
         ============================================================ -->
-        <error-page>
-            <error-code>400</error-code><location>/error.jsp</location>
-        </error-page>
-        <error-page>
-            <error-code>401</error-code><location>/error.jsp</location>
-        </error-page>
-        <error-page>
-            <error-code>403</error-code><location>/error.jsp</location>
-        </error-page>
-        <error-page>
-            <error-code>404</error-code><location>/error.jsp</location>
-        </error-page>
-        <error-page>
-            <error-code>500</error-code><location>/error.jsp</location>
-        </error-page>
-        <error-page>
-            <error-code>503</error-code><location>/error.jsp</location>
-        </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/error.jsp</location>
+    </error-page>
 </web-app>
