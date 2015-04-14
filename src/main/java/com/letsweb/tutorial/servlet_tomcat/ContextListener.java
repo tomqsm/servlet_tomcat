@@ -6,11 +6,15 @@ import biz.letsweb.research.dblink.SqlExecutor;
 import biz.letsweb.research.dblink.SqlFileLineReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +25,9 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ServletContext context = sce.getServletContext();
-        initialiseDataBase(sce);
-        logger.debug("Context initialised {}", context.getEffectiveMajorVersion());
+            ServletContext context = sce.getServletContext();
+            DataSource ds = initialiseDataBase(sce);
+            logger.debug("Context initialised {}", context.getEffectiveMajorVersion());
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ContextListener implements ServletContextListener {
         logger.debug("Context destroyed.");
     }
 
-    private void initialiseDataBase(ServletContextEvent sce) {
+    private DataSource initialiseDataBase(ServletContextEvent sce) {
         final ServletContext context = sce.getServletContext();
         final String createSqlFilePath = context.getInitParameter("createSqlFilePath");
         final String loadSqlFilePath = context.getInitParameter("loadSqlFilePath");
@@ -43,10 +47,12 @@ public class ContextListener implements ServletContextListener {
         final SqlFileLineReader loadReader = new SqlFileLineReader(context.getRealPath(loadSqlFilePath));
         final ReadSqlResult readCreateSql = readSql(createReader);
         final ReadSqlResult readLoadSql = readSql(loadReader);
-        final SqlExecutor sqlExecutor = new SqlExecutor(dataSourceable.getDataSource());
+        final DataSource dataSource = dataSourceable.getDataSource();
+        final SqlExecutor sqlExecutor = new SqlExecutor(dataSource);
         if (readCreateSql.read && readLoadSql.read && runSql(sqlExecutor, readCreateSql.sqlLines, SqlPurpose.CREATE) && runSql(sqlExecutor, readLoadSql.sqlLines, SqlPurpose.LOAD)) {
             logger.info("Created and loaded database: {}", dbConnectionUrl);
         }
+        return dataSource;
     }
 
     private ReadSqlResult readSql(SqlFileLineReader sqlFileLineReader, int[] lineNumbers) {

@@ -1,5 +1,6 @@
 package com.letsweb.tutorial.servlet_tomcat.rewriting;
 
+import com.letsweb.tutorial.servlet_tomcat.dataaccess.dao.PropertyLineDao;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,8 @@ public class UserJsonController {
     public void run(HttpServletRequest req, HttpServletResponse res) {
         logger.debug("Starts.");
         req.setAttribute("date", new Date());
+        PropertyLineDao dao = new PropertyLineDao();
+        logger.debug("XXX {}", dao.findRecordByName("esgo4"));
     }
     
     public void getDelayedJson(HttpServletRequest req, HttpServletResponse res) throws InterruptedException{

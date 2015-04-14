@@ -27,25 +27,25 @@
         <param-value>pl,en,de</param-value>
     </context-param>
     <context-param>
-        <description>This is a logical name of scripts.</description>
         <param-name>dbConnectionUrl</param-name>
         <!--<param-value>jdbc:h2:../test;INIT=CREATE SCHEMA IF NOT EXISTS makumba\;SET SCHEMA makumba\;RUNSCRIPT FROM '~/tables.sql';AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;USER=sa;PASSWORD=sa</param-value>-->
-        <param-value>jdbc:h2:${db.directory}/test;INIT=CREATE SCHEMA IF NOT EXISTS ${dbSchema}\;SET SCHEMA ${dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${dbServerPort};USER=${dbUsername};PASSWORD=${dbPassword}</param-value>
+        <param-value>jdbc:h2:${dbDirectory}/test;INIT=CREATE SCHEMA IF NOT EXISTS ${dbSchema}\;SET SCHEMA ${dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${dbServerPort};USER=${dbUsername};PASSWORD=${dbPassword}</param-value>
     </context-param>
     <context-param>
-        <description>This is a logical name of scripts.</description>
         <param-name>dbUsername</param-name>
         <param-value>${dbUsername}</param-value>
     </context-param>
     <context-param>
-        <description>This is a logical name of scripts.</description>
         <param-name>dbPassword</param-name>
         <param-value>${dbPassword}</param-value>
     </context-param>
     <context-param>
-        <description>This is a logical name of scripts.</description>
-        <param-name>sqlFilePath</param-name>
-        <param-value>${dbSqlFilePath}</param-value>
+        <param-name>createSqlFilePath</param-name>
+        <param-value>${createSqlFilePath}</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loadSqlFilePath</param-name>
+        <param-value>${loadSqlFilePath}</param-value>
     </context-param>
     <!-- f i l t e r s -->
     <filter>

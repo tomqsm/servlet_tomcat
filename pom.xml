@@ -205,6 +205,14 @@
                                 <include>**/web.xml</include>
                             </includes>
                         </resource>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/META-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>META-INF</targetPath>
+                            <includes>
+                                <include>**/context.xml</include>
+                            </includes>
+                        </resource>
                     </webResources>
                 </configuration>
             </plugin>

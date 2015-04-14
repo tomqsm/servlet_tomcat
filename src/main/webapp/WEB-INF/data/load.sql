@@ -1,0 +1,1 @@
+INSERT INTO makumba.PROPERTY (name, value) VALUES ('esgo4', 'żąć');
