@@ -2,5 +2,6 @@
 {
 "user": "tomasz",
 "date": "${date?datetime}",
-"decimal-localised": "${1.2}"
+"decimal-localised": "${1.2}",
+"news": "${esgo4}"
 }
