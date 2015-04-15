@@ -15,4 +15,6 @@ pathTo      (request url)
 Login will create a session. Failed login creates a session too.
 Consider invalidating session upon failed login.
 
+urlrewriting has hardcoded name of server to switch off https
+
 

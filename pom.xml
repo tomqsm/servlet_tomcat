@@ -214,6 +214,7 @@
                             <targetPath>WEB-INF</targetPath>
                             <includes>
                                 <include>**/web.xml</include>
+                                <include>**/urlrewrite.xml</include>
                             </includes>
                         </resource>
                         <resource>

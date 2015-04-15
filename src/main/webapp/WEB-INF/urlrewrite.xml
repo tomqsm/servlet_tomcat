@@ -4,29 +4,41 @@
 <urlrewrite use-context="false">
     
     <rule enabled="true" match-type="regex">
-        <name>Root-Index</name>
-        <note>Limits url on index.</note>
+        <name>rootPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(index|cennik|firma|realizacje|kontakt)$</from>
+        <from>^(/en|/de)?/(${props.view_root.pages})$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
-        <name>Oferta-Index</name>
-        <note>Limits url on index.</note>
+        <name>ofertaPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(lakierowanie|cyklinowanie|podlogi|szpachlowanie)$</from>
+        <from>^(/en|/de)?/(${props.view_oferta.pages})$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/oferta/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
-        <name>FirstLevelRoute</name>
-        <note>Controlls </note>
+        <name>todoPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <from>^(/en|/de)?/(${props.view_todo.pages})$</from>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
+        <to type="forward" last="true">/todo.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>restrictedRootPages</name>
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/restricted/(${props.view_root.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
         <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward" last="true">$1/view/$2.ftl</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <name>restrictedOfertaPages</name>
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/restricted/(${props.view_oferta.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
+        <to type="forward" last="true">$1/view/oferta/$2.ftl</to>
     </rule>
     
     <!--LOGIN-->
@@ -125,20 +137,20 @@
     </outbound-rule>
     <!-- END USER SELECTION LANGUAGE TO URL - REWRITE-->
     <rule>
+        <name>switchFromHttpsToHttp</name>
         <condition type="scheme" operator="equal">^https$</condition>
-        <set name="log.info">XXX1</set>
+        <set name="log.info">switchFromHttpsToHttp</set>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <!--<from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>-->
-        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>
-        <to type="redirect" last="true">http://localhost:8084%{context-path}$1/$2</to>
+        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view_root.pages}|${props.view_oferta.pages})?$</from>
+        <to type="redirect" last="true">${props.httpServer}%{context-path}$1/$2</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
         <!--add a condition that principal is not empty ?-->
-        <from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>
-        <!--<from>^(.*)/logout/restricted/(index|cennik|firma|realizacje|kontakt|cyklinowanie)?$</from>-->
+        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view_root.pages}|${props.view_oferta.pages})?$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <to type="redirect">%{context-path}$1/$2</to>
     </rule>
