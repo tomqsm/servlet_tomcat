@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>biz.letsweb.research</groupId>
-            <artifactId>dblink</artifactId>
+            <artifactId>dbinitialiser</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
@@ -42,18 +42,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
         <dependency>  
             <groupId>org.slf4j</groupId>  
             <artifactId>slf4j-log4j12</artifactId>  
             <version>1.7.5</version>  
         </dependency>
         <!--jstl cannot be provided, there is problem when it is-->
-        <dependency>
+        <!--        <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
             <scope>compile</scope> 
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
@@ -73,12 +78,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dependencies used by examples in this project (not required for using Spock) -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.187</version>
-        </dependency>
         <!--GEB testin dependencies-->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -114,6 +113,12 @@
             <artifactId>selenium-firefox-driver</artifactId>
             <version>${seleniumVersion}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
