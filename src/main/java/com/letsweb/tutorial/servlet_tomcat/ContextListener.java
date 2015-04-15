@@ -34,16 +34,17 @@ public class ContextListener implements ServletContextListener {
 
     /**
      * Creates and preloads database on start of application.
+     *
      * @param sce
      * @return
      */
     private DataSource initialiseDataBase(ServletContextEvent sce) {
         final ServletContext context = sce.getServletContext();
-        final String createSqlFilePath = context.getInitParameter("createSqlFilePath");
-        final String loadSqlFilePath = context.getInitParameter("loadSqlFilePath");
-        final String dbConnectionUrl = context.getInitParameter("dbConnectionUrl");
-        final String dbUsername = context.getInitParameter("dbUsername");
-        final String dbPassword = context.getInitParameter("dbPassword");
+        final String createSqlFilePath = getContextParameter(context, "createSqlFilePath");
+        final String loadSqlFilePath = getContextParameter(context, "loadSqlFilePath");
+        final String dbConnectionUrl = getContextParameter(context, "dbConnectionUrl");
+        final String dbUsername = getContextParameter(context, "dbUsername");
+        final String dbPassword = getContextParameter(context, "dbPassword");
         final DataSourceable dataSourceable = new DataSourceProviderH2(dbConnectionUrl, dbUsername, dbPassword);
         final SqlFileLineReader readerToCreateTables = new SqlFileLineReader(context.getRealPath(createSqlFilePath));
         final SqlFileLineReader readerToLoadTables = new SqlFileLineReader(context.getRealPath(loadSqlFilePath));
@@ -55,6 +56,12 @@ public class ContextListener implements ServletContextListener {
             logger.info("Created and loaded database: {}", dbConnectionUrl);
         }
         return dataSource;
+    }
+
+    private String getContextParameter(final ServletContext context, final String paramName) {
+        String param = "";
+        param = context.getInitParameter(paramName);
+        return param;
     }
 
     /**
@@ -105,12 +112,18 @@ public class ContextListener implements ServletContextListener {
         return created;
     }
 
+    /**
+     * Structure for holding result of reading of sql file lines.
+     */
     private class ReadSqlResult {
 
         boolean read;
         String[] sqlLines;
     }
 
+    /**
+     * Marks the purpose of sql lines read for error logging.
+     */
     private enum SqlPurpose {
 
         CREATE, LOAD
