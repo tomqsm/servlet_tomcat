@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -18,18 +19,21 @@ public class ClientLanguageSetter {
 
     private static final Set<String> languages = new HashSet<>();
     private static final String DEFAULT_LANGUAGE = "pl";
-    private static final String SUPPORTED_LANGUAGES = "supportedLanguages";
+    private static final String SUPPORTED_LANGUAGES_PARAM_NAME = "supportedLanguages";
+    private static final String CLIENT_LANGUAGE_ATTRIBUTE_NAME = "browserLanguage";
     private String supportedLanguagesString = null;
     private static final Logger logger = LoggerFactory.getLogger(ClientLanguageSetter.class);
 
     /**
      * This method is authomatically called when urlrewite.xml uses this class.
-     * @param servletConfig 
+     *
+     * @param servletConfig
      */
     public void init(ServletConfig servletConfig) {
         final boolean needsInitialising = supportedLanguagesString == null;
         if (needsInitialising) {
-            supportedLanguagesString = servletConfig.getServletContext().getInitParameter(SUPPORTED_LANGUAGES);
+            final ServletContext servletContext = servletConfig.getServletContext();
+            supportedLanguagesString = getContextParameter(servletContext, SUPPORTED_LANGUAGES_PARAM_NAME);
             assert supportedLanguagesString != null : "assert that web.xml has <context-param> named supportedLanguages";
             final String[] langs = supportedLanguagesString.split(",");
             languages.addAll(Arrays.asList(langs));
@@ -44,19 +48,25 @@ public class ClientLanguageSetter {
      */
     public void run(HttpServletRequest request, HttpServletResponse response) {
         final Locale locale = request.getLocale();
-        final String attributeName = "browserLanguage";
         String browserLang = locale.getLanguage();
-        if (languages.contains(browserLang) && !browserLang.equals(DEFAULT_LANGUAGE)) {
-            request.setAttribute(attributeName, browserLang);
-            logger.debug("Set attribute: {}:{} default language is {}", attributeName, browserLang, DEFAULT_LANGUAGE);
+        if (isLanguageSupported(browserLang) && !isLanguageDefault(browserLang)) {
+            request.setAttribute(CLIENT_LANGUAGE_ATTRIBUTE_NAME, browserLang);
+            logger.debug("Set attribute: {}:{} default language is {}", CLIENT_LANGUAGE_ATTRIBUTE_NAME, browserLang, DEFAULT_LANGUAGE);
         } else {
-            request.setAttribute(attributeName, "/");
+            request.setAttribute(CLIENT_LANGUAGE_ATTRIBUTE_NAME, "/");
         }
     }
 
     private boolean isLanguageSupported(String lang) {
-        boolean isSupported = false;
-        isSupported = languages.contains(lang);
-        return isSupported;
+        return languages.contains(lang);
+    }
+
+    private boolean isLanguageDefault(String lang) {
+        return lang.equals(DEFAULT_LANGUAGE);
+    }
+
+    private String getContextParameter(ServletContext servletContext, String paramName) {
+        final String param = servletContext.getInitParameter(SUPPORTED_LANGUAGES_PARAM_NAME);
+        return param == null ? "" : param;
     }
 }
