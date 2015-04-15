@@ -13,7 +13,11 @@
         <link rel="icon" href="${context}/images/favicon.ico">
         <title>Zaloguj</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-
+        <script>
+            var appInit = {
+                context: '${context}'
+            };
+        </script>
         <#assign scripts = scripts["properties/scripts"]> 
         <#list scripts as s>
         <#list s.* as sc>
