@@ -103,12 +103,7 @@ public class ContextListener implements ServletContextListener {
 
     private boolean runSql(SqlExecutor sqlExecutor, String[] sqlLines, SqlPurpose purpose) {
         boolean created = true;
-        try {
-            sqlExecutor.executeSql(sqlLines);
-        } catch (SQLException | NamingException | IOException ex) {
-            logger.warn("Executing {} SQL problem. Error: {}", purpose, ex.getMessage());
-            created = false;
-        }
+        sqlExecutor.executeSql(sqlLines);
         return created;
     }
 

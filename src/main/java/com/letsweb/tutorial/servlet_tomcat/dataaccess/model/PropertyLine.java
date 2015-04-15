@@ -71,7 +71,4 @@ public class PropertyLine {
     public String toString() {
         return "PropertyLine{" + "id=" + id + ", name=" + name + ", value=" + value + ", inserted=" + inserted + '}';
     }
-    
-    
-   
 }
