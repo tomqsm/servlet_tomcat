@@ -7,7 +7,7 @@
     <Resource 
       name="jdbc/h2/makumba" 
       type="javax.sql.DataSource" 
-      url="jdbc:h2:${dbDirectory}/test;INIT=SET SCHEMA ${dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${dbServerPort};USER=${dbUsername};PASSWORD=${dbPassword}" 
+      url="jdbc:h2:${props.dbDirectory}/test;INIT=SET SCHEMA ${props.dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${props.dbServerPort};USER=${props.dbUsername};PASSWORD=${props.dbPassword}" 
       driverClassName="org.h2.Driver" 
       maxActive="100" 
       maxIdle="20"/>

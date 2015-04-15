@@ -28,24 +28,23 @@
     </context-param>
     <context-param>
         <param-name>dbConnectionUrl</param-name>
-        <!--<param-value>jdbc:h2:../test;INIT=CREATE SCHEMA IF NOT EXISTS makumba\;SET SCHEMA makumba\;RUNSCRIPT FROM '~/tables.sql';AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9090;USER=sa;PASSWORD=sa</param-value>-->
-        <param-value>jdbc:h2:${dbDirectory}/test;INIT=CREATE SCHEMA IF NOT EXISTS ${dbSchema}\;SET SCHEMA ${dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${dbServerPort};USER=${dbUsername};PASSWORD=${dbPassword}</param-value>
+        <param-value>jdbc:h2:${props.dbDirectory}/test;INIT=CREATE SCHEMA IF NOT EXISTS ${props.dbSchema}\;SET SCHEMA ${props.dbSchema};AUTO_SERVER=TRUE;AUTO_SERVER_PORT=${props.dbServerPort};USER=${props.dbUsername};PASSWORD=${props.dbPassword}</param-value>
     </context-param>
     <context-param>
         <param-name>dbUsername</param-name>
-        <param-value>${dbUsername}</param-value>
+        <param-value>${props.dbUsername}</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>${dbPassword}</param-value>
+        <param-value>${props.dbPassword}</param-value>
     </context-param>
     <context-param>
         <param-name>createSqlFilePath</param-name>
-        <param-value>${createSqlFilePath}</param-value>
+        <param-value>${props.createSqlFilePath}</param-value>
     </context-param>
     <context-param>
         <param-name>loadSqlFilePath</param-name>
-        <param-value>${loadSqlFilePath}</param-value>
+        <param-value>${props.loadSqlFilePath}</param-value>
     </context-param>
     <!-- f i l t e r s -->
     <filter>
@@ -68,7 +67,7 @@
         <init-param>
             <description>Logging level: debug, info</description>
             <param-name>logLevel</param-name>
-            <param-value>${tuckeyLogLevel}</param-value>
+            <param-value>${props.tuckeyLogLevel}</param-value>
         </init-param>
         <!-- you can change status path so that it does not
         conflict with your installed apps (note, defaults

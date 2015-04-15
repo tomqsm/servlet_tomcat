@@ -6,28 +6,28 @@
     <rule enabled="true" match-type="regex">
         <name>rootPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(${props.view_root.pages})$</from>
+        <from>^(/en|/de)?/(${props.view/.pages})$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>ofertaPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(${props.view_oferta.pages})$</from>
+        <from>^(/en|/de)?/(${props.view/oferta.pages})$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/oferta/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>todoPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/(${props.view_todo.pages})$</from>
+        <from>^(/en|/de)?/(${props./todo.pages})$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">/todo.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>restrictedRootPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/restricted/(${props.view_root.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <from>^(/en|/de)?/restricted/(${props.view/.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
         <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward" last="true">$1/view/$2.ftl</to>
@@ -35,7 +35,7 @@
     <rule enabled="true" match-type="regex">
         <name>restrictedOfertaPages</name>
         <condition type="method">GET</condition>
-        <from>^(/en|/de)?/restricted/(${props.view_oferta.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <from>^(/en|/de)?/restricted/(${props.view/oferta.pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
         <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward" last="true">$1/view/oferta/$2.ftl</to>
@@ -143,14 +143,14 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RewritingLogger" method="log"/>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <!--<from>^(/en|/de)?/restricted/logout/restricted/(index|cennik|cyklinowanie|lakierowanie|kontakt)?$</from>-->
-        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view_root.pages}|${props.view_oferta.pages})?$</from>
+        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view/.pages}|${props.view/oferta.pages})?$</from>
         <to type="redirect" last="true">${props.httpServer}%{context-path}$1/$2</to>
     </rule>
     <rule enabled="true" match-type="regex">
         <name>logout</name>
         <condition type="method">GET</condition>
         <!--add a condition that principal is not empty ?-->
-        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view_root.pages}|${props.view_oferta.pages})?$</from>
+        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view/.pages}|${props.view/oferta.pages})?$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <to type="redirect">%{context-path}$1/$2</to>
     </rule>
