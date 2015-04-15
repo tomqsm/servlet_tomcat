@@ -22,9 +22,9 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-            ServletContext context = sce.getServletContext();
-            DataSource ds = initialiseDataBase(sce);
-            logger.debug("Context initialised {}", context.getEffectiveMajorVersion());
+        ServletContext context = sce.getServletContext();
+        initialiseDataBase(sce);
+        logger.debug("Context initialised {}", context.getEffectiveMajorVersion());
     }
 
     @Override
@@ -32,6 +32,11 @@ public class ContextListener implements ServletContextListener {
         logger.debug("Context destroyed.");
     }
 
+    /**
+     * Creates and preloads database on start of application.
+     * @param sce
+     * @return
+     */
     private DataSource initialiseDataBase(ServletContextEvent sce) {
         final ServletContext context = sce.getServletContext();
         final String createSqlFilePath = context.getInitParameter("createSqlFilePath");
@@ -40,10 +45,10 @@ public class ContextListener implements ServletContextListener {
         final String dbUsername = context.getInitParameter("dbUsername");
         final String dbPassword = context.getInitParameter("dbPassword");
         final DataSourceable dataSourceable = new DataSourceProviderH2(dbConnectionUrl, dbUsername, dbPassword);
-        final SqlFileLineReader createReader = new SqlFileLineReader(context.getRealPath(createSqlFilePath));
-        final SqlFileLineReader loadReader = new SqlFileLineReader(context.getRealPath(loadSqlFilePath));
-        final ReadSqlResult readCreateSql = readSql(createReader);
-        final ReadSqlResult readLoadSql = readSql(loadReader);
+        final SqlFileLineReader readerToCreateTables = new SqlFileLineReader(context.getRealPath(createSqlFilePath));
+        final SqlFileLineReader readerToLoadTables = new SqlFileLineReader(context.getRealPath(loadSqlFilePath));
+        final ReadSqlResult readCreateSql = readSql(readerToCreateTables);
+        final ReadSqlResult readLoadSql = readSql(readerToLoadTables);
         final DataSource dataSource = dataSourceable.getDataSource();
         final SqlExecutor sqlExecutor = new SqlExecutor(dataSource);
         if (readCreateSql.read && readLoadSql.read && runSql(sqlExecutor, readCreateSql.sqlLines, SqlPurpose.CREATE) && runSql(sqlExecutor, readLoadSql.sqlLines, SqlPurpose.LOAD)) {
@@ -52,6 +57,13 @@ public class ContextListener implements ServletContextListener {
         return dataSource;
     }
 
+    /**
+     * Reads specified line numbers from an sql file.
+     *
+     * @param sqlFileLineReader
+     * @param lineNumbers
+     * @return
+     */
     private ReadSqlResult readSql(SqlFileLineReader sqlFileLineReader, int[] lineNumbers) {
         final ReadSqlResult result = new ReadSqlResult();
         result.read = true;
@@ -64,6 +76,12 @@ public class ContextListener implements ServletContextListener {
         return result;
     }
 
+    /**
+     * Reads all lines from an sql file.
+     *
+     * @param sqlFileLineReader
+     * @return
+     */
     private ReadSqlResult readSql(SqlFileLineReader sqlFileLineReader) {
         final ReadSqlResult result = new ReadSqlResult();
         result.read = true;
@@ -87,13 +105,13 @@ public class ContextListener implements ServletContextListener {
         return created;
     }
 
-    class ReadSqlResult {
+    private class ReadSqlResult {
 
         boolean read;
         String[] sqlLines;
     }
 
-    enum SqlPurpose {
+    private enum SqlPurpose {
 
         CREATE, LOAD
     }
