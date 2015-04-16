@@ -40,6 +40,14 @@
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
         <to type="forward" last="true">$1/view/oferta/$2.ftl</to>
     </rule>
+    <rule enabled="true" match-type="regex">
+        <name>restrictedTodoPages</name>
+        <condition type="method">GET</condition>
+        <from>^(/en|/de)?/restricted/(${props./todo/pages})((?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?)?$</from>
+        <!--<set type="cookie" name="tkcookie">value:sd:3600</set>-->
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LinksController" method="doGetPodlogi" />
+        <to type="forward" last="true">/todo.ftl</to>
+    </rule>
     
     <!--LOGIN-->
     <rule enabled="true" match-type="regex">
@@ -150,7 +158,7 @@
         <name>logout</name>
         <condition type="method">GET</condition>
         <!--add a condition that principal is not empty ?-->
-        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view/pages}|${props.view/oferta/pages})?$</from>
+        <from>^(/en|/de)?/restricted/logout/restricted/(${props.view/pages}|${props.view/oferta/pages}|${props./todo/pages})?$</from>
         <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.LogoutController"/>
         <to type="redirect">%{context-path}$1/$2</to>
     </rule>
