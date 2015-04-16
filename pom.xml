@@ -124,7 +124,7 @@
 
     <build>
         <filters>
-            <filter>project.properties</filter>
+            <filter>makumba.properties</filter>
         </filters>
         <plugins>
             <plugin>
