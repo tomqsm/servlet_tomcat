@@ -11,5 +11,12 @@
     background-color: #5a5a5a;
 }
 .container:nth-of-type(1):after, .navbar-collapse:after, .navbar:after {
-   clear: none; 
+    /*pozwala uniknąć zachodzenia navbar na inne elementy*/
+    clear: none; 
+}
+.error{
+    color: red;
+}
+#loginForm > label {
+    font-weight:normal;
 }

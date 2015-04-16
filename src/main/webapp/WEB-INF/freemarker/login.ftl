@@ -12,6 +12,8 @@
         <meta name="author" content="">
         <link rel="icon" href="${context}/images/favicon.ico">
         <title>Zaloguj</title>
+        <link href="${context}/css/main.css" rel="stylesheet">
+
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <script>
             var appInit = {
@@ -24,6 +26,8 @@
         <script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
         </#list>
         </#list>
+        <script src="${context}/js/lib/jquery.validate.min.js"></script>
+        <script src="${context}/js/validate-login.js"></script>
         <style>
             body {
                 padding-top: 40px;
@@ -69,12 +73,16 @@
     </head>
     <body>
         <div class="container">
-            <form action="${response.encodeURL('j_security_check')}" method="post" class="form-signin">
+            <form id="loginForm" action="${response.encodeURL('j_security_check')}" method="post" class="form-signin">
                 <h2 class="form-signin-heading">${xml["//zaloguj/${locale}"]} <#if failed??> ${xml["//niezalogowano/${locale}"]}<#else></#if></h2>
-                <label for="inputEmail" class="sr-only">${xml["//identyfikator/${locale}"]}</label>
-                <input type="email" name="j_username" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus required>
-                       <label for="inputPassword" class="sr-only" required="required">Password</label>
-                <input type="password" name="j_password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}" required>
+                <label for="inputEmail">${xml["//identyfikator/${locale}"]} (${xml["//polewymagane/${locale}"]})</label>
+                <input type="email" name="j_username" id="inputEmail" class="form-control" placeholder="${xml["//identyfikator/${locale}"]}" autofocus 
+data-rule-required="true" data-msg-required="${xml['//wypelnijpole/${locale}']} '${xml["//identyfikator/${locale}"]}'" 
+data-rule-email="true" data-msg-email="Proszę wprowadzić poprawny e-mail.">
+                       <label for="inputPassword" required="required">${xml["//haslo/${locale}"]} (${xml["//polewymagane/${locale}"]}) (${xml["//minlength/${locale}"]})</label>
+                <input type="password" name="j_password" id="inputPassword" class="form-control" placeholder="${xml["//haslo/${locale}"]}" 
+                data-rule-required="true" data-msg-required="${xml['//wypelnijpole/${locale}']} '${xml["//haslo/${locale}"]}'"
+                data-rule-minlength="4" data-msg-minlength="${xml['//wypelnijpole/${locale}']} '${xml["//haslo/${locale}"]}' - ${xml['//minlength/${locale}']?lower_case}">
                        <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me"> ${xml["//zapamietaj/${locale}"]}

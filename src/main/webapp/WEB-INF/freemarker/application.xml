@@ -26,10 +26,25 @@
         <de>Poland</de>
     </country>
     <identyfikator>
-        <pl>Identyfikator</pl>
+        <pl>Identyfikator użytkownika.</pl>
         <en>Username</en>
         <de>Username</de>
     </identyfikator>
+    <polewymagane>
+        <pl>Pole wymagane.</pl>
+        <en>Required.</en>
+        <de>Required.</de>
+    </polewymagane>
+    <minlength>
+        <pl>Minimum 4 znaki.</pl>
+        <en>Minimal length 4.</en>
+        <de>Minimal length 4.</de>
+    </minlength>
+    <wypelnijpole>
+        <pl>Proszę wypełnić pole:</pl>
+        <en>Please fill-in field:</en>
+        <de>Please fill-in field:</de>
+    </wypelnijpole>
     <haslo>
         <pl>Hasło</pl>
         <en>Password</en>
