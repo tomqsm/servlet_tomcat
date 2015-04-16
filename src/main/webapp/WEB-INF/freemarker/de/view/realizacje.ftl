@@ -1,9 +1,9 @@
 <#import "../../layout.ftl" as default>
 <#import "../../jesteswMacro.ftl" as jestesw>
-<#assign title>Strona główna.</#assign>
 <#assign lang="de"> 
-<#assign navbar_highlight=xml['//realizacje/${lang}']>
+<#assign title>Strona główna.</#assign>
 <#assign js_scripts=scripts["properties/layout/scripts"]> 
+<#assign navbar_highlight=xml['//realizacje/${lang}']>
 
 <@default.layout lang title js_scripts navbar_highlight>
 <@jestesw.breadcrumbs ["index","realizacje"] lang/>
