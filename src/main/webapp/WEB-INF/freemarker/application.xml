@@ -117,8 +117,8 @@
     </kontakt>
     <podlogi>
         <pl url="podlogi">Oferta-Podłogi</pl>
-        <en url="podlogi">Floors</en>
-        <de url="podlogi">Floors-de</de>
+        <en url="podlogi">Offer-Floors</en>
+        <de url="podlogi">Offer-Floors-de</de>
     </podlogi>
     <schody>
         <pl url="schody">Schody</pl>
