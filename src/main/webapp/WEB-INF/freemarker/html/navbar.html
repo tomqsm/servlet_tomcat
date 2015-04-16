@@ -19,24 +19,32 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="<#if xml['/properties/index/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//index/${lang}']!=navbar_highlight>${response.encodeURL(xml['//index/${lang}/@url'])}<#else>#</#if>">${xml['//index/${lang}']}</a></li>
-                        <li class="<#if xml['//cennik/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="<#if xml['//cennik/${lang}']!=navbar_highlight>${response.encodeURL(xml['//cennik/${lang}/@url'])}<#else>#</#if>">${xml['//cennik/${lang}']}</a></li>
-                        <li class="<#if xml['//firma/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('firma')}">${xml['//firma/${lang}']}</a></li>
-                        <li class="<#if xml['//realizacje/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('realizacje')}">${xml['//realizacje/${lang}']}</a></li>
-                        <li class="<#if xml['//kontakt/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('kontakt')}">${xml['//kontakt/${lang}']}</a></li>
+                        <li class="<#if xml['/properties/index/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="<#if xml['//index/${lang}']!=navbar_highlight>${response.encodeURL(xml['//index/${lang}/@url'])}<#else>#</#if>">${xml['//index/${lang}']}</a></li>
+                        <li class="<#if xml['//cennik/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="<#if xml['//cennik/${lang}']!=navbar_highlight>${response.encodeURL(xml['//cennik/${lang}/@url'])}<#else>#</#if>">${xml['//cennik/${lang}']}</a></li>
+                        <li class="<#if xml['//firma/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="<#if xml['//firma/${lang}']!=navbar_highlight>${response.encodeURL(xml['//firma/${lang}/@url'])}<#else>#</#if>">${xml['//firma/${lang}']}</a></li>
+                        <li class="<#if xml['//realizacje/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="<#if xml['//realizacje/${lang}']!=navbar_highlight>${response.encodeURL(xml['//realizacje/${lang}/@url'])}<#else>#</#if>">${xml['//realizacje/${lang}']}</a></li>
+                        <li class="<#if xml['//kontakt/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                            <a href="<#if xml['//kontakt/${lang}']!=navbar_highlight>${response.encodeURL(xml['//kontakt/${lang}/@url'])}<#else>#</#if>">${xml['//kontakt/${lang}']}</a></li>
                         <li class="dropdown <#if xml['//szpachlowanie/${lang}']==navbar_highlight || xml['//lakierowanie/${lang}']==navbar_highlight || xml['//cyklinowanie/${lang}']==navbar_highlight || xml['//oferta/${lang}']==navbar_highlight>active<#else>inactive</#if>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">${xml['//oferta/${lang}']}<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header">${xml['//podlogi/${lang}']}</li>
-                                <li class="<#if xml['//cyklinowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('cyklinowanie')}">${xml['//cyklinowanie/${lang}']}</a></li>
-                                <li class="<#if xml['//szpachlowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('szpachlowanie')}">${xml['//szpachlowanie/${lang}']}</a></li>
-                                <li class="<#if xml['//lakierowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>"><a href="${response.encodeURL('lakierowanie')}">${xml['//lakierowanie/${lang}']}</a></li>
+                                <li class="<#if xml['//cyklinowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                                    <a href="<#if xml['//cyklinowanie/${lang}']!=navbar_highlight>${response.encodeURL(xml['//cyklinowanie/${lang}/@url'])}<#else>#</#if>">${xml['//cyklinowanie/${lang}']}</a></li>
+                                <li class="<#if xml['//szpachlowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                                    <a href="<#if xml['//szpachlowanie/${lang}']!=navbar_highlight>${response.encodeURL(xml['//szpachlowanie/${lang}/@url'])}<#else>#</#if>">${xml['//szpachlowanie/${lang}']}</a></li>
+                                <li class="<#if xml['//lakierowanie/${lang}']==navbar_highlight>active<#else>inactive</#if>">
+                                    <a href="<#if xml['//lakierowanie/${lang}']!=navbar_highlight>${response.encodeURL(xml['//lakierowanie/${lang}/@url'])}<#else>#</#if>">${xml['//lakierowanie/${lang}']}</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">${xml['//stolarka/${lang}']}</li>
-                                <li><a href="${response.encodeURL('schody')}">${xml['//schody/${lang}']}</a></li>
-                                <li><a href="${response.encodeURL('balustrady')}">${xml['//balustrady/${lang}']}</a></li>
-                                <li><a href="${response.encodeURL('drzwi')}">${xml['//drzwi/${lang}']}</a></li>
-                                <li><a href="${response.encodeURL('werandy')}">${xml['//werandy/${lang}']}</a></li>
+                                <li><a href="<#if xml['//schody/${lang}']!=navbar_highlight>${response.encodeURL(xml['//schody/${lang}/@url'])}<#else>#</#if>">${xml['//schody/${lang}']}</a></li>
+                                <li><a href="<#if xml['//balustrady/${lang}']!=navbar_highlight>${response.encodeURL(xml['//balustrady/${lang}/@url'])}<#else>#</#if>">${xml['//balustrady/${lang}']}</a></li>
+                                <li><a href="<#if xml['//drzwi/${lang}']!=navbar_highlight>${response.encodeURL(xml['//drzwi/${lang}/@url'])}<#else>#</#if>">${xml['//drzwi/${lang}']}</a></li>
+                                <li><a href="<#if xml['//werandy/${lang}']!=navbar_highlight>${response.encodeURL(xml['//werandy/${lang}/@url'])}<#else>#</#if>">${xml['//werandy/${lang}']}</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Usługi</li>
                                 <li><a href="#">Pomiar wilgotności powierzchni</a></li>

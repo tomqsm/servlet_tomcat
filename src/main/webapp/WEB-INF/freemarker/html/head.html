@@ -12,12 +12,6 @@
         context: '${context}'
     };
 </script>
-        <#assign scripts = scripts["properties/scripts"]> 
-        <#list scripts as s>
-                <#list s.* as sc>
-<script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
-</#list>
-</#list>
 <!-- Custom styles for this template -->
 <link href="${context}/css/carousel.css" rel="stylesheet"/>
 <style>

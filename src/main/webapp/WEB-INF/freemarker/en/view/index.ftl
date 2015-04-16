@@ -3,7 +3,7 @@
 <#assign lang="en"> 
 <#assign navbar_highlight=xml['//index/${lang}']> 
 
-<@default.layout lang title navbar_highlight>
+<@default.layout lang title scripts["properties/layout/scripts"] navbar_highlight>
 <#include "../../html/carousel.html"/>
 <#include "../../html/columns.html"/>
 <div class="container">

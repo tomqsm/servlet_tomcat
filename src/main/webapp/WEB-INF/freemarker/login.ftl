@@ -20,14 +20,12 @@
                 context: '${context}'
             };
         </script>
-        <#assign scripts = scripts["properties/scripts"]> 
+        <#assign scripts = scripts["properties/login/scripts"]> 
         <#list scripts as s>
         <#list s.* as sc>
         <script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
         </#list>
         </#list>
-        <script src="${context}/js/lib/jquery.validate.min.js"></script>
-        <script src="${context}/js/validate-login.js"></script>
         <style>
             body {
                 padding-top: 40px;

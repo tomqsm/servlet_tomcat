@@ -3,7 +3,7 @@
 <#assign lang="pl"> 
 <#assign navbar_highlight=xml['//lakierowanie/${lang}']> 
 
-<@default.layout lang xml['//lakierowanie/${lang}'] navbar_highlight>
+<@default.layout lang xml['//lakierowanie/${lang}'] scripts["properties/layout/scripts"] navbar_highlight>
 <@jestesw.breadcrumbs ["index","podlogi", "lakierowanie"] lang/>
   <#include "../../html/lakierowanie.html"/>
 </@default.layout>

@@ -1,4 +1,4 @@
-<#macro layout lang title navbar_highlight>
+<#macro layout lang title js_scripts navbar_highlight>
 <#import "jestesZalogowanyMacro.ftl" as jestesZalogowany>
 <#assign queryString=(request.queryString)!>
 <#if queryString != ""><#assign queryString="?"+queryString></#if>
@@ -9,6 +9,11 @@
 <html lang="${lang}">
     <head>
         <#include "html/head.html"/>
+        <#list js_scripts as s>
+        <#list s.* as sc>
+        <script src="<#if sc.@with?matches("context")>${sc.@with?eval}${sc}<#else>${sc}</#if>"></script>
+        </#list>
+        </#list>
     </head>
     <body>
         <div class="container"><@jestesZalogowany.info lang principalName/></div>

@@ -83,7 +83,7 @@
     <szpachlowanie>
         <pl url="szpachlowanie">Szpachlowanie</pl>
         <en url="szpachlowanie">Filling-in</en>
-        <de url="szpachlowanie">Sanding - de</de>
+        <de url="szpachlowanie">Filling-in - de</de>
     </szpachlowanie>
     <lakierowanie>
         <pl url="lakierowanie">Lakierowanie</pl>
@@ -106,14 +106,14 @@
         <de url="firma">Firm-de</de>
     </firma>
     <realizacje>
-        <pl>Realizacje</pl>
-        <en>Projects</en>
-        <de>Projects-de</de>
+        <pl url="realizacje">Realizacje</pl>
+        <en url="realizacje">Projects</en>
+        <de url="realizacje">Projects-de</de>
     </realizacje>
     <kontakt>
-        <pl>Kontakt</pl>
-        <en>Contact</en>
-        <de>Contact-de</de>
+        <pl url="kontakt">Kontakt</pl>
+        <en url="kontakt">Contact</en>
+        <de url="kontakt">Contact-de</de>
     </kontakt>
     <podlogi>
         <pl url="podlogi">Oferta-Podłogi</pl>
@@ -121,9 +121,9 @@
         <de url="podlogi">Floors-de</de>
     </podlogi>
     <schody>
-        <pl>Schody</pl>
-        <en>Stairs</en>
-        <de>Stairs+de</de>
+        <pl url="schody">Schody</pl>
+        <en url="schody">Stairs</en>
+        <de url="schody">Stairs+de</de>
     </schody>
     <stolarka>
         <pl>Stolarka</pl>
@@ -131,19 +131,19 @@
         <de>Carpentry-de</de>
     </stolarka>
     <balustrady>
-        <pl>Balustrady</pl>
-        <en>Handrails</en>
-        <de>Handrails-de</de>
+        <pl url="balustrady">Balustrady</pl>
+        <en url="balustrady">Handrails</en>
+        <de url="balustrady">Handrails-de</de>
     </balustrady>
     <drzwi>
-        <pl>Drzwi</pl>
-        <en>Door</en>
-        <de>Door-de</de>
+        <pl url="drzwi">Drzwi</pl>
+        <en url="drzwi">Door</en>
+        <de url="drzwi">Door-de</de>
     </drzwi>
     <werandy>
-        <pl>Werandy</pl>
-        <en>Verandah</en>
-        <de>Verandah-de</de>
+        <pl url="werandy">Werandy</pl>
+        <en url="werandy">Verandah</en>
+        <de url="werandy">Verandah-de</de>
     </werandy>
     <oferta>
         <pl url="#">Oferta</pl>
