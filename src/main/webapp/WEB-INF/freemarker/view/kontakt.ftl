@@ -1,7 +1,7 @@
 <#import "../layout.ftl" as default>
 <#import "../jesteswMacro.ftl" as jestesw>
 <#assign lang="pl">
-<#assign title>xml['//kontakt/${lang}']</#assign>
+<#assign title=xml['//kontakt/${lang}']>
 <#assign js_scripts=scripts["properties/layout/scripts"]> 
 <#assign navbar_highlight=xml['//kontakt/${lang}']>
 
