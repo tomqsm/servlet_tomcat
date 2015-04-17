@@ -10,6 +10,5 @@
 <div class="container">
     <h1>Some content here.</h1>
 </div>
-  <#include "static/artykul1.html"/>
 </@default.layout>
 

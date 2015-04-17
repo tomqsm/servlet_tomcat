@@ -10,5 +10,4 @@
 <div class="container">
     <h1>Das ist geil.</h1>
 </div>
-  <#include "static/artykul1.html"/>
 </@default.layout>
