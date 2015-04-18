@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author toks
  */
-class RootColtroller {
-    private static final Logger logger = LoggerFactory.getLogger(RootController.class);
+class RootControllerGroovy {
+    private static final Logger logger = LoggerFactory.getLogger(RootControllerGroovy.class);
 
     public void run(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         logger.debug("Started.");
