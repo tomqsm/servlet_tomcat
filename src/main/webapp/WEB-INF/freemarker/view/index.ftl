@@ -8,7 +8,7 @@
 <#include "../html/carousel.html"/>
 <#include "../html/columns.html"/>
 <div class="container">
-    <h1>Jakaś zawartość tutaj.</h1>
+    <h1>Jakaś zawartość tutaj. ${config.resources.URL}</h1>
 </div>
   <#include "static/artykul1.html"/>
 </@default.layout>

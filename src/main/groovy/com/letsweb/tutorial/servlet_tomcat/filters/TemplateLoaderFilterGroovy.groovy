@@ -1,11 +1,17 @@
 package com.letsweb.tutorial.servlet_tomcat.filters;
 
 import freemarker.ext.dom.NodeModel;
+import groovy.util.ConfigSlurper
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -22,9 +28,9 @@ import org.xml.sax.SAXException;
  * @author toks
  */
 public class TemplateLoaderFilterGroovy implements Filter {
-
-    private static final Logger logger = LoggerFactory.getLogger(TemplateLoaderFilter.class);
-
+    
+    private static final Logger logger = LoggerFactory.getLogger(TemplateLoaderFilterGroovy.class);
+    
     private FilterConfig filterConfig;
     private File appStaticDataFile;
     private File scriptsFile;
@@ -32,15 +38,22 @@ public class TemplateLoaderFilterGroovy implements Filter {
     private NodeModel cssesParsed;
     private NodeModel scriptsParsed;
     private NodeModel appStaticDataParsed;
-
-    public TemplateLoaderFilterGroovy() {
+    def slurper = new ConfigSlurper();
+    
+    public TemplateLoaderFilterGroovy() throws ScriptException, FileNotFoundException {
     }
-
+    
     private void doBeforeProcessing(ServletRequest req, ServletResponse response)
-            throws IOException, ServletException {
+    throws IOException, ServletException {
         logger.debug("TemplateLoaderFilter:DoBeforeProcessing");
+        File configLocation = new File(filterConfig.getServletContext().getRealPath("WEB-INF/classes/Application.groovy"));
+        
+        slurper.setBinding([date: new Date()])
+        def config = slurper.parse(configLocation.toURL())
+        logger.debug("{}",config.binding)
         req.setAttribute("context", req.getServletContext().getContextPath());
         try {
+            req.setAttribute("config", config);
             req.setAttribute("xml", appStaticDataParsed);
             req.setAttribute("scripts", scriptsParsed);
             req.setAttribute("csses", cssesParsed);
@@ -49,9 +62,9 @@ public class TemplateLoaderFilterGroovy implements Filter {
             throw new RuntimeException(ex);
         }
     }
-
+    
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {
+    throws IOException, ServletException {
         logger.debug("TemplateLoaderFilter:DoAfterProcessing");
     }
 
@@ -66,8 +79,8 @@ public class TemplateLoaderFilterGroovy implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain)
-            throws IOException, ServletException {
+        FilterChain chain)
+    throws IOException, ServletException {
         logger.debug("TemplateLoaderFilter:doFilter()");
         doBeforeProcessing(request, response);
         Throwable problem = null;
@@ -80,7 +93,7 @@ public class TemplateLoaderFilterGroovy implements Filter {
             problem = t;
             t.printStackTrace();
         }
-
+        
         doAfterProcessing(request, response);
 
         // If there was a problem, we want to rethrow it if it is
@@ -98,7 +111,8 @@ public class TemplateLoaderFilterGroovy implements Filter {
 
     /**
      * Return the filter configuration object for this filter.
-     * @return 
+     *
+     * @return
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -115,6 +129,7 @@ public class TemplateLoaderFilterGroovy implements Filter {
 
     /**
      * Init method for this filter
+     *
      * @param filterConfig
      */
     @Override
@@ -123,11 +138,11 @@ public class TemplateLoaderFilterGroovy implements Filter {
         logger.debug("TemplateLoaderFilter:Initializing filter");
         try {
             initialiseFreemarker();
-        } catch (SAXException | IOException | ParserConfigurationException ex) {
+        } catch (Exception ex) {
             logger.error("{}", getStackTrace(ex));
         }
     }
-
+    
     private void initialiseFreemarker() throws SAXException, IOException, ParserConfigurationException {
         appStaticDataFile = new File(filterConfig.getServletContext().getRealPath("/WEB-INF/freemarker/application.xml"));
         scriptsFile = new File(filterConfig.getServletContext().getRealPath(filterConfig.getServletContext().getInitParameter("scripts")));
@@ -150,10 +165,10 @@ public class TemplateLoaderFilterGroovy implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-
+    
     private void sendProcessingError(Throwable t, ServletResponse response) {
         String stackTrace = getStackTrace(t);
-
+        
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
@@ -180,7 +195,7 @@ public class TemplateLoaderFilterGroovy implements Filter {
             }
         }
     }
-
+    
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -194,13 +209,13 @@ public class TemplateLoaderFilterGroovy implements Filter {
         }
         return stackTrace;
     }
-
+    
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
     }
-
+    
     @Override
     public void destroy() {
     }
-
+    
 }
