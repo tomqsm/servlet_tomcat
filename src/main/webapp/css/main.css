@@ -12,7 +12,7 @@
 }
 .container:nth-of-type(1):after, .navbar-collapse:after, .navbar:after {
     /*pozwala uniknąć zachodzenia navbar na inne elementy*/
-    clear: none; 
+    clear: right; 
 }
 .error{
     color: red;
