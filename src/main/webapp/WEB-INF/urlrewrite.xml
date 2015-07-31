@@ -7,7 +7,7 @@
         <name>rootPages</name>
         <condition type="method">GET</condition>
         <from>^(/en|/de)?/(${props.view/})$</from>
-        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootControllerGroovy"/>
+        <run class="com.letsweb.tutorial.servlet_tomcat.rewriting.RootController"/>
         <to type="forward" last="true">view/$2.ftl</to>
     </rule>
     <rule enabled="true" match-type="regex">
